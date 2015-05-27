@@ -28,8 +28,10 @@ function Install_PHP_Tools()
 	elif echo "$php_v" | grep -q "5.2."; then
 		php_ext_date="20060613"
 	fi
-	if [ "$php_ext_date" == "200906261" ]; then
-	    echo "ddd";
+	if [ "$php_ext_date" == "20090626" ]; then
+	    php_ext_date="no-debug-zts-${php_ext_date}"
+	elif [ "$php_ext_date" == "20100525" ]; then
+	    php_ext_date="no-debug-zts-${php_ext_date}"
 	else
 	    php_ext_date="no-debug-non-zts-${php_ext_date}"
 	fi
@@ -72,6 +74,7 @@ function Install_PHP_Tools()
 	mv phpMyAdmin-${VERS['phpMyAdmin']}-all-languages $IN_WEB_DIR/default/_phpmyadmin/
 	mv $IN_WEB_DIR/default/_phpmyadmin/config.sample.inc.php $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
 	sed -i "s:UploadDir'] = '':UploadDir'] = 'upload':g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
+	sed -i "s#localhost#localhost:3306#g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
 	sed -i "s:SaveDir'] = '':SaveDir'] = 'save':g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
 	
 	mkdir $IN_WEB_DIR/default/_phpmyadmin/upload/

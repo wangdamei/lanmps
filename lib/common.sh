@@ -3,7 +3,7 @@
 # OS Version detect
 # 1:redhat/centos 2:debian/ubuntu
 OS_RL="centos"
-grep -qi 'debian\|ubuntu' /etc/issue && OS_RL="ubuntu"
+grep -qi 'Deepin\|debian\|ubuntu' /etc/issue && OS_RL="ubuntu"
 if [ $OS_RL = "centos" ]; then
     R6=0
     grep -q 'release 6' /etc/redhat-release && R6=1

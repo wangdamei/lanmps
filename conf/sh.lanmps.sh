@@ -16,7 +16,7 @@ fi
 
 IN_DIR="/www/lanmps"
 echo "========================================================================="
-echo "Manager for LANMPS V0.1 "
+echo "Manager for LANMPS V2.1.0 "
 echo "========================================================================="
 echo "LANMPS is a tool to auto-compile & install Apache+Nginx+MySQL+PHP on Linux "
 echo "This script is a tool to Manage status of lanmps "
@@ -28,7 +28,7 @@ echo "========================================================================="
 
 function_start()
 {
-    echo "Starting LNMP..."
+    echo "Starting LANMPS..."
 	
 	if [[ $SERVER == "apache" ]];then
 	    $IN_DIR/init.d/httpd start
@@ -44,7 +44,7 @@ function_start()
 
 function_stop()
 {
-    echo "Stoping LNMP..."
+    echo "Stoping LANMPS..."
 	
 	if [[ $SERVER == "apache" ]];then
 	    $IN_DIR/init.d/httpd stop
@@ -60,7 +60,7 @@ function_stop()
 
 function_reload()
 {
-    echo "Reload LNMP..."
+    echo "Reload LANMPS..."
 	
 	if [[ $SERVER == "apache" ]];then
 	    $IN_DIR/init.d/httpd reload

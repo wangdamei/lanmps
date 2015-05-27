@@ -8,7 +8,7 @@ IN_WEB_LOG_DIR="/www/wwwLogs"
 SERVER="nginx"
 RE_INS=0
 SOFT_DOWN=1
-ETC_INIT_D_LN=1;#1:ln x to /etc/init.d/x;2:no
+ETC_INIT_D_LN=2;#1:ln x to /etc/init.d/x;2:no
 INNODB_ID=2
 YUM_APT_GET_UPDATE=1;#1:Update the kernel and software(yum install -7 update or apt-get install -y update);2:no
 FName="LANMPS"
@@ -20,37 +20,37 @@ declare -A VERS;
 declare -A DUS;
 declare -A IN_DIR_SETS;
 # soft url and down
-#http://nginx.org/download/nginx-1.7.9.tar.gz
-DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.7.9.tar.gz"
-VERS['nginx']="1.7.9"
+#cdownload/nginx-1.7.12.tar.gz
+DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.8.0.tar.gz"
+VERS['nginx']="1.8.0"
 
 DUS['mysql']="http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.21.tar.gz"
 VERS['mysql']="5.6.21"
 
-#http://mirrors.hustunique.com/mariadb/mariadb-10.0.15/source/mariadb-10.0.15.tar.gz
-DUS['MariaDB']="http://mirrors.hustunique.com/mariadb/mariadb-10.0.15/source/mariadb-10.0.15.tar.gz"
-VERS['MariaDB']="10.0.15"
+#http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
+DUS['MariaDB']="http://mirrors.opencas.cn/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz"
+VERS['MariaDB']="10.0.17"
 
-#http://cn2.php.net/distributions/php-5.6.4.tar.gz
-DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.4.tar.gz"
-VERS['php5.6.x']="5.6.4"
+#http://cn2.php.net/distributions/php-5.6.7.tar.gz
+DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.8.tar.gz"
+VERS['php5.6.x']="5.6.8"
 
-#http://cn2.php.net/distributions/php-5.5.20.tar.gz
-DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.21.tar.gz"
-VERS['php5.5.x']="5.5.21"
+#http://cn2.php.net/distributions/php-5.5.23.tar.gz
+DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.24.tar.gz"
+VERS['php5.5.x']="5.5.24"
 
 #http://cn2.php.net/distributions/php-5.4.36.tar.gz
-DUS['php5.4.x']="http://download.lanmps.com/php/php-5.4.37.tar.gz"
-VERS['php5.4.x']="5.4.37"
+DUS['php5.4.x']="http://download.lanmps.com/php/php-5.4.40.tar.gz"
+VERS['php5.4.x']="5.4.40"
 
 #http://cn2.php.net/distributions/php-5.3.29.tar.gz
 DUS['php5.3.x']="http://download.lanmps.com/php/php-5.3.29.tar.gz"
 VERS['php5.3.x']="5.3.29"
 IN_DIR_SETS['php5.3.x']=${IN_DIR}/php
 
-#http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.3.6/phpMyAdmin-4.3.6-all-languages.tar.gz
-DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.3.6-all-languages.tar.gz"
-VERS['phpMyAdmin']="4.3.6"
+#http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.4.2/phpMyAdmin-4.4.2-all-languages.tar.gz
+DUS['phpMyAdmin']="http://download.lanmps.com/down/phpMyAdmin-4.4.3-all-languages.tar.gz"
+VERS['phpMyAdmin']="4.4.3"
 
 DUS['libpcre']="http://www.lanmps.com/down/pcre-8.33.tar.gz"
 VERS['libpcre']="8.33"

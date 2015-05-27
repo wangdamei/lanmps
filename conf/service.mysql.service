@@ -1,0 +1,13 @@
+[Unit]  
+Description=mysql
+After=network.target  
+   
+[Service]  
+Type=forking  
+ExecStart=/www/lanmps/init.d/mysql start  
+ExecReload=/www/lanmps/init.d/mysql restart  
+ExecStop=/www/lanmps/init.d/mysql  stop  
+PrivateTmp=true  
+   
+[Install]  
+WantedBy=multi-user.target  

@@ -75,8 +75,7 @@ case "$1" in
 	kill -USR1 `cat $PID_FILE`
  ;;
  *)
- echo "Usage: $SCRIPT_NAME {start|stop|reload|restart|status|cutLog} 
- or Usage: /etc/init.d/$NAME {start|stop|reload|restart|status|cutLog} " >&2
+ echo "Usage: $SCRIPT_NAME {start|stop|reload|restart|status|cutLog} " >&2
  exit 3
  ;;
 esac

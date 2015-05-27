@@ -1,0 +1,13 @@
+[Unit]
+Description=nginx
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/www/lanmps/init.d/nginx start
+ExecReload=/www/lanmps/init.d/nginx restart
+ExecStop=/www/lanmps/init.d/nginx  stop
+PrivateTmp=true
+ 
+[Install]
+WantedBy=multi-user.target

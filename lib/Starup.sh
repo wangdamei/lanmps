@@ -31,14 +31,32 @@ EOF
 		chkconfig --add memcached
 		chkconfig --level 345 memcached on
 	else
-	    if [ $SERVER == "apache" ]; then
-			update-rc.d -f httpd defaults
+	    systemd_path=/lib/systemd/system
+	    if [ ! -d "$systemd_path" ]; then
+			if [ $SERVER == "apache" ]; then
+				update-rc.d -f httpd defaults
+			else
+				update-rc.d -f php-fpm defaults
+				update-rc.d -f nginx defaults
+			fi
+			update-rc.d -f mysql defaults
+			update-rc.d -f memcached defaults
 		else
-			update-rc.d -f php-fpm defaults
-			update-rc.d -f nginx defaults
+			file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
+			file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
+			file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
+			file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
+			
+			systemctl enable nginx.service
+			systemctl enable php-fpm.service
+			systemctl enable mysql.service
+			systemctl enable memcached.service
+			
+			systemctl start nginx.service
+			systemctl start php-fpm.service
+			systemctl start mysql.service
+			systemctl start memcached.service
 		fi
-		update-rc.d -f mysql defaults
-		update-rc.d -f memcached defaults
 	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
@@ -51,8 +69,8 @@ EOF
 	ln -s $IN_DIR/lanmps /root/lanmps
 	#sed -i "s:/usr/local/php/logs:$IN_DIR/php/var/run:g" "${IN_DIR}/lnmp"
 	
-	echo "Starting LNMP..."
-	$IN_DIR/init.d/$MYSQL_INITD start
+	echo "Starting LANMPS..."
+	$IN_DIR/init.d/mysql start
 	
 	if [ $SERVER == "nginx" ]; then
 		$IN_DIR/init.d/php-fpm start
@@ -114,11 +132,11 @@ function CheckInstall()
 		fi
 	fi
 	
-	if [ -s "$IN_DIR/$MYSQL_INITD" ] && [ -s "$IN_DIR/mysql/bin/mysql" ]; then
+	if [ -s "$IN_DIR/mysql" ] && [ -s "$IN_DIR/mysql/bin/mysql" ]; then
 		  echo "MySQL: OK"
 		  ismysql="ok"
 		else
-		  echo "Error: $IN_DIR/${MYSQL_INITD} not found!!!MySQL install failed."
+		  echo "Error: $IN_DIR/mysql not found!!!MySQL install failed."
 		fi
 	
 	if [ "$isnginx" = "ok" ] && [ "$ismysql" = "ok" ] && [ "$isphp" = "ok" ]; then
