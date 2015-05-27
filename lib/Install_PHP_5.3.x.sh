@@ -128,7 +128,7 @@ if [ "${IN_DIR_SETS['php5.3.x']}" = "${IN_DIR}/php" ]; then
 	fi
 	
 else
-	sed -i 's/listen = 127.0.0.1:9000/listen = 127.0.0.1:9530/g' $conf
+	sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 	
 	ln -s ${IN_DIR_SETS['php5.3.x']}/etc/php-fpm.conf $IN_DIR/etc/php-fpm-53.conf
 	cp "${IN_DOWN}/php-${VERS['php5.3.x']}/sapi/fpm/init.d.php-fpm" $IN_DIR/init.d/php-fpm-53

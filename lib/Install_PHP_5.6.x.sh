@@ -93,6 +93,7 @@ sed -i 's:;log_level = notice:log_level = notice:g' $conf
 sed -i 's:pm.max_children = 5:pm.max_children = 10:g' $conf
 sed -i 's:pm.max_spare_servers = 3:pm.max_spare_servers = 6:g' $conf
 sed -i 's:;request_terminate_timeout = 0:request_terminate_timeout = 100:g' $conf
+sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 
 ln -s $IN_DIR/php/etc/php-fpm.conf $IN_DIR/etc/php-fpm.conf
 
