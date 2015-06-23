@@ -14,25 +14,25 @@ EOF
 	
 	echo "============================add nginx and php-fpm on startup============================"
 	echo "Set start"
-	if [ $OS_RL = "centos" ]; then
-		if [ $SERVER == "nginx" ]; then
-			chkconfig --add php-fpm
-			chkconfig --level 345 php-fpm on
+	systemd_path=/lib/systemd/system
+	if [ ! -d "$systemd_path" ]; then
+		if [ $OS_RL = "centos" ]; then
+			if [ $SERVER == "nginx" ]; then
+				chkconfig --add php-fpm
+				chkconfig --level 345 php-fpm on
+				
+				chkconfig --add nginx
+				chkconfig --level 345 nginx on
+			else
+				chkconfig --add httpd
+				chkconfig --level 345 httpd on
+			fi
+			chkconfig --add mysql
+			chkconfig --level 345 mysql on
 			
-			chkconfig --add nginx
-			chkconfig --level 345 nginx on
+			chkconfig --add memcached
+			chkconfig --level 345 memcached on
 		else
-		    chkconfig --add httpd
-			chkconfig --level 345 httpd on
-		fi
-		chkconfig --add mysql
-		chkconfig --level 345 mysql on
-		
-		chkconfig --add memcached
-		chkconfig --level 345 memcached on
-	else
-	    systemd_path=/lib/systemd/system
-	    if [ ! -d "$systemd_path" ]; then
 			if [ $SERVER == "apache" ]; then
 				update-rc.d -f httpd defaults
 			else
@@ -41,7 +41,8 @@ EOF
 			fi
 			update-rc.d -f mysql defaults
 			update-rc.d -f memcached defaults
-		else
+		fi
+	else
 			file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
 			file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
 			file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
@@ -57,7 +58,6 @@ EOF
 			systemctl start mysql.service
 			systemctl start memcached.service
 		fi
-	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
 	
