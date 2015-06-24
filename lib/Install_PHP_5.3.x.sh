@@ -113,33 +113,33 @@ sed -i 's:;request_terminate_timeout = 0:request_terminate_timeout = 100:g' $con
 
 
 echo "ln -s ${IN_DIR_SETS['php5.3.x']}/etc/php-fpm.conf $IN_DIR/etc/php-fpm.conf "
-echo "Copy php-fpm init.d file......"
-echo "chmod +x ${IN_DIR}/init.d/php-fpm-53"
+echo "Copy php-fpm action file......"
+echo "chmod +x ${IN_DIR}/action/php-fpm-53"
 
 if [ "${IN_DIR_SETS['php5.3.x']}" = "${IN_DIR}/php" ]; then
 	ln -s ${IN_DIR_SETS['php5.3.x']}/etc/php-fpm.conf $IN_DIR/etc/php-fpm.conf
-	cp "${IN_DOWN}/php-${VERS['php5.3.x']}/sapi/fpm/init.d.php-fpm" $IN_DIR/init.d/php-fpm
-	chmod +x $IN_DIR/init.d/php-fpm
+	cp "${IN_DOWN}/php-${VERS['php5.3.x']}/sapi/fpm/init.d.php-fpm" $IN_DIR/action/php-fpm
+	chmod +x $IN_DIR/action/php-fpm
 	
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/init.d/php-fpm /etc/init.d/php-fpm
+		ln -s $IN_DIR/action/php-fpm $IN_DIR/init.d/php-fpm
 	fi
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/init.d/php-fpm
+		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/action/php-fpm
 	fi
 	
 else
 	sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 	
 	ln -s ${IN_DIR_SETS['php5.3.x']}/etc/php-fpm.conf $IN_DIR/etc/php-fpm-53.conf
-	cp "${IN_DOWN}/php-${VERS['php5.3.x']}/sapi/fpm/init.d.php-fpm" $IN_DIR/init.d/php-fpm-53
-	chmod +x $IN_DIR/init.d/php-fpm-53
+	cp "${IN_DOWN}/php-${VERS['php5.3.x']}/sapi/fpm/init.d.php-fpm" $IN_DIR/action/php-fpm-53
+	chmod +x $IN_DIR/action/php-fpm-53
 	
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/init.d/php-fpm /etc/init.d/php-fpm-53
+		ln -s $IN_DIR/action/php-fpm $IN_DIR/init.d/php-fpm-53
 	fi
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/init.d/php-fpm-53
+		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/action/php-fpm-53
 	fi
 fi
 

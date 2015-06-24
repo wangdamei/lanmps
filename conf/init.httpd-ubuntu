@@ -255,7 +255,7 @@ case $1 in
 		fi
 	;;
 	*)
-		log_success_msg "Usage: /www/lanmps/init.d/httpd {start|stop|graceful-stop|restart|reload|force-reload|start-htcacheclean|stop-htcacheclean|status}"
+		log_success_msg "Usage: /www/lanmps/action/httpd {start|stop|graceful-stop|restart|reload|force-reload|start-htcacheclean|stop-htcacheclean|status}"
 		exit 1
 	;;
 esac

@@ -157,13 +157,13 @@ function Init_SetDirectoryAndUser
 		echo 
 		echo "=============Start to create the directory=========="
 		echo $IN_DIR/etc
-		echo $IN_DIR/init.d
+		echo $IN_DIR/action
 		echo $IN_DIR/tmp
 		echo $IN_DIR/run
 		echo $IN_WEB_DIR/default
 		echo $IN_WEB_LOG_DIR
 		
-		mkdir -p $IN_DIR/{etc,init.d,tmp,run}
+		mkdir -p $IN_DIR/{etc,init.d,action,tmp,run}
 		
 		mkdir -p $IN_WEB_DIR/default
 		chmod +w $IN_WEB_DIR/default

@@ -73,16 +73,16 @@ AddType application/x-httpd-php .php
 	mkdir -p $IN_WEB_LOG_DIR/logs/default
 	
 	if [ $OS_RL == "ubuntu" ]; then
-        file_cp init.httpd-ubuntu $IN_DIR/init.d/httpd
+        file_cp action.httpd-ubuntu $IN_DIR/action/httpd
     else
-        file_cp init.httpd $IN_DIR/init.d/httpd
+        file_cp action.httpd $IN_DIR/action/httpd
     fi
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/init.d/nginx
+		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/action/nginx
 	fi
-	chmod +x $IN_DIR/init.d/httpd
+	chmod +x $IN_DIR/action/httpd
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/init.d/httpd /etc/init.d/httpd
+		ln -s $IN_DIR/action/httpd $IN_DIR/init.d/httpd
 	fi
 	
 	file_cp sh.vhost.sh $IN_DIR/vhost.sh

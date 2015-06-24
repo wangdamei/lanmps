@@ -99,13 +99,13 @@ sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 ln -s $IN_DIR/php/etc/php-fpm.conf $IN_DIR/etc/php-fpm.conf
 
 echo "Copy php-fpm init.d file......"
-cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/init.d/php-fpm
-chmod +x $IN_DIR/init.d/php-fpm
+cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/action/php-fpm
+chmod +x $IN_DIR/action/php-fpm
 if [ $ETC_INIT_D_LN = 1 ]; then
-	ln -s $IN_DIR/init.d/php-fpm /etc/init.d/php-fpm
+	ln -s $IN_DIR/action/php-fpm $IN_DIR/init.d/php-fpm
 fi
 if [ ! $IN_DIR = "/www/lanmps" ]; then
-	sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/init.d/php-fpm
+	sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/action/php-fpm
 fi
 
 

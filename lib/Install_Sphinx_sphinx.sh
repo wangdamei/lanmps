@@ -8,13 +8,13 @@ cd sphinx-${VERS['sphinx']}-release
 --enable-id64
 make && make install
 
-file_cp init.d.sphinx $IN_DIR/init.d/sphinx
+file_cp action.sphinx $IN_DIR/action/sphinx
 if [ ! $IN_DIR = "/www/lanmps" ]; then
-	sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/init.d/sphinx
+	sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/action/sphinx
 fi
 
-chmod +x $IN_DIR/init.d/sphinx
+chmod +x $IN_DIR/action/sphinx
 
 if [ $ETC_INIT_D_LN = 1 ]; then
-	ln -s $IN_DIR/init.d/sphinx /etc/init.d/sphinx
+	ln -s $IN_DIR/action/sphinx $IN_DIR/init.d/sphinx
 fi

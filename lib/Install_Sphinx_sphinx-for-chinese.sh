@@ -14,13 +14,13 @@ tar -zxvf xdict_1.1.tar.gz
 $IN_DIR/sphinx-for-chinese/bin/mkdict xdict_1.1.txt xdict
 cp xdict $IN_DIR/sphinx-for-chinese/etc/
 
-file_cp init.d.sphinx-for-chinese $IN_DIR/init.d/sphinx-for-chinese
+file_cp action.sphinx-for-chinese $IN_DIR/action/sphinx-for-chinese
 if [ ! $IN_DIR = "/www/lanmps" ]; then
-	sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/init.d/sphinx-for-chinese
+	sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/action/sphinx-for-chinese
 fi
 
-chmod +x $IN_DIR/init.d/sphinx-for-chinese
+chmod +x $IN_DIR/action/sphinx-for-chinese
 
 if [ $ETC_INIT_D_LN = 1 ]; then
-	ln -s $IN_DIR/init.d/sphinx-for-chinese /etc/init.d/sphinx-for-chinese
+	ln -s $IN_DIR/action/sphinx-for-chinese $IN_DIR/init.d/sphinx-for-chinese
 fi

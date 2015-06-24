@@ -70,16 +70,16 @@ EOF
 	#sed -i "s:/usr/local/php/logs:$IN_DIR/php/var/run:g" "${IN_DIR}/lnmp"
 	
 	echo "Starting LANMPS..."
-	$IN_DIR/init.d/mysql start
+	$IN_DIR/action/mysql start
 	
 	if [ $SERVER == "nginx" ]; then
-		$IN_DIR/init.d/php-fpm start
-		$IN_DIR/init.d/nginx start
+		$IN_DIR/action/php-fpm start
+		$IN_DIR/action/nginx start
 	else
-		$IN_DIR/init.d/httpd start
+		$IN_DIR/action/httpd start
 	fi
 	
-	$IN_DIR/init.d/memcached start
+	$IN_DIR/action/memcached start
 	
 	#add 80 port to iptables
 	if [ -s /sbin/iptables ]; then
@@ -88,8 +88,8 @@ EOF
 		/sbin/iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 		iptables-save > /etc/iptables.up.rules
 		iptables-save > /etc/network/iptables.up.rules
-		#/etc/rc.d/init.d/iptables save
-		#/etc/init.d/iptables restart
+		#/etc/rc.d/action/iptables save
+		#/etc/action/iptables restart
 	fi
 }
 

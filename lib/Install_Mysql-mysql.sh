@@ -43,13 +43,13 @@
 	chown -R mysql $IN_DIR/mysql/data
 	chgrp -R mysql $IN_DIR/mysql/.
 	
-	cp support-files/mysql.server $IN_DIR/init.d/mysql
-	chmod 755 $IN_DIR/init.d/mysql
+	cp support-files/mysql.server $IN_DIR/action/mysql
+	chmod 755 $IN_DIR/action/mysql
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/init.d/mysql /etc/init.d/mysql
+		ln -s $IN_DIR/action/mysql $IN_DIR/init.d/mysql
 	fi
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/init.d/mysql
+		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/action/mysql
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
@@ -66,7 +66,7 @@ EOF
 	fi
 	
 	#start
-	$IN_DIR/init.d/mysql start
+	$IN_DIR/action/mysql start
 	
 	ln -s $IN_DIR/mysql/bin/mysql /usr/bin/mysql
 	ln -s $IN_DIR/mysql/bin/mysqldump /usr/bin/mysqldump
@@ -89,6 +89,6 @@ EOF
 
 	rm -f /tmp/mysql_sec_script
 	
-	$IN_DIR/init.d/mysql restart
-	$IN_DIR/init.d/mysql stop
+	$IN_DIR/action/mysql restart
+	$IN_DIR/action/mysql stop
 

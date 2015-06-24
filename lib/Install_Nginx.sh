@@ -58,13 +58,13 @@ function Install_Nginx {
 		sed -i "s:/www/wwwLogs:$IN_WEB_LOG_DIR:g" $conf_default
 	fi
 	
-	file_cp init.d.nginx $IN_DIR/init.d/nginx
+	file_cp action.nginx $IN_DIR/action/nginx
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/init.d/nginx
+		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/action/nginx
 	fi
-	chmod +x $IN_DIR/init.d/nginx
+	chmod +x $IN_DIR/action/nginx
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/init.d/nginx /etc/init.d/nginx
+		ln -s $IN_DIR/action/nginx $IN_DIR/init.d/nginx
 	fi
 	
 	file_cp sh.vhost.sh $IN_DIR/vhost.sh

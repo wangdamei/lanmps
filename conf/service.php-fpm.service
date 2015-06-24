@@ -4,9 +4,9 @@ After=network.target
    
 [Service]  
 Type=forking  
-ExecStart=/www/lanmps/init.d/php-fpm start  
-ExecReload=/www/lanmps/init.d/php-fpm restart  
-ExecStop=/www/lanmps/init.d/php-fpm  stop  
+ExecStart=/www/lanmps/action/php-fpm start  
+ExecReload=/www/lanmps/action/php-fpm restart  
+ExecStop=/www/lanmps/action/php-fpm  stop  
 PrivateTmp=true  
    
 [Install]  

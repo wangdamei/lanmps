@@ -4,9 +4,9 @@ After=network.target
  
 [Service]
 Type=forking
-ExecStart=/www/lanmps/init.d/nginx start
-ExecReload=/www/lanmps/init.d/nginx restart
-ExecStop=/www/lanmps/init.d/nginx  stop
+ExecStart=/www/lanmps/action/nginx start
+ExecReload=/www/lanmps/action/nginx restart
+ExecStop=/www/lanmps/action/nginx  stop
 PrivateTmp=true
  
 [Install]
