@@ -91,6 +91,9 @@ EOF
 
 	rm -f /tmp/mysql_sec_script
 	
+	mkdir -p /var/log/mysqld
+	ln -s $IN_DIR/mysql/data/mysql.sock /var/log/mysqld/mysql.sock
+	
 	$IN_DIR/action/mysql restart
 	$IN_DIR/action/mysql stop
 
