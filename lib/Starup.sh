@@ -43,21 +43,21 @@ EOF
 			update-rc.d -f memcached defaults
 		fi
 	else
-			file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
-			file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
-			file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
-			file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
-			
-			systemctl enable nginx.service
-			systemctl enable php-fpm.service
-			systemctl enable mysql.service
-			systemctl enable memcached.service
-			
-			systemctl start nginx.service
-			systemctl start php-fpm.service
-			systemctl start mysql.service
-			systemctl start memcached.service
-		fi
+		file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
+		file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
+		file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
+		file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
+		
+		systemctl enable nginx.service
+		systemctl enable php-fpm.service
+		systemctl enable mysql.service
+		systemctl enable memcached.service
+		
+		systemctl start nginx.service
+		systemctl start php-fpm.service
+		systemctl start mysql.service
+		systemctl start memcached.service
+	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
 	
@@ -70,17 +70,23 @@ EOF
 	#sed -i "s:/usr/local/php/logs:$IN_DIR/php/var/run:g" "${IN_DIR}/lnmp"
 	
 	echo "Starting LANMPS..."
-	$IN_DIR/action/mysql start
-	
-	if [ $SERVER == "nginx" ]; then
-		$IN_DIR/action/php-fpm start
-		$IN_DIR/action/nginx start
+	if [ ! -d "$systemd_path" ]; then
+		$IN_DIR/action/mysql start
+		
+		if [ $SERVER == "nginx" ]; then
+			$IN_DIR/action/php-fpm start
+			$IN_DIR/action/nginx start
+		else
+			$IN_DIR/action/httpd start
+		fi
+		
+		$IN_DIR/action/memcached start
 	else
-		$IN_DIR/action/httpd start
+		systemctl start nginx.service
+		systemctl start php-fpm.service
+		systemctl start mysql.service
+		systemctl start memcached.service
 	fi
-	
-	$IN_DIR/action/memcached start
-	
 	#add 80 port to iptables
 	if [ -s /sbin/iptables ]; then
 		/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
@@ -141,7 +147,7 @@ function CheckInstall()
 	
 	if [ "$isnginx" = "ok" ] && [ "$ismysql" = "ok" ] && [ "$isphp" = "ok" ]; then
 		echo "========================================================================="
-		echo "LANMPS V0.1 for CentOS/Ubuntu Linux Written by Licess "
+		echo "LANMPS V2.2.1 for CentOS/Ubuntu Linux Written by Licess "
 		echo "========================================================================="
 		echo ""
 		echo "For more information please visit http://www.lanmps.com"

@@ -16,7 +16,7 @@ fi
 
 IN_DIR="/www/lanmps"
 echo "========================================================================="
-echo "Manager for LANMPS V2.1.0 "
+echo "Manager for LANMPS V2.2.1 "
 echo "========================================================================="
 echo "LANMPS is a tool to auto-compile & install Apache+Nginx+MySQL+PHP on Linux "
 echo "This script is a tool to Manage status of lanmps "
@@ -121,5 +121,4 @@ case "$1" in
 	*)
 esac
 echo "Usage: $IN_DIR/lanmps {start|stop|reload|restart|kill|status}"
-echo "or Usage: $IN_DIR/lanmps {start|stop|reload|restart|kill|status}"
 exit
