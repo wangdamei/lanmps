@@ -65,8 +65,8 @@ VERS['autoconf']="2.69"
 DUS['libevent']="http://download.lanmps.com/basic/libevent-2.0.21-stable.tar.gz"
 VERS['libevent']="2.0.21"
 
-DUS['memcached']="http://download.lanmps.com/memcache/memcached-1.4.21.tar.gz"
-VERS['memcached']="1.4.21"
+DUS['memcached']="http://download.lanmps.com/memcache/memcached-1.4.24.tar.gz"
+VERS['memcached']="1.4.24"
 
 #http://pecl.php.net/package/memcache
 DUS['memcache']="http://download.lanmps.com/memcache/memcache-3.0.8.tar.gz"
