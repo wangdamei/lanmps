@@ -114,7 +114,7 @@ function Init()
 		pcre pcre-devel libtool-ltdl-devel \
 		wget \
 		libmcrypt-devel libmhash-devel \
-		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel;
+		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel net-tools;
 		do 
 			yum -y install $packages;
 			echo
