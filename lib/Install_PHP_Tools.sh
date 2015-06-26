@@ -84,4 +84,15 @@ function Install_PHP_Tools()
 	
 	touch $IN_LOG
 	echo "============================phpMyAdmin install completed======================"
+	
+	echo "Create PHP Info Tool..."
+	#TOOLS
+	cd $IN_PWD
+	cp conf/index.html $IN_WEB_DIR/default/index.html
+	cp conf/php.tz.php $IN_WEB_DIR/default/_tz.php
+	cat > $IN_WEB_DIR/default/_phpinfo.php<<EOF
+<?php
+phpinfo();
+?>
+EOF
 }

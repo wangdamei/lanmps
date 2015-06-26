@@ -16,26 +16,27 @@ function Init()
     echo
     [ -f "$IN_LOG" ] && return
 	
-	Init_ReplacementSource
+	#Init_ReplacementSource
 	
 	if [ $OS_RL = 3 ]; then
 		echo "====================================="
 	elif [ $OS_RL = "ubuntu" ]; then
-		apt-get remove -y apache2 apache2-utils apache2.2-common apache2.2-bin \
-		apache2-mpm-prefork apache2-doc apache2-mpm-worker \
-		mysql-common mysql-server \
-		php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
-		
-		killall apache2
-		
-		dpkg -l |grep mysql 
-		dpkg -P libmysqlclient15off libmysqlclient15-dev mysql-common 
-		dpkg -l |grep apache 
-		dpkg -P apache2 apache2-doc apache2-mpm-prefork apache2-utils apache2.2-common
-		dpkg -l |grep php 
-		dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
-		apt-get purge `dpkg -l | grep php| awk '{print $2}'`
-		
+		if [ $IS_EXISTS_REMOVE = 1 ]; then
+			apt-get remove -y apache2 apache2-utils apache2.2-common apache2.2-bin \
+			apache2-mpm-prefork apache2-doc apache2-mpm-worker \
+			mysql-common mysql-server \
+			php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
+			
+			killall apache2
+			
+			dpkg -l |grep mysql 
+			dpkg -P libmysqlclient15off libmysqlclient15-dev mysql-common 
+			dpkg -l |grep apache 
+			dpkg -P apache2 apache2-doc apache2-mpm-prefork apache2-utils apache2.2-common
+			dpkg -l |grep php 
+			dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
+			apt-get purge `dpkg -l | grep php| awk '{print $2}'`
+		fi
 		apt-get install -y ntpdate
 		ntpdate -u pool.ntp.org
 		date
@@ -75,21 +76,22 @@ function Init()
 		yum install -y ntp
 		ntpdate -u pool.ntp.org
 		date
+		if [ $IS_EXISTS_REMOVE = 1 ]; then
+			rpm -qa|grep httpd
+			rpm -e httpd
+			rpm -qa|grep mysql
+			rpm -e mysql
+			rpm -qa|grep php
+			rpm -e php
 
-		rpm -qa|grep httpd
-		rpm -e httpd
-		rpm -qa|grep mysql
-		rpm -e mysql
-		rpm -qa|grep php
-		rpm -e php
+			yum -y remove httpd*
+			yum -y remove php*
+			yum -y remove mysql-server mysql
+			yum -y remove php-mysql
 
-		yum -y remove httpd*
-		yum -y remove php*
-		yum -y remove mysql-server mysql
-		yum -y remove php-mysql
-
-		yum -y install yum-fastestmirror
-		yum -y remove httpd
+			yum -y install yum-fastestmirror
+			yum -y remove httpd
+		fi
 		if [ $YUM_APT_GET_UPDATE = 1 ]; then
 			yum update -y
 		fi
