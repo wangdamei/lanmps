@@ -6,10 +6,10 @@ function Install_Memcached()
 	local IN_LOG=$LOGPATH/install_Install_Memcache.sh.lock
 	echo
     [ -f "$IN_LOG" ] && return
-	
+
 
 	local Memcached_DIR=$IN_DIR/memcached
-	
+
 
 	ProgramIsInstalled "libevent" "libevent-${VERS['libevent']}-stable.tar.gz"
 
@@ -18,7 +18,7 @@ function Install_Memcached()
 	echo "/usr/local/libevent/lib/" >> /etc/ld.so.conf
 	ln -s /usr/local/libevent/lib/libevent-2.0.so.5  /lib/libevent-2.0.so.5
 	ldconfig
-	
+
 	echo "======================================================="
 	ProgramDownloadFiles "memcached" "memcached-${VERS['memcached']}.tar.gz"
 
@@ -40,7 +40,7 @@ function Install_Memcached()
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/etc/memcached.conf
 	fi
-	
+
 	echo "Copy Memcached PHP Test file..."
 	cp $IN_PWD/conf/php.memcached.php $IN_WEB_DIR/default/memcached.php
 
