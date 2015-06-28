@@ -94,9 +94,9 @@ function Init()
 			yum -y remove mysql-server mysql
 			yum -y remove php-mysql
 
-			yum -y install yum-fastestmirror
 			yum -y remove httpd
 		fi
+		yum -y install yum-fastestmirror
 		if [ $YUM_APT_GET_UPDATE = 1 ]; then
 			yum update -y
 		fi
