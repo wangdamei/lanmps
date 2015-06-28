@@ -53,7 +53,8 @@ function Init()
 			apt-get autoremove -y
 			apt-get -fy install
 		fi
-		apt-get install -y build-essential gcc g++ make cmake autoconf
+		echo "apt-get -y install build-essential gcc g++ make cmake autoconf"
+		apt-get -y install build-essential gcc g++ make cmake autoconf
 		#ln -s /bin/gcc /bin/cc
 		
 		for packages in libltdl-dev openssl \
