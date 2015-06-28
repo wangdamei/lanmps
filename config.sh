@@ -14,7 +14,13 @@ YUM_APT_GET_UPDATE=1;#1:Update the kernel and software(yum install -7 update or 
 FName="LANMPS"
 TIME_ZONE=1;#Asia/Shanghai
 MysqlPassWord="root";#mysql username and password
-IS_EXISTS_REMOVE=1
+
+if [ $IS_EXISTS_REMOVE != 0 ]; then
+	IS_EXISTS_REMOVE=1
+fi
+if [ $IS_DOCKER != 1 ]; then
+	IS_DOCKER=0
+fi
 
 if [ $FAST = 1 ]; then
 	FAST=1

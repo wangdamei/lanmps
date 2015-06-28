@@ -37,10 +37,11 @@ function Init()
 			dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
 			apt-get purge `dpkg -l | grep php| awk '{print $2}'`
 		fi
-		apt-get install -y ntpdate
-		ntpdate -u pool.ntp.org
-		date
-		
+		if [ $IS_DOCKER = 0 ]; then
+			apt-get install -y ntpdate
+			ntpdate -u pool.ntp.org
+			date
+		fi
 		if [ -s /etc/ld.so.conf.d/libc6-xen.conf ]; then
 		sed -i 's/hwcap 1 nosegneg/hwcap 0 nosegneg/g' /etc/ld.so.conf.d/libc6-xen.conf
 		fi
@@ -48,8 +49,10 @@ function Init()
 		if [ $YUM_APT_GET_UPDATE = 1 ]; then
 			apt-get update -y
 		fi
-		apt-get autoremove -y
-		apt-get -fy install
+		if [ $IS_DOCKER = 0 ]; then
+			apt-get autoremove -y
+			apt-get -fy install
+		fi
 		apt-get install -y build-essential gcc g++ make cmake autoconf
 		#ln -s /bin/gcc /bin/cc
 		
@@ -73,9 +76,11 @@ function Init()
 		done
 
 	else
-		yum install -y ntp
-		ntpdate -u pool.ntp.org
-		date
+		if [ $IS_DOCKER = 0 ]; then
+			yum install -y ntp
+			ntpdate -u pool.ntp.org
+			date
+		fi
 		if [ $IS_EXISTS_REMOVE = 1 ]; then
 			rpm -qa|grep httpd
 			rpm -e httpd
