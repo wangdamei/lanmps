@@ -21,7 +21,7 @@ function Init()
 	if [ $OS_RL = 3 ]; then
 		echo "====================================="
 	elif [ $OS_RL = "ubuntu" ]; then
-		if [ $IS_EXISTS_REMOVE = 1 ]; then
+		if [ "$IS_EXISTS_REMOVE" = "1" ]; then
 			apt-get remove -y apache2 apache2-utils apache2.2-common apache2.2-bin \
 			apache2-mpm-prefork apache2-doc apache2-mpm-worker \
 			mysql-common mysql-server \
@@ -37,7 +37,7 @@ function Init()
 			dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
 			apt-get purge `dpkg -l | grep php| awk '{print $2}'`
 		fi
-		if [ $IS_DOCKER = 0 ]; then
+		if [ "$IS_DOCKER" = "0" ]; then
 			apt-get install -y ntpdate
 			ntpdate -u pool.ntp.org
 			date
@@ -46,10 +46,10 @@ function Init()
 		sed -i 's/hwcap 1 nosegneg/hwcap 0 nosegneg/g' /etc/ld.so.conf.d/libc6-xen.conf
 		fi
 		
-		if [ $YUM_APT_GET_UPDATE = 1 ]; then
+		if [ "$YUM_APT_GET_UPDATE" = "1" ]; then
 			apt-get update -y
 		fi
-		if [ $IS_DOCKER = 0 ]; then
+		if [ "$IS_DOCKER" = "0" ]; then
 			apt-get autoremove -y
 			apt-get -fy install
 		fi
@@ -76,12 +76,12 @@ function Init()
 		done
 
 	else
-		if [ $IS_DOCKER = 0 ]; then
+		if [ "${IS_DOCKER}"x = "0"x ]; then
 			yum install -y ntp
 			ntpdate -u pool.ntp.org
 			date
 		fi
-		if [ $IS_EXISTS_REMOVE = 1 ]; then
+		if [ "${IS_EXISTS_REMOVE}"x = "1"x ]; then
 			rpm -qa|grep httpd
 			rpm -e httpd
 			rpm -qa|grep mysql
@@ -97,7 +97,7 @@ function Init()
 			yum -y remove httpd
 		fi
 		yum -y install yum-fastestmirror
-		if [ $YUM_APT_GET_UPDATE = 1 ]; then
+		if [ "${YUM_APT_GET_UPDATE}"x = "1"x ]; then
 			yum update -y
 		fi
 
@@ -121,7 +121,7 @@ function Init()
 		pcre pcre-devel libtool-ltdl-devel \
 		wget \
 		libmcrypt-devel libmhash-devel \
-		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel net-tools;
+		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel;
 		do 
 			yum -y install $packages;
 			echo

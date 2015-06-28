@@ -53,7 +53,7 @@ function Starup()
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
 	
-	if [ $FAST = 1 ];then
+	if [ "${FAST}" = "1" ];then
 		echo "FAST"
 	else
 		file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"

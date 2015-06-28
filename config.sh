@@ -15,14 +15,14 @@ FName="LANMPS"
 TIME_ZONE=1;#Asia/Shanghai
 MysqlPassWord="root";#mysql username and password
 
-if [ $IS_EXISTS_REMOVE != 0 ]; then
+if [ "${IS_EXISTS_REMOVE}" = "0" ]; then
 	IS_EXISTS_REMOVE=1
 fi
-if [ $IS_DOCKER != 1 ]; then
+if [ "${IS_DOCKER}" = "1" ]; then
 	IS_DOCKER=0
 fi
 
-if [ $FAST = 1 ]; then
+if [ "$FAST" = "1" ]; then
 	FAST=1
 else
 	FAST=0
