@@ -9,11 +9,8 @@ START="no"
 IS_EXISTS_REMOVE=0
 IS_DOCKER=1
 . $IN_PWD/lib/common.sh
-echo $IN_PWD
-. $IN_PWD/lib/Install_Fast.sh
-Init_CheckAndDownloadFiles
 
-exit 0
+. $IN_PWD/lib/Install_Fast.sh
 
 Init_SetDirectoryAndUser 2>&1 | tee -a "${LOGPATH}/1.Init_SetDirectoryAndUser-install.log"
 

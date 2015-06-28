@@ -4,7 +4,7 @@ function Install_Fast {
 	echo "FAST=============="
 	echo "FAST=============="
 	echo "FAST=============="
-	$IN_PWD/www.tar.gz
+	cd $IN_PWD
 	[ -d "/www" ] && mv /www /www_$(date +%Y%m%d%H);
 	tar -zxvf www.tar.gz -C /
 
