@@ -1,14 +1,19 @@
 #!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/root/bin:~/bin
 export PATH
+IN_PWD=$(pwd)
+# Check if user is root
+if [ $UID != 0 ]; then echo "Error: You must be root to run the install script, please use root to install lanmps";exit;fi
 FAST=1
 START="no"
 IS_EXISTS_REMOVE=0
 IS_DOCKER=1
-# Check if user is root
-if [ $UID != 0 ]; then echo "Error: You must be root to run the install script, please use root to install lanmps";exit;fi
-. lib/common.sh
-. lib/Install_Fast.sh
+. $IN_PWD/lib/common.sh
+echo $IN_PWD
+. $IN_PWD/lib/Install_Fast.sh
+Init_CheckAndDownloadFiles
+
+exit 0
 
 Init_SetDirectoryAndUser 2>&1 | tee -a "${LOGPATH}/1.Init_SetDirectoryAndUser-install.log"
 

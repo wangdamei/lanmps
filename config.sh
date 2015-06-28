@@ -1,5 +1,5 @@
 # common var
-IN_PWD=$(pwd)
+
 IN_DOWN=${IN_PWD}/down
 LOGPATH=${IN_PWD}/logs
 IN_DIR="/www/lanmps"

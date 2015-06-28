@@ -3,6 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/root/bin:~/bi
 export PATH
 # Check if user is root
 START="no"
+IN_PWD=$(pwd)
 if [ $UID != 0 ]; then echo "Error: You must be root to run the install script, please use root to install lanmps";exit;fi
 . lib/common.sh
 

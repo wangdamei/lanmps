@@ -1,4 +1,4 @@
-. ./config.sh
+. $IN_PWD/config.sh
 
 # OS Version detect
 # 1:redhat/centos 2:debian/ubuntu
@@ -31,18 +31,18 @@ IP=${IP// /}
 
 
 #=================================================
-. lib/fun.sh
-. lib/Init.sh
-. lib/Init_CheckAndDownloadFiles.sh
-. lib/Install_DependsAndOpt.sh
-. lib/Install_Mysql.sh
-. lib/Install_Nginx.sh
-. lib/Install_Apache.sh
-. lib/Install_PHP.sh
-. lib/Install_PHP_Tools.sh
-. lib/Install_Memcached.sh
-. lib/Install_Sphinx.sh
-. lib/Starup.sh
+. $IN_PWD/lib/fun.sh
+. $IN_PWD/lib/Init.sh
+. $IN_PWD/lib/Init_CheckAndDownloadFiles.sh
+. $IN_PWD/lib/Install_DependsAndOpt.sh
+. $IN_PWD/lib/Install_Mysql.sh
+. $IN_PWD/lib/Install_Nginx.sh
+. $IN_PWD/lib/Install_Apache.sh
+. $IN_PWD/lib/Install_PHP.sh
+. $IN_PWD/lib/Install_PHP_Tools.sh
+. $IN_PWD/lib/Install_Memcached.sh
+. $IN_PWD/lib/Install_Sphinx.sh
+. $IN_PWD/lib/Starup.sh
 clear
 t_median=32
 if [ $X86 = 1 ]; then
