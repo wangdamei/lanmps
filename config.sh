@@ -1,5 +1,5 @@
 # common var
-IN_PWD=$(pwd)
+
 IN_DOWN=${IN_PWD}/down
 LOGPATH=${IN_PWD}/logs
 IN_DIR="/www/lanmps"
@@ -14,6 +14,19 @@ YUM_APT_GET_UPDATE=1;#1:Update the kernel and software(yum install -7 update or 
 FName="LANMPS"
 TIME_ZONE=1;#Asia/Shanghai
 MysqlPassWord="root";#mysql username and password
+
+if [ "${IS_EXISTS_REMOVE}" = "0" ]; then
+	IS_EXISTS_REMOVE=1
+fi
+if [ "${IS_DOCKER}" = "1" ]; then
+	IS_DOCKER=0
+fi
+
+if [ "$FAST" = "1" ]; then
+	FAST=1
+else
+	FAST=0
+fi
 
 declare -A LIBS;
 declare -A VERS;

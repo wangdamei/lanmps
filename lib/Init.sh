@@ -16,40 +16,45 @@ function Init()
     echo
     [ -f "$IN_LOG" ] && return
 	
-	Init_ReplacementSource
+	#Init_ReplacementSource
 	
 	if [ $OS_RL = 3 ]; then
 		echo "====================================="
 	elif [ $OS_RL = "ubuntu" ]; then
-		apt-get remove -y apache2 apache2-utils apache2.2-common apache2.2-bin \
-		apache2-mpm-prefork apache2-doc apache2-mpm-worker \
-		mysql-common mysql-server \
-		php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
-		
-		killall apache2
-		
-		dpkg -l |grep mysql 
-		dpkg -P libmysqlclient15off libmysqlclient15-dev mysql-common 
-		dpkg -l |grep apache 
-		dpkg -P apache2 apache2-doc apache2-mpm-prefork apache2-utils apache2.2-common
-		dpkg -l |grep php 
-		dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
-		apt-get purge `dpkg -l | grep php| awk '{print $2}'`
-		
-		apt-get install -y ntpdate
-		ntpdate -u pool.ntp.org
-		date
-		
+		if [ "$IS_EXISTS_REMOVE" = "1" ]; then
+			apt-get remove -y apache2 apache2-utils apache2.2-common apache2.2-bin \
+			apache2-mpm-prefork apache2-doc apache2-mpm-worker \
+			mysql-common mysql-server \
+			php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
+			
+			killall apache2
+			
+			dpkg -l |grep mysql 
+			dpkg -P libmysqlclient15off libmysqlclient15-dev mysql-common 
+			dpkg -l |grep apache 
+			dpkg -P apache2 apache2-doc apache2-mpm-prefork apache2-utils apache2.2-common
+			dpkg -l |grep php 
+			dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
+			apt-get purge `dpkg -l | grep php| awk '{print $2}'`
+		fi
+		if [ "$IS_DOCKER" = "0" ]; then
+			apt-get install -y ntpdate
+			ntpdate -u pool.ntp.org
+			date
+		fi
 		if [ -s /etc/ld.so.conf.d/libc6-xen.conf ]; then
 		sed -i 's/hwcap 1 nosegneg/hwcap 0 nosegneg/g' /etc/ld.so.conf.d/libc6-xen.conf
 		fi
 		
-		if [ $YUM_APT_GET_UPDATE = 1 ]; then
+		if [ "$YUM_APT_GET_UPDATE" = "1" ]; then
 			apt-get update -y
 		fi
-		apt-get autoremove -y
-		apt-get -fy install
-		apt-get install -y build-essential gcc g++ make cmake autoconf
+		if [ "$IS_DOCKER" = "0" ]; then
+			apt-get autoremove -y
+			apt-get -fy install
+		fi
+		echo "apt-get -y install build-essential gcc g++ make cmake autoconf"
+		apt-get -y install build-essential gcc g++ make cmake autoconf
 		#ln -s /bin/gcc /bin/cc
 		
 		for packages in libltdl-dev openssl \
@@ -72,25 +77,28 @@ function Init()
 		done
 
 	else
-		yum install -y ntp
-		ntpdate -u pool.ntp.org
-		date
+		if [ "${IS_DOCKER}"x = "0"x ]; then
+			yum install -y ntp
+			ntpdate -u pool.ntp.org
+			date
+		fi
+		if [ "${IS_EXISTS_REMOVE}"x = "1"x ]; then
+			rpm -qa|grep httpd
+			rpm -e httpd
+			rpm -qa|grep mysql
+			rpm -e mysql
+			rpm -qa|grep php
+			rpm -e php
 
-		rpm -qa|grep httpd
-		rpm -e httpd
-		rpm -qa|grep mysql
-		rpm -e mysql
-		rpm -qa|grep php
-		rpm -e php
+			yum -y remove httpd*
+			yum -y remove php*
+			yum -y remove mysql-server mysql
+			yum -y remove php-mysql
 
-		yum -y remove httpd*
-		yum -y remove php*
-		yum -y remove mysql-server mysql
-		yum -y remove php-mysql
-
+			yum -y remove httpd
+		fi
 		yum -y install yum-fastestmirror
-		yum -y remove httpd
-		if [ $YUM_APT_GET_UPDATE = 1 ]; then
+		if [ "${YUM_APT_GET_UPDATE}"x = "1"x ]; then
 			yum update -y
 		fi
 
@@ -114,7 +122,7 @@ function Init()
 		pcre pcre-devel libtool-ltdl-devel \
 		wget \
 		libmcrypt-devel libmhash-devel \
-		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel net-tools;
+		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel;
 		do 
 			yum -y install $packages;
 			echo

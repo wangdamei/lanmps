@@ -1,16 +1,7 @@
 # start services
 function Starup()
 {
-	echo "Create PHP Info Tool..."
-	#TOOLS
 	cd $IN_PWD
-	cp conf/index.html $IN_WEB_DIR/default/index.html
-	cp conf/php.tz.php $IN_WEB_DIR/default/_tz.php
-	cat > $IN_WEB_DIR/default/_phpinfo.php<<EOF
-<?php
-phpinfo();
-?>
-EOF
 	
 	echo "============================add nginx and php-fpm on startup============================"
 	echo "Set start"
@@ -50,8 +41,9 @@ EOF
 		
 		systemctl enable nginx.service
 		systemctl enable php-fpm.service
-		systemctl enable mysql.service
 		systemctl enable memcached.service
+		systemctl enable mysql.service
+		
 		
 		systemctl start nginx.service
 		systemctl start php-fpm.service
@@ -61,11 +53,15 @@ EOF
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
 	
-	file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
-	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
+	if [ "${FAST}" = "1" ];then
+		echo "FAST"
+	else
+		file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
+		if [ ! $IN_DIR = "/www/lanmps" ]; then
+			sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
+		fi
+		chmod +x "${IN_DIR}/lanmps"
 	fi
-	chmod +x "${IN_DIR}/lanmps"
 	ln -s $IN_DIR/lanmps /root/lanmps
 	#sed -i "s:/usr/local/php/logs:$IN_DIR/php/var/run:g" "${IN_DIR}/lnmp"
 	
