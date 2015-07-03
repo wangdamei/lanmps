@@ -37,26 +37,17 @@ LANMPS状态管理命令
 
 ### 方法一：
 
-* LANMPS      状态管理 ： /root/lanmps {start|stop|reload|restart|kill|status}
-* Nginx            状态管理 ：/etc/init.d/nginx {start|stop|reload|restart|status}
-* MySQL          状态管理 ：/etc/init.d/mysql {start|stop|restart|reload|force-reload|status}
-* PHP-FPM     状态管理 ：/etc/init.d/php-fpm {start|stop|quit|restart|reload|logrotate}
-* Memcached状态管理 ：/etc/init.d/memcached {start|stop|restart}
+* LANMPS      状态管理 ： /www/lanmps/lanmps {start|stop|reload|restart|kill|status}
+* Nginx            状态管理 ： /www/lanmps/action/nginx {start|stop|reload|restart|status|cutLog}
+* MySQL          状态管理 ：/www/lanmps/action/mysql {start|stop|restart|reload|force-reload|status}
+* PHP-FPM     状态管理 ：/www/lanmps/action/php-fpm {start|stop|quit|restart|reload|logrotate}
+* Memcached状态管理 ：/www/lanmps/action/memcached {start|stop|restart}
 
 例如：
 > 
 重启LANMPS：/root/lanmps restart           输入此命令即可重启
 > 
-重启mysql     ：/www/lanmps/init.d/mysql restart
-
-### 方法二 (推荐)：
-在安装目录下也有此状态命令：
-
-* LANMPS      状态管理 ： /www/lanmps/lanmps {start|stop|reload|restart|kill|status}
-* Nginx            状态管理 ： /www/lanmps/init.d/nginx {start|stop|reload|restart|status|cutLog}
-* MySQL          状态管理 ：/www/lanmps/init.d/mysql {start|stop|restart|reload|force-reload|status}
-* PHP-FPM     状态管理 ：/www/lanmps/init.d/php-fpm {start|stop|quit|restart|reload|logrotate}
-* Memcached状态管理 ：/www/lanmps/init.d/memcached {start|stop|restart}
+重启mysql     ：/www/lanmps/action/mysql restart
 
 > 
 /www                     ：为安装目录位置
@@ -87,7 +78,7 @@ Xdubug ：已编译，但默认关闭，如需开启在php.ini中开启
 
 nginx 自动分割日志
 --------------------------------------------
-0 0 * * * /www/lanmps/init.d/nginx cutLog
+0 0 * * * /www/lanmps/action/nginx cutLog
 > 
 凌晨 0点0分00秒 开始执行
 
