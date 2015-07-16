@@ -77,7 +77,18 @@ sed -i 's/magic_quotes_gpc = On/;magic_quotes_gpc = On/g' $php_ini
 sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server/g' $php_ini
 sed -i 's:mysql.default_socket =:mysql.default_socket ='$IN_DIR'/mysql/data/mysql.sock:g' $php_ini
 sed -i 's:pdo_mysql.default_socket.*:pdo_mysql.default_socket ='$IN_DIR'/mysql/data/mysql.sock:g' $php_ini
-sed -i 's/expose_php/;expose_php/g' $php_ini
+sed -i 's/expose_php = On/expose_php = Off/g' $php_ini
+
+sed -i 's/[opcache]/[opcache]\nzend_extension=opcache.so/g' $php_ini
+sed -i 's/;opcache.enable=0/opcache.enable=1/g' $php_ini
+sed -i 's/;opcache.enable_cli=0/opcache.enable_cli=1/g' $php_ini
+sed -i 's/;opcache.memory_consumption=64/opcache.memory_consumption=128/g' $php_ini
+sed -i 's/;opcache.interned_strings_buffer=4/opcache.interned_strings_buffer=8/g' $php_ini
+sed -i 's/;opcache.max_accelerated_files=2000/opcache.max_accelerated_files=4000/g' $php_ini
+sed -i 's/;opcache.revalidate_freq=2/opcache.revalidate_freq=60/g' $php_ini
+sed -i 's/;opcache.fast_shutdown=0/opcache.fast_shutdown=1/g' $php_ini
+sed -i 's/;opcache.save_comments=1/opcache.save_comments=0/g' $php_ini
+
 
 ln -s $php_ini $IN_DIR/etc/php.ini
 

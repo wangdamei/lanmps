@@ -22,41 +22,30 @@ coreseek(Sphinx中文版) 不支持 Ubuntu 12.x,13.x,14.x
 -----------------------------------
 
 请以  root  用户执行命令
-### 方法一（速度比较慢）：
-系统执行：`wget -c http://www.lanmps.com/soft/lanmps-1.0.3.tar.gz && tar -zxvf lanmps-1.0.3.tar.gz && cd lanmps-1.0.0 && ./lanmps.sh`
 
 安装包大小：197MB（包含相关环境所需文件）
 ### 方法二：
 百度网盘下载(速度快)：[http://pan.baidu.com/s/1bnjIYKJ](http://pan.baidu.com/s/1bnjIYKJ)
 
 然后上传文件到服务器上，在当前目录下执行：
-`tar -zxvf lanmps-1.0.3.tar.gz && cd lanmps-1.0.3 && ./lanmps.sh`
+`tar -zxvf lanmps-2.2.2.tar.gz && cd lanmps-2.2.2 && ./lanmps.sh`
 
 LANMPS状态管理命令
 ------------------------------------
 
 ### 方法一：
 
-* LANMPS      状态管理 ： /root/lanmps {start|stop|reload|restart|kill|status}
-* Nginx            状态管理 ：/etc/init.d/nginx {start|stop|reload|restart|status}
-* MySQL          状态管理 ：/etc/init.d/mysql {start|stop|restart|reload|force-reload|status}
-* PHP-FPM     状态管理 ：/etc/init.d/php-fpm {start|stop|quit|restart|reload|logrotate}
-* Memcached状态管理 ：/etc/init.d/memcached {start|stop|restart}
+* LANMPS      状态管理 ： /www/lanmps/lanmps {start|stop|reload|restart|kill|status}
+* Nginx            状态管理 ： /www/lanmps/action/nginx {start|stop|reload|restart|status|cutLog}
+* MySQL          状态管理 ：/www/lanmps/action/mysql {start|stop|restart|reload|force-reload|status}
+* PHP-FPM     状态管理 ：/www/lanmps/action/php-fpm {start|stop|quit|restart|reload|logrotate}
+* Memcached状态管理 ：/www/lanmps/action/memcached {start|stop|restart}
 
 例如：
 > 
 重启LANMPS：/root/lanmps restart           输入此命令即可重启
 > 
-重启mysql     ：/www/lanmps/init.d/mysql restart
-
-### 方法二 (推荐)：
-在安装目录下也有此状态命令：
-
-* LANMPS      状态管理 ： /www/lanmps/lanmps {start|stop|reload|restart|kill|status}
-* Nginx            状态管理 ： /www/lanmps/init.d/nginx {start|stop|reload|restart|status|cutLog}
-* MySQL          状态管理 ：/www/lanmps/init.d/mysql {start|stop|restart|reload|force-reload|status}
-* PHP-FPM     状态管理 ：/www/lanmps/init.d/php-fpm {start|stop|quit|restart|reload|logrotate}
-* Memcached状态管理 ：/www/lanmps/init.d/memcached {start|stop|restart}
+重启mysql     ：/www/lanmps/action/mysql restart
 
 > 
 /www                     ：为安装目录位置
@@ -87,7 +76,7 @@ Xdubug ：已编译，但默认关闭，如需开启在php.ini中开启
 
 nginx 自动分割日志
 --------------------------------------------
-0 0 * * * /www/lanmps/init.d/nginx cutLog
+0 0 * * * /www/lanmps/action/nginx cutLog
 > 
 凌晨 0点0分00秒 开始执行
 
