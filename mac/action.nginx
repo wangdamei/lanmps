@@ -5,8 +5,8 @@
 # HTML files and CGI.
 # processname: nginx
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DESC="nginx daemon"
-NAME=nginx
+DESC="php-fpm daemon"
+NAME=php-fpm
 IN_DIR="/usr/local/Cellar/nginx/1.8.1"
 DAEMON=$IN_DIR/sbin/$NAME
 CONF=/usr/local/etc/nginx/nginx.conf
@@ -32,7 +32,7 @@ do_reload() {
 case "$1" in
  start)
  echo -n "Starting $DESC: $NAME"
- do_start
+ php-fpm -D
  echo "."
  ;;
  stop)
