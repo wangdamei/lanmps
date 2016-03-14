@@ -5,13 +5,16 @@ export PATH
 if [ $UID != 0 ]; then echo "Error: You must be root to run the install script, please use root to install lanmps";exit;fi
 IN_PWD=$(pwd)
 IN_DOWN=${IN_PWD}/down
-IN_DIR=/Users/${USER}/lanmps
-IN_WEB_DIR={IN_PWD}/wwwroot
-IN_WEB_LOG_DIR=${IN_PWD}/wwwLogs
+IN_DIR=~/lanmps
+IN_USER_DIR=~
+IN_USER=${IN_USER_DIR##*/}
+IN_WEB_DIR=${IN_DIR}/wwwroot
+IN_WEB_LOG_DIR=${IN_DIR}/wwwLogs
 
 mkdir -p $IN_DIR/vhost
 mkdir -p $IN_WEB_DIR
 mkdir -p $IN_WEB_LOG_DIR
+
 
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -69,7 +72,7 @@ sudo chmod u+s /usr/local/Cellar/nginx/1.8.1/bin/nginx
 mv /usr/local/etc/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf.old
 
 cd $IN_PWD
-sudo cp -rf nginx.conf /usr/local/etc/nginx/
+sudo cp -rf conf.nginx.conf /usr/local/etc/nginx/nginx.conf
 
 #cp -rf conf.default.conf $IN_DIR/vhost/default.conf
 cp -rf conf.upstream.conf $IN_DIR/vhost/upstream.conf
@@ -80,6 +83,7 @@ chmod +x $IN_DIR/nginx
 
 
 php_ini="/usr/local/etc/php/5.6/php.ini"
+rm -rf /private/etc/php.ini
 ln -s $php_ini /private/etc/php.ini
 cp $php_ini "${php_ini}.old"
 
@@ -113,6 +117,7 @@ ln -s /usr/local/sbin/php56-fpm $IN_DIR/php-fpm
 
 conf=/usr/local/etc/php/5.6/php-fpm.conf
 cp -rf $conf "${conf}.old"
+rm -rf /private/etc/php-fpm.conf
 ln -s $conf /private/etc/php-fpm.conf
 
 #sed -i 's:;pid = run/php-fpm.pid:pid = run/php-fpm.pid:g' $conf
@@ -124,18 +129,20 @@ sed -i 's:;request_terminate_timeout = 0:request_terminate_timeout = 100:g' $con
 sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 
 
-if [ -s "/Users/${USER}/.bashrc" ]; then
+if [ -s "${THIS_PATH}/.bashrc" ]; then
     echo " .bashrc FIND "
 else
     cd $IN_PWD
-    cp -rf .bashrc /Users/${USER}/.bashrc
+    cp -rf .bashrc ~/.bashrc
 fi
 
 if [ -s "/Users/${USER}/.bash_profile" ]; then
     echo " .bash_profile FIND "
 else
     cd $IN_PWD
-    cp -rf .bashrc /Users/${USER}/.bash_profile
+    cp -rf .bashrc ~/.bash_profile
 fi
 
+
+chown -R $IN_USER:staff $IN_DIR
 echo "OK"
