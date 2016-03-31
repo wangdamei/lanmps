@@ -36,9 +36,9 @@ declare -A IN_DIR_SETS;
 #http://nginx.org/download/nginx-1.8.0.tar.gz
 DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.8.0.tar.gz"
 VERS['nginx']="1.8.0"
-#http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.21.tar.gz
-DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.21.tar.gz"
-VERS['mysql']="5.6.21"
+#http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.29.tar.gz
+DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.29.tar.gz"
+VERS['mysql']="5.6.29"
 
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
