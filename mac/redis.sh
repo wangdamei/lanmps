@@ -20,7 +20,7 @@ prog="redis-server"
 desc="Redis Server" 
 start() { 
         echo $"Starting $desc: " 
-        $BIN/$prog $CONFIG 
+        nohup $BIN/$prog $CONFIG &
         RETVAL=$? 
         return $RETVAL 
 } 
