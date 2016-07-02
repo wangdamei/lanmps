@@ -17,10 +17,9 @@ PROGRAM_NAME="LANMPS"
 PROGRAM_VERSION="V 3.0.0"
 #安装服务
 SERVER="nginx"
-RE_INS=0
+
+#下载
 SOFT_DOWN=1
-ETC_INIT_D_LN=2;#1:ln x to $IN_DIR/init.d/x;2:no
-INNODB_ID=2
 
 #1:Update the kernel and software(yum install -7 update or apt-get install -y update);2:no
 YUM_APT_GET_UPDATE=1;
@@ -45,7 +44,6 @@ fi
 declare -A LIBS;
 declare -A VERS;
 declare -A DUS;
-declare -A IN_DIR_SETS;
 # soft url and down
 #http://nginx.org/download/nginx-1.8.0.tar.gz
 DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.10.1.tar.gz"
@@ -78,7 +76,6 @@ VERS['php5.4.x']="5.4.45"
 #http://cn2.php.net/distributions/php-5.3.29.tar.gz
 DUS['php5.3.x']="http://download.lanmps.com/php/php-5.3.29.tar.gz"
 VERS['php5.3.x']="5.3.29"
-IN_DIR_SETS['php5.3.x']=${IN_DIR}/php
 
 #http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.4.10/phpMyAdmin-4.4.10-all-languages.tar.gz
 DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.6.3-all-languages.tar.gz"
