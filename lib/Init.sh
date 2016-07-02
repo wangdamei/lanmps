@@ -57,17 +57,17 @@ function Init()
 		apt-get -y install build-essential gcc g++ make cmake autoconf
 		#ln -s /bin/gcc /bin/cc
 		
-		for packages in libltdl-dev openssl \
+		for packages in iproute iproute-doc libltdl-dev openssl \
 		libzip-dev automake re2c wget cron libc6-dev file rcconf \
 		flex vim nano bison m4 gawk less cpp binutils diffutils \
 		unzip tar bzip2 unrar p7zip libncurses5-dev libncurses5 \
 		libtool libevent-dev libpcre3 libpcre3-dev \
-		libpcrecpp0  zlibc libssl-dev libsasl2-dev libltdl3-dev  \
-		libmcrypt-dev libmysqlclient15-dev zlib1g zlib1g-dev libbz2-1.0 libbz2-dev \
-		libglib2.0-0 libglib2.0-dev libpng3 libfreetype6 libfreetype6-dev libjpeg62 \
-		libjpeg62-dev libjpeg-dev libpng-dev libpng12-0 libpng12-dev curl libcurl3 \
-		libmhash2 libmhash-dev libpq-dev libpq5 gettext libxml2-dev  \
-		libcurl4-openssl-dev libcurl4-gnutls-dev mcrypt libcap-dev libexpat1-dev mysql-client;
+		zlibc libssl-dev libsasl2-dev libltdl3-dev  \
+        libmcrypt-dev zlib1g zlib1g-dev libbz2-1.0 libbz2-dev \
+        libglib2.0-0 libglib2.0-dev libpng3 libfreetype6 libfreetype6-dev libjpeg62 \
+        libjpeg-dev libpng-dev libpng12-0 libpng12-dev curl libcurl3 \
+        libmhash2 libmhash-dev libpq-dev libpq5 gettext libxml2-dev  \
+        mcrypt libcap-dev libexpat1-dev mysql-client;
 		
 		do 
 			apt-get install -y $packages --force-yes;
@@ -170,7 +170,7 @@ function Init_SetDirectoryAndUser
 		echo $IN_WEB_DIR/default
 		echo $IN_WEB_LOG_DIR
 		
-		mkdir -p $IN_DIR/{etc,init.d,bin,tmp,run}
+		mkdir -p $IN_DIR/{etc,bin,tmp,run}
 		
 		mkdir -p $IN_WEB_DIR/default
 		chmod +w $IN_WEB_DIR/default
