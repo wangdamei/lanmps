@@ -97,7 +97,7 @@ VERS['libevent']="2.0.21"
 DUS['redis']="http://download.lanmps.com/redis/redis-3.2.1.tar.gz"
 VERS['redis']="3.4.1"
 
-DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tar.gz"
+DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tgz"
 VERS['php-redis']="3.0.0"
 
 

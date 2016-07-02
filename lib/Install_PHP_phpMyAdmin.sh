@@ -7,10 +7,11 @@ function Install_PHP_phpMyAdmin()
     local IN_LOG=$LOGPATH/install_Install_PHPMyadmin.sh.lock
 	echo
     [ -f $IN_LOG ] && return
+    ProgramDownloadFiles "phpMyAdmin" "phpMyAdmin-${VERS['phpMyAdmin']}-all-languages.tar.gz"
 	
 	cd $IN_DOWN
 	tar zxvf phpMyAdmin-${VERS['phpMyAdmin']}-all-languages.tar.gz
-	mv phpMyAdmin-${VERS['phpMyAdmin']}-all-languages $IN_WEB_DIR/default/_phpmyadmin/
+	mv phpMyAdmin-${VERS['phpMyAdmin']}-all-languages $IN_WEB_DIR/default/_phpmyadmin
 	mv $IN_WEB_DIR/default/_phpmyadmin/config.sample.inc.php $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
 	sed -i "s:UploadDir'] = '':UploadDir'] = 'upload':g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
 	sed -i "s#localhost#localhost:3306#g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php

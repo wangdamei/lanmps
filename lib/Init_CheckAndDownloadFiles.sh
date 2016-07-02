@@ -14,8 +14,6 @@ function Init_CheckAndDownloadFiles()
 		ProgramDownloadFiles "mariadb" "mariadb-${VERS['MariaDB']}.tar.gz"
 	fi
 	
-	#ProgramDownloadFiles "phpMyAdmin" "phpMyAdmin-${VERS['phpMyAdmin']}-all-languages.tar.gz"
-	
 	ProgramDownloadFiles "memcache" "memcache-${VERS['php-memcache']}.tgz"
 	
 	ProgramDownloadFiles "xdebug" "xdebug-${VERS['php-xdebug']}.tgz"
