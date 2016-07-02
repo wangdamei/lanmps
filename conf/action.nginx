@@ -11,7 +11,7 @@ IN_DIR="/www/lanmps"
 DAEMON=$IN_DIR/nginx/sbin/$NAME
 CONF=$IN_DIR/nginx/conf/$NAME.conf
 PID_FILE=$IN_DIR/nginx/logs/$NAME.pid
-SCRIPT_NAME=$IN_DIR/action/$NAME
+SCRIPT_NAME=$IN_DIR/bin/$NAME
 IN_WEB_LOG_DIR="/www/wwwLogs"
 
 set -e

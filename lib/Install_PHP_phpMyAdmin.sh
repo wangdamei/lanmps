@@ -1,6 +1,5 @@
 function Install_PHP_phpMyAdmin()
 {
-	local php_ini=$IN_DIR/php/php.ini
 	echo "================================="
     echo "================================="
     echo "================================="

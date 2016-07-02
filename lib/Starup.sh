@@ -63,20 +63,19 @@ function Starup()
 		chmod +x "${IN_DIR}/lanmps"
 	fi
 	ln -s $IN_DIR/lanmps /root/lanmps
-	#sed -i "s:/usr/local/php/logs:$IN_DIR/php/var/run:g" "${IN_DIR}/lnmp"
 	
 	echo "Starting LANMPS..."
 	if [ ! -d "$systemd_path" ]; then
-		$IN_DIR/action/mysql start
+		$IN_DIR/bin/mysql start
 		
 		if [ $SERVER == "nginx" ]; then
-			$IN_DIR/action/php-fpm start
-			$IN_DIR/action/nginx start
+			$IN_DIR/bin/php-fpm start
+			$IN_DIR/bin/nginx start
 		else
-			$IN_DIR/action/httpd start
+			$IN_DIR/bin/httpd start
 		fi
 		
-		$IN_DIR/action/memcached start
+		$IN_DIR/bin/memcached start
 	else
 		systemctl start nginx.service
 		systemctl start php-fpm.service
@@ -90,8 +89,8 @@ function Starup()
 		/sbin/iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 		iptables-save > /etc/iptables.up.rules
 		iptables-save > /etc/network/iptables.up.rules
-		#/etc/rc.d/action/iptables save
-		#/etc/action/iptables restart
+		#/etc/rc.d/bin/iptables save
+		#/etc/bin/iptables restart
 	fi
 }
 

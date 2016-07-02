@@ -52,7 +52,7 @@ make
 make install
 #	--enable-magic-quotes 
 #	--enable-safe-mode 
-#	--with-curlwrappers 
+#	--with-curlwrappers
 
 rm -rf "/usr/bin/php54"
 rm -rf "/usr/bin/phpize54"
@@ -118,3 +118,5 @@ if [ $SERVER == "nginx" ]; then
 fi
 #PHP-FPM
 unset php_ini conf
+
+Install_PHP_Tools $PHP_PATH

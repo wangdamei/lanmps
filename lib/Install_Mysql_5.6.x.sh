@@ -53,10 +53,10 @@ function Install_Mysql {
 	chown -R mysql $IN_DIR/mysql/data
 	chgrp -R mysql $IN_DIR/mysql/.
 	
-	cp support-files/mysql.server $IN_DIR/action/mysql
-	chmod 755 $IN_DIR/action/mysql
+	cp support-files/mysql.server $IN_DIR/bin/mysql
+	chmod 755 $IN_DIR/bin/mysql
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/action/mysql $IN_DIR/init.d/mysql
+		ln -s $IN_DIR/bin/mysql $IN_DIR/init.d/mysql
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
@@ -73,7 +73,7 @@ EOF
 	fi
 	
 	#start
-	$IN_DIR/action/mysql start
+	$IN_DIR/bin/mysql start
 	
 	ln -s $IN_DIR/mysql/bin/mysql /usr/bin/mysql
 	ln -s $IN_DIR/mysql/bin/mysqldump /usr/bin/mysqldump
@@ -96,8 +96,8 @@ EOF
 
 	rm -f /tmp/mysql_sec_script
 	
-	$IN_DIR/action/mysql restart
-	$IN_DIR/action/mysql stop
+	$IN_DIR/bin/mysql restart
+	$IN_DIR/bin/mysql stop
 	echo "============================MySQL ${VERS['mysql']} install completed========================="
 	touch $IN_LOG
 }

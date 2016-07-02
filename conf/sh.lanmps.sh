@@ -31,15 +31,15 @@ function_start()
     echo "Starting LANMPS..."
 	
 	if [[ $SERVER == "apache" ]];then
-	    $IN_DIR/action/httpd start
+	    $IN_DIR/bin/httpd start
 	else
-	    $IN_DIR/action/nginx start
-		$IN_DIR/action/php-fpm start
+	    $IN_DIR/bin/nginx start
+		$IN_DIR/bin/php-fpm start
 	fi
     
-    $IN_DIR/action/mysql start
+    $IN_DIR/bin/mysql start
 	
-	$IN_DIR/action/memcached start
+	$IN_DIR/bin/memcached start
 }
 
 function_stop()
@@ -47,15 +47,15 @@ function_stop()
     echo "Stoping LANMPS..."
 	
 	if [[ $SERVER == "apache" ]];then
-	    $IN_DIR/action/httpd stop
+	    $IN_DIR/bin/httpd stop
 	else
-	    $IN_DIR/action/nginx stop
-		$IN_DIR/action/php-fpm stop
+	    $IN_DIR/bin/nginx stop
+		$IN_DIR/bin/php-fpm stop
 	fi
 
-    $IN_DIR/action/mysql stop
+    $IN_DIR/bin/mysql stop
 	
-	$IN_DIR/action/memcached stop
+	$IN_DIR/bin/memcached stop
 }
 
 function_reload()
@@ -63,13 +63,13 @@ function_reload()
     echo "Reload LANMPS..."
 	
 	if [[ $SERVER == "apache" ]];then
-	    $IN_DIR/action/httpd reload
+	    $IN_DIR/bin/httpd reload
 	else
-	    $IN_DIR/action/nginx reload
-		$IN_DIR/action/php-fpm reload
+	    $IN_DIR/bin/nginx reload
+		$IN_DIR/bin/php-fpm reload
 	fi
 
-    $IN_DIR/action/mysql reload
+    $IN_DIR/bin/mysql reload
 }
 
 function_kill()
@@ -89,13 +89,13 @@ function_status()
 {
 
     if [[ $SERVER == "apache" ]];then
-	    $IN_DIR/action/httpd status
+	    $IN_DIR/bin/httpd status
 	else
-	    $IN_DIR/action/nginx status
-		$IN_DIR/action/php-fpm status
+	    $IN_DIR/bin/nginx status
+		$IN_DIR/bin/php-fpm status
 	fi
 
-	$IN_DIR/action/mysql status
+	$IN_DIR/bin/mysql status
 }
 
 case "$1" in

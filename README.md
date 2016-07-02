@@ -36,16 +36,16 @@ LANMPS状态管理命令
 ### 方法一：
 
 * LANMPS      状态管理 ： /www/lanmps/lanmps {start|stop|reload|restart|kill|status}
-* Nginx            状态管理 ： /www/lanmps/action/nginx {start|stop|reload|restart|status|cutLog}
-* MySQL          状态管理 ：/www/lanmps/action/mysql {start|stop|restart|reload|force-reload|status}
-* PHP-FPM     状态管理 ：/www/lanmps/action/php-fpm {start|stop|quit|restart|reload|logrotate}
-* Memcached状态管理 ：/www/lanmps/action/memcached {start|stop|restart}
+* Nginx            状态管理 ： /www/lanmps/bin/nginx {start|stop|reload|restart|status|cutLog}
+* MySQL          状态管理 ：/www/lanmps/bin/mysql {start|stop|restart|reload|force-reload|status}
+* PHP-FPM     状态管理 ：/www/lanmps/bin/php-fpm {start|stop|quit|restart|reload|logrotate}
+* Memcached状态管理 ：/www/lanmps/bin/memcached {start|stop|restart}
 
 例如：
 > 
 重启LANMPS：/root/lanmps restart           输入此命令即可重启
 > 
-重启mysql     ：/www/lanmps/action/mysql restart
+重启mysql     ：/www/lanmps/bin/mysql restart
 
 > 
 /www                     ：为安装目录位置
@@ -76,7 +76,7 @@ Xdubug ：已编译，但默认关闭，如需开启在php.ini中开启
 
 nginx 自动分割日志
 --------------------------------------------
-0 0 * * * /www/lanmps/action/nginx cutLog
+0 0 * * * /www/lanmps/bin/nginx cutLog
 > 
 凌晨 0点0分00秒 开始执行
 

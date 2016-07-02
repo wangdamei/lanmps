@@ -25,11 +25,11 @@ function Install_Memcached()
 	ProgramInstalled "memcached" "memcached-${VERS['memcached']}.tar.gz" "--with-libevent=/usr/local/libevent --prefix=${Memcached_DIR}"
 
 	ln $Memcached_DIR/bin/memcached /usr/bin/memcached
-	local cnf="$IN_DIR/action/memcached"
+	local cnf="$IN_DIR/bin/memcached"
 	if [ $OS_RL = "centos" ]; then
-		cp $IN_PWD/conf/action.memcached $cnf
+		cp $IN_PWD/conf/bin.memcached $cnf
 	else
-		cp $IN_PWD/conf/action.memcached-ubuntu $cnf
+		cp $IN_PWD/conf/bin.memcached-ubuntu $cnf
 	fi
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf

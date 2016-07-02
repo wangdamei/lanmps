@@ -129,4 +129,4 @@ fi
 #PHP-FPM
 unset php_ini conf
 
-Install_PHP_Tools
+Install_PHP_Tools $PHP_PATH

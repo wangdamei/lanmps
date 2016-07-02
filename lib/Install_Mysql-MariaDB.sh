@@ -45,13 +45,13 @@
 	chown -R mysql $TMP_TTT_MARIADB_PATH/data
 	chgrp -R mysql $TMP_TTT_MARIADB_PATH/.
 	
-	cp support-files/mysql.server $IN_DIR/action/mysql
-	chmod 755 $IN_DIR/action/mysql
+	cp support-files/mysql.server $IN_DIR/bin/mysql
+	chmod 755 $IN_DIR/bin/mysql
 	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/action/mysql $IN_DIR/init.d/mysql
+		ln -s $IN_DIR/bin/mysql $IN_DIR/init.d/mysql
 	fi
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/action/mysql
+		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/mysql
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
@@ -68,7 +68,7 @@ EOF
 	fi
 	
 	#start
-	$IN_DIR/action/mysql start
+	$IN_DIR/bin/mysql start
 	
 	ln -s $TMP_TTT_MARIADB_PATH/bin/mysql /usr/bin/mysql
 	ln -s $TMP_TTT_MARIADB_PATH/bin/mysqldump /usr/bin/mysqldump
@@ -94,6 +94,6 @@ EOF
 	mkdir -p /var/log/mysqld
 	ln -s $IN_DIR/mysql/data/mysql.sock /var/log/mysqld/mysql.sock
 	
-	$IN_DIR/action/mysql restart
-	$IN_DIR/action/mysql stop
+	$IN_DIR/bin/mysql restart
+	$IN_DIR/bin/mysql stop
 
