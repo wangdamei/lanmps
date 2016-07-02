@@ -1,8 +1,9 @@
 # start services
 function Starup()
 {
+    
 	cd $IN_PWD
-	
+
 	echo "============================add nginx and php-fpm on startup============================"
 	echo "Set start"
 	systemd_path=/lib/systemd/system

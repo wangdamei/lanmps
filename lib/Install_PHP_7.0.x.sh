@@ -1,5 +1,5 @@
 
-PHP_PATH=${IN_DIR}/php
+PHP_PATH=${IN_DIR}/php${VERS['php7.0.x']}
 tmp_configure=""
 if [ $SERVER == "nginx" ]; then
 	tmp_configure="--enable-fpm --with-fpm-user=www --with-fpm-group=www"
@@ -118,10 +118,10 @@ if [ $SERVER == "nginx" ]; then
             sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 
             echo "Copy php-fpm init.d file......"
-            cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/bin/php-fpm
-            chmod +x $IN_DIR/bin/php-fpm
+            cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/bin/php-fpm7
+            chmod +x $IN_DIR/bin/php-fpm7
             if [ ! $IN_DIR = "/www/lanmps" ]; then
-                sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/php-fpm
+                sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/php-fpm7
             fi
 
 
@@ -129,4 +129,11 @@ if [ $SERVER == "nginx" ]; then
 fi
 #PHP-FPM
 unset php_ini conf
+
+if [ ! -d "$IN_DIR/php" ]; then
+        ln -s $PHP_PATH $IN_DIR/php
+fi
+
 Install_PHP_Tools $PHP_PATH
+
+

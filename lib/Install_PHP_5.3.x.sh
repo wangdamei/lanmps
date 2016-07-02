@@ -129,4 +129,8 @@ fi
 #PHP-FPM
 unset php_ini conf
 
+if [ ! -d "$IN_DIR/php" ]; then
+        ln -s $PHP_PATH $IN_DIR/php
+fi
+
 Install_PHP_Tools $PHP_PATH
