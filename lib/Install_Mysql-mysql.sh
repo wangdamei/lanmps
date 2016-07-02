@@ -26,7 +26,8 @@ cmake . \
 	make && make install
 
 	local cnf=$IN_DIR/mysql/my.cnf
-	cp $IN_PWD/conf/conf.mysql.conf $cnf
+	#cp $IN_PWD/conf/conf.mysql.conf $cnf
+	cp $MYSQL_PATH/my-new.cnf $cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi

@@ -28,7 +28,8 @@
 	make && make install
 
 	local cnf=$MYSQL_PATH/my.cnf
-	cp $IN_PWD/conf/conf.mariadb.conf $cnf
+	#cp $IN_PWD/conf/conf.mariadb.conf $cnf
+	cp $MYSQL_PATH/my-new.cnf $cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
