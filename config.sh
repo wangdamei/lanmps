@@ -140,3 +140,7 @@ VERS['apr']="1.5.1"
 #http://mirrors.axint.net/apache/apr/apr-util-1.5.4.tar.gz
 DUS['apr-util']="http://download.lanmps.com/Apache/apr-util-1.5.4.tar.gz"
 VERS['apr-util']="1.5.4"
+
+#https://cmake.org/files/v3.5/cmake-3.5.2.tar.gz
+DUS['cmake']="http://download.lanmps.com/basic/cmake-3.5.2.tar.gz"
+VERS['cmake']="3.5.2"

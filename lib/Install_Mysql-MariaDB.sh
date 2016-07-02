@@ -1,20 +1,17 @@
 # mariadb install function
-	
+
+    MYSQL_PATH=$IN_DIR/mariadb${VERS['MariaDB']}
     echo "============================Install MariaDB ${VERS['MariaDB']}=================================="
 	echo "Delete the old configuration files and directory   /etc/my.cnf /etc/mysql/my.cnf /etc/mysql/"
-	[ -s /etc/my.cnf ] && file_bk "/etc/my.cnf"
-	[ -s /etc/mysql/my.cnf ] && file_bk "/etc/mysql/my.cnf"
-	[ -e /etc/mysql/ ] && file_bk "/etc/mysql/"
-	TMP_TTT_MARIADB_PATH=$IN_DIR/mysql
 	
 	cd $IN_DOWN
 	tar zxvf mariadb-${VERS['MariaDB']}.tar.gz
 	cd mariadb-${VERS['MariaDB']}/
 	cmake . \
-	-DCMAKE_INSTALL_PREFIX=$TMP_TTT_MARIADB_PATH \
-	-DMYSQL_DATADIR=$TMP_TTT_MARIADB_PATH/data \
-	-DSYSCONFDIR=$TMP_TTT_MARIADB_PATH \
-	-DMYSQL_UNIX_ADDR=$TMP_TTT_MARIADB_PATH/data/mysql.sock \
+	-DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
+	-DMYSQL_DATADIR=$MYSQL_PATH/data \
+	-DSYSCONFDIR=$MYSQL_PATH \
+	-DMYSQL_UNIX_ADDR=$MYSQL_PATH/data/mysql.sock \
 	-DMYSQL_TCP_PORT=3306 \
 	-DWITH_INNOBASE_STORAGE_ENGINE=1 \
 	-DWITH_MEMORY_STORAGE_ENGINE=1 \
@@ -30,18 +27,17 @@
 	-DENABLED_LOCAL_INFILE=1
 	make && make install
 
-	local cnf=$TMP_TTT_MARIADB_PATH/my.cnf
+	local cnf=$MYSQL_PATH/my.cnf
 	cp $IN_PWD/conf/conf.mariadb.conf $cnf
-	ln -s $cnf $IN_DIR/etc/my.cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
 
-	$TMP_TTT_MARIADB_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$TMP_TTT_MARIADB_PATH --datadir=$TMP_TTT_MARIADB_PATH/data --user=mysql
-	chown -R mysql $TMP_TTT_MARIADB_PATH/data
-	chgrp -R mysql $TMP_TTT_MARIADB_PATH/.
+	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
+	chown -R mysql $MYSQL_PATH/data
+	chgrp -R mysql $MYSQL_PATH/.
 	
 	cp support-files/mysql.server $IN_DIR/bin/mysql
 	chmod 755 $IN_DIR/bin/mysql
@@ -50,27 +46,18 @@
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
-${TMP_TTT_MARIADB_PATH}/lib
+${MYSQL_PATH}/lib
 /usr/local/lib
 EOF
 
 	ldconfig
-
-	ln -s $TMP_TTT_MARIADB_PATH/lib/mysql /usr/lib/mysql
-	ln -s $TMP_TTT_MARIADB_PATH/include/mysql /usr/include/mysql
-	if [ -d "/proc/vz" ];then
-		ulimit -s unlimited
-	fi
 	
 	#start
 	$IN_DIR/bin/mysql start
 	
-	ln -s $TMP_TTT_MARIADB_PATH/bin/mysql /usr/bin/mysql
-	ln -s $TMP_TTT_MARIADB_PATH/bin/mysqldump /usr/bin/mysqldump
-	ln -s $TMP_TTT_MARIADB_PATH/bin/myisamchk /usr/bin/myisamchk
-	ln -s $TMP_TTT_MARIADB_PATH/bin/mysqld_safe /usr/bin/mysqld_safe
 
-	$TMP_TTT_MARIADB_PATH/bin/mysqladmin -u root password $MysqlPassWord
+
+	$MYSQL_PATH/bin/mysqladmin -u root password $MysqlPassWord
 
 	cat > /tmp/mysql_sec_script<<EOF
 use mysql;
@@ -82,13 +69,32 @@ DROP USER ''@'%';
 flush privileges;
 EOF
 
-	$TMP_TTT_MARIADB_PATH/bin/mysql -u root -p$MysqlPassWord -h localhost < /tmp/mysql_sec_script
+	$MYSQL_PATH/bin/mysql -u root -p$MysqlPassWord -h localhost < /tmp/mysql_sec_script
 
 	rm -f /tmp/mysql_sec_script
 	
 	mkdir -p /var/log/mysqld
-	ln -s $IN_DIR/mysql/data/mysql.sock /var/log/mysqld/mysql.sock
+	ln -s $MYSQL_PATH/data/mysql.sock /var/log/mysqld/mysql.sock
 	
 	$IN_DIR/bin/mysql restart
 	$IN_DIR/bin/mysql stop
+
+    ln -s $MYSQL_PATH/lib/mysql /usr/lib/mysql
+	ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
+	if [ -d "/proc/vz" ];then
+		ulimit -s unlimited
+	fi
+
+    ln -s $MYSQL_PATH/bin/mysql /usr/bin/mariadb
+    ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mariadbdump
+	if [ -e /usr/bin/mysql ]; then
+
+    else
+        	ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
+        	ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
+    fi
+
+if [ ! -d "$IN_DIR/mysql" ]; then
+        ln -s $MYSQL_PATH $IN_DIR/mysql
+fi
 

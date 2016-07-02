@@ -8,29 +8,25 @@
 	cd $IN_DOWN
 	tar zxvf mysql-${VERS['mysql']}.tar.gz
 	cd mysql-${VERS['mysql']}/
-	cmake . \
-	-DCMAKE_INSTALL_PREFIX=$IN_DIR/mysql \
-	-DMYSQL_DATADIR=$IN_DIR/mysql/data \
-	-DSYSCONFDIR=$IN_DIR/mysql \
-	-DMYSQL_UNIX_ADDR=$IN_DIR/mysql/data/mysql.sock \
-	-DMYSQL_TCP_PORT=3306 \
-	-DWITH_INNOBASE_STORAGE_ENGINE=1 \
-	-DWITH_MEMORY_STORAGE_ENGINE=1 \
-	-DWITH_PARTITION_STORAGE_ENGINE=1 \
-	-DEXTRA_CHARSETS=all \
-	-DDEFAULT_CHARSET=utf8 \
-	-DDEFAULT_COLLATION=utf8_general_ci \
-	-DWITH_READLINE=1 \
-	-DWITH_SSL=system \
-	-DWITH_ZLIB=system \
-	-DMYSQL_USER=mysql \
-	-DWITH_EMBEDDED_SERVER=1 \
-	-DENABLED_LOCAL_INFILE=1
+cmake . \
+-DCMAKE_INSTALL_PREFIX=$IN_DIR/mysql \
+-DMYSQL_DATADIR=$IN_DIR/mysql/data \
+-DSYSCONFDIR=$IN_DIR/mysql \
+-DMYSQL_UNIX_ADDR=$IN_DIR/mysql/data/mysql.sock \
+-DMYSQL_TCP_PORT=3306 \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_PARTITION_STORAGE_ENGINE=1 \
+-DEXTRA_CHARSETS=all \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DWITH_SSL=system \
+-DWITH_ZLIB=system \
+-DWITH_EMBEDDED_SERVER=1 \
+-DENABLED_LOCAL_INFILE=1
 	make && make install
 
 	local cnf=$IN_DIR/mysql/my.cnf
 	cp $IN_PWD/conf/conf.mysql.conf $cnf
-	ln -s $cnf $IN_DIR/etc/my.cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
@@ -65,8 +61,6 @@ EOF
 	
 	ln -s $IN_DIR/mysql/bin/mysql /usr/bin/mysql
 	ln -s $IN_DIR/mysql/bin/mysqldump /usr/bin/mysqldump
-	ln -s $IN_DIR/mysql/bin/myisamchk /usr/bin/myisamchk
-	ln -s $IN_DIR/mysql/bin/mysqld_safe /usr/bin/mysqld_safe
 
 	$IN_DIR/mysql/bin/mysqladmin -u root password $MysqlPassWord
 

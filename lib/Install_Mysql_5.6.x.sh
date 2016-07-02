@@ -3,7 +3,7 @@ function Install_Mysql {
 	local IN_LOG=$LOGPATH/install_Install_Mysql.sh.lock
 	echo
     [ -f $IN_LOG ] && return
-	
+
     echo "============================Install MySQL ${VERS['mysql']}=================================="
 	echo "Delete the old configuration files and directory   /etc/my.cnf /etc/mysql/my.cnf /etc/mysql/"
 	[ -s /etc/my.cnf ] && rm /etc/my.cnf
@@ -13,24 +13,21 @@ function Install_Mysql {
 	cd $IN_DOWN
 	tar zxvf mysql-${VERS['mysql']}.tar.gz
 	cd mysql-${VERS['mysql']}/
-	cmake . \
-	-DCMAKE_INSTALL_PREFIX=$IN_DIR/mysql \
-	-DMYSQL_DATADIR=$IN_DIR/mysql/data \
-	-DSYSCONFDIR=$IN_DIR/mysql \
-	-DMYSQL_UNIX_ADDR=$IN_DIR/mysql/data/mysql.sock \
-	-DMYSQL_TCP_PORT=3306 \
-	-DWITH_INNOBASE_STORAGE_ENGINE=1 \
-	-DWITH_MEMORY_STORAGE_ENGINE=1 \
-	-DWITH_PARTITION_STORAGE_ENGINE=1 \
-	-DEXTRA_CHARSETS=all \
-	-DDEFAULT_CHARSET=utf8 \
-	-DDEFAULT_COLLATION=utf8_general_ci \
-	-DWITH_READLINE=1 \
-	-DWITH_SSL=system \
-	-DWITH_ZLIB=system \
-	-DMYSQL_USER=mysql \
-	-DWITH_EMBEDDED_SERVER=1 \
-	-DENABLED_LOCAL_INFILE=1
+cmake . \
+-DCMAKE_INSTALL_PREFIX=$IN_DIR/mysql \
+-DMYSQL_DATADIR=$IN_DIR/mysql/data \
+-DSYSCONFDIR=$IN_DIR/mysql \
+-DMYSQL_UNIX_ADDR=$IN_DIR/mysql/data/mysql.sock \
+-DMYSQL_TCP_PORT=3306 \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_PARTITION_STORAGE_ENGINE=1 \
+-DEXTRA_CHARSETS=all \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DWITH_SSL=system \
+-DWITH_ZLIB=system \
+-DWITH_EMBEDDED_SERVER=1 \
+-DENABLED_LOCAL_INFILE=1
 	make && make install
 
 	cnf=$IN_DIR/mysql/my.cnf
