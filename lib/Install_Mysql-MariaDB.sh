@@ -39,10 +39,10 @@
 	chown -R mysql $MYSQL_PATH/data
 	chgrp -R mysql $MYSQL_PATH/.
 	
-	cp support-files/mysql.server $IN_DIR/bin/mysql
-	chmod 755 $IN_DIR/bin/mysql
+	cp support-files/mysql.server $IN_DIR/bin/mariadb
+	chmod 755 $IN_DIR/bin/mariadb
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/mysql
+		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/mariadb
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
@@ -53,7 +53,7 @@ EOF
 	ldconfig
 	
 	#start
-	$IN_DIR/bin/mysql start
+	$IN_DIR/bin/mariadb start
 	
 
 
@@ -76,8 +76,8 @@ EOF
 	mkdir -p /var/log/mysqld
 	ln -s $MYSQL_PATH/data/mysql.sock /var/log/mysqld/mysql.sock
 	
-	$IN_DIR/bin/mysql restart
-	$IN_DIR/bin/mysql stop
+	$IN_DIR/bin/mariadb restart
+	$IN_DIR/bin/mariadb stop
 
     ln -s $MYSQL_PATH/lib/mysql /usr/lib/mysql
 	ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
@@ -85,14 +85,14 @@ EOF
 		ulimit -s unlimited
 	fi
 
-    ln -s $MYSQL_PATH/bin/mysql /usr/bin/mariadb
-    ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mariadbdump
-	if [ -e /usr/bin/mysql ]; then
+ln -s $MYSQL_PATH/bin/mysql /usr/bin/mariadb
+ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mariadbdump
+if [ -e /usr/bin/mysql ]; then
 
-    else
-        	ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
-        	ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
-    fi
+else
+        ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
+        ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
+fi
 
 if [ ! -d "$IN_DIR/mysql" ]; then
         ln -s $MYSQL_PATH $IN_DIR/mysql

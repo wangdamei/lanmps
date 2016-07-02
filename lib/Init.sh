@@ -54,7 +54,10 @@ function Init()
 			apt-get -fy install
 		fi
 		echo "apt-get -y install build-essential gcc g++ make cmake autoconf"
-		apt-get -y install build-essential gcc g++ make cmake autoconf
+		apt-get -y install build-essential gcc g++ make autoconf
+        #安装新版cmake
+		Init_basic
+
 		#ln -s /bin/gcc /bin/cc
 		
 		for packages in iproute iproute-doc libltdl-dev openssl \
@@ -105,8 +108,10 @@ function Init()
 		cp /etc/yum.conf /etc/yum.conf.lnmp
 		sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
 		yum -y install wget iproute iproute-doc gcc gcc-c++ gcc-g77 make
+		#安装新版cmake
+        Init_basic
 
-		for packages in patch cmake autoconf \
+		for packages in patch autoconf \
 		flex bison file libtool libtool-libs \
 		kernel-devel \
 		libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel \
@@ -211,4 +216,15 @@ eof
 		echo "Ubuntu default Update source ( default )"
 	fi
 	echo "============= Finish ReplacementSource        ===="
+}
+
+function Init_basic()
+{
+     #新版
+    ProgramDownloadFiles "cmake" "cmake-${VERS['cmake']}.tar.gz"
+    cd $IN_DOWN/
+    tar zxvf cmake-${VERS['cmake']}.tar.gz
+    cd $IN_DOWN/cmake-${VERS['cmake']}
+     ./configure
+     make && make install
 }

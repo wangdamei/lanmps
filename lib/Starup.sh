@@ -143,7 +143,7 @@ function CheckInstall()
 	
 	if [ "$isnginx" = "ok" ] && [ "$ismysql" = "ok" ] && [ "$isphp" = "ok" ]; then
 		echo "========================================================================="
-		echo "LANMPS V2.2.1 for CentOS/Ubuntu Linux Written by Licess "
+		echo "${PROGRAM_NAME} ${PROGRAM_VERSION} for CentOS/Ubuntu Linux Written by Licess "
 		echo "========================================================================="
 		echo ""
 		echo "For more information please visit http://www.lanmps.com"
@@ -167,7 +167,7 @@ function CheckInstall()
 		echo ""
 		echo "========================================================================="
 		$IN_DIR/lanmps status
-		netstat -ntl
+		ss -pltn
 	else
 		echo "Sorry,Failed to install LANMPS!"
 		echo "Please visit http://bbs.lanmps.com feedback errors and logs."

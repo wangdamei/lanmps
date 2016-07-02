@@ -96,13 +96,6 @@ function Install_Installed()
 EOF
 	
 	/sbin/ldconfig
-    #新版
-	ProgramDownloadFiles "cmake" "cmake-${VERS['cmake']}.tar.gz"
-	cd $IN_DOWN/
-	tar zxvf cmake-${VERS['cmake']}.tar.gz
-	cd $IN_DOWN/cmake-${VERS['cmake']}
-    ./configure
-    make && make install
 }
 
 function Install_Openssl()
