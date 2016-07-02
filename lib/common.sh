@@ -154,31 +154,7 @@ else
 fi
 echo "Input $MYSQL_SELECT  ,MYSQL Name ${MYSQL_ID}"
 
-echo "Select sphinx :
-    1 sphinx ${VERS['sphinx']} 
-    2 sphinx-for-chinese ${VERS['sphinx-for-chinese']} (default)
-    3 sphinx-coreseek ${VERS['sphinx-coreseek']}
-    4 no"
-read -p "Please Input : " SPHINX_SELECT
 
-if [ "$SPHINX_SELECT" = "" ]; then
-	SPHINX_SELECT="2"
-fi
-
-if [ "$SPHINX_SELECT" == "1" ]; then
-	SPHINX_ID="sphinx"
-elif [ "$SPHINX_SELECT" == "2" ]; then
-	SPHINX_ID="sphinx-for-chinese"
-elif [ "$SPHINX_SELECT" == "3" ]; then
-	SPHINX_ID="sphinx-coreseek"
-	if [ "$OS_RL" == "ubuntu" ]; then
-		SPHINX_ID=""
-		echo " Coreseek cannot be installed on Ubuntu 14.x,13.x,12.x "
-	fi
-else
-    SPHINX_ID=""
-fi
-echo "Input $SPHINX_SELECT  ,sphinx Name ${SPHINX_ID}"
 
 #update source 
 SOURCE_ID=1

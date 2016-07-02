@@ -12,6 +12,10 @@ IN_WEB_LOG_DIR="/www/wwwLogs"
 
 #Asia/Shanghai  时区 设置为上海
 TIME_ZONE=1;
+#程序名称
+PROGRAM_NAME="LANMPS"
+PROGRAM_VERSION="V 3.0.0"
+#安装服务
 SERVER="nginx"
 RE_INS=0
 SOFT_DOWN=1
@@ -104,8 +108,8 @@ DUS['memcached']="http://download.lanmps.com/memcache/memcached-1.4.24.tar.gz"
 VERS['memcached']="1.4.24"
 
 #http://pecl.php.net/package/memcache
-DUS['memcache']="http://download.lanmps.com/memcache/memcache-3.0.8.tar.gz"
-VERS['memcache']="3.0.8"
+DUS['php-memcache']="http://download.lanmps.com/memcache/memcache-3.0.8.tar.gz"
+VERS['php-memcache']="3.0.8"
 
 DUS['libxml2']="http://download.lanmps.com/basic/libxml2-2.9.1.tar.gz"
 VERS['libxml2']="2.9.1"

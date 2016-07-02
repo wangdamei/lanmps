@@ -170,7 +170,7 @@ function Init_SetDirectoryAndUser
 		echo $IN_WEB_DIR/default
 		echo $IN_WEB_LOG_DIR
 		
-		mkdir -p $IN_DIR/{etc,init.d,action,tmp,run}
+		mkdir -p $IN_DIR/{etc,init.d,bin,tmp,run}
 		
 		mkdir -p $IN_WEB_DIR/default
 		chmod +w $IN_WEB_DIR/default

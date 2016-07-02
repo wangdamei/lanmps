@@ -3,11 +3,7 @@ function Init_CheckAndDownloadFiles()
     echo "============================check files=================================="
 	
 	ProgramDownloadFiles "$PHP_KEY" "php-${PHP_VER}.tar.gz"
-	
-	#ProgramDownloadFiles "memcache" "memcache-${VERS['memcache']}.tar.gz"
 
-	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tar.gz"
-	
 	ProgramDownloadFiles "nginx" "nginx-${VERS['nginx']}.tar.gz"
 	
 	ProgramDownloadFiles "apache" "httpd-${VERS['apache']}.tar.gz"
@@ -20,9 +16,11 @@ function Init_CheckAndDownloadFiles()
 	
 	#ProgramDownloadFiles "phpMyAdmin" "phpMyAdmin-${VERS['phpMyAdmin']}-all-languages.tar.gz"
 	
-	ProgramDownloadFiles "memcache" "memcache-${VERS['memcache']}.tgz"
+	ProgramDownloadFiles "memcache" "memcache-${VERS['php-memcache']}.tgz"
 	
-	ProgramDownloadFiles "xdebug" "xdebug-${VERS['xdebug']}.tgz"
+	ProgramDownloadFiles "xdebug" "xdebug-${VERS['php-xdebug']}.tgz"
+
+	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tar.gz"
 	
 	
 	#ProgramIsInstalled "iconv" "libiconv-${VERS['libiconv']}.tar.gz" "libiconv"
@@ -38,14 +36,7 @@ function Init_CheckAndDownloadFiles()
 	#SoInstallationLocation "libltdl" "libltdl-${VERS['libltdl']}.tar.gz"
 	
 	#SoInstallationLocation "libmhash" "mhash-${VERS['libmhash']}.tar.gz"
-	
-	if [ "$SPHINX_ID" == "sphinx" ]; then
-		ProgramDownloadFiles "sphinx" "sphinx-${VERS['sphinx']}-release.tar.gz"
-	elif [ "$SPHINX_ID" == "sphinx-for-chinese" ]; then
-		ProgramDownloadFiles "sphinx-for-chinese" "sphinx-for-chinese-${VERS['sphinx-for-chinese']}-dev-r4311.tar.gz"
-	elif [ "$SPHINX_ID" == "sphinx-coreseek" ]; then
-		ProgramDownloadFiles "coreseek" "coreseek-${VERS['sphinx-coreseek']}-beta.tar.gz"
-	fi
+
 	echo "============================check files=================================="
 	echo
 	echo "============================ependsAndOpt ===================="

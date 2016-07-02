@@ -1,17 +1,19 @@
 function Install_PHP_Tools()
 {
-	local php_ini=$IN_DIR/php/php.ini
+    # $1 第一个参数为 PHP安装后路径
+    PHP_PATH=$1
+	local php_ini=$PHP_PATH/php.ini
 	echo "================================="
     echo "================================="
     echo "================================="
 	echo "Install memcache php extension..."
 	
-	echo "tar zxvf memcache-${VERS['memcache']}.tgz"
+	echo "tar zxvf memcache-${VERS['php-memcache']}.tgz"
 	cd $IN_DOWN
-	tar zxvf memcache-${VERS['memcache']}.tgz
-	cd memcache-${VERS['memcache']}
-	${IN_DIR}/php/bin/phpize
-	./configure --enable-memcache --with-php-config=${IN_DIR}/php/bin/php-config --with-zlib-dir
+	tar zxvf memcache-${VERS['php-memcache']}.tgz
+	cd memcache-${VERS['php-memcache']}
+	${PHP_PATH}/bin/phpize
+	./configure --enable-memcache --with-php-config=${PHP_PATH}/bin/php-config --with-zlib-dir
 	make && make install
 
 	echo "================================="
@@ -20,17 +22,17 @@ function Install_PHP_Tools()
 	echo "Install Redis php extension..."
     echo "tar zxvf Redis-${VERS['php-redis']}.tgz"
     tar zxvf redis-${VERS['php-redis']}.tgz
-	${IN_DIR}/php/bin/phpize
-	./configure --with-php-config=${IN_DIR}/php/bin/php-config
+	${PHP_PATH}/bin/phpize
+	./configure --with-php-config=${PHP_PATH}/bin/php-config
     make & make install
 	echo "================================="
 	echo "================================="
 	echo "================================="
 
-	local php_v=`${IN_DIR}/php/bin/php -v`
+	local php_v=`${PHP_PATH}/bin/php -v`
 	local php_ext_date="20131226"
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
-	echo "${IN_DIR}/php/bin/php -v"
+	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
 	if echo "$php_v" | grep -q "7.0."; then
     		php_ext_date="20151012"
@@ -53,19 +55,19 @@ function Install_PHP_Tools()
 	    php_ext_date="no-debug-non-zts-${php_ext_date}"
 	fi
 	
-	sed -i 's#extension_dir = "./"#extension_dir = "'$IN_DIR'/php/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#' $php_ini
-	echo 's#extension_dir = "./"#extension_dir = "'$IN_DIR'/php/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#'
+	sed -i 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#' $php_ini
+	echo 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#'
 	
 	echo "Install xdebug php extension..."
 	cd $IN_DOWN
-	tar zxvf xdebug-${VERS['xdebug']}.tgz
-	cd xdebug-${VERS['xdebug']}
-	${IN_DIR}/php/bin/phpize
-	./configure --enable-xdebug --with-php-config=${IN_DIR}/php/bin/php-config
+	tar zxvf xdebug-${VERS['php-xdebug']}.tgz
+	cd xdebug-${VERS['php-xdebug']}
+	${PHP_PATH}/bin/phpize
+	./configure --enable-xdebug --with-php-config=${PHP_PATH}/bin/php-config
 	make && make install
 	echo '
 [Xdebug]
-;zend_extension="'$IN_DIR'/php/lib/php/extensions/no-debug-zts-'$php_ext_date'/xdebug.so"
+;zend_extension="'$PHP_PATH'/lib/php/extensions/no-debug-zts-'$php_ext_date'/xdebug.so"
 ;xdebug.auto_trace=1
 ;xdebug.collect_params=1
 ;xdebug.collect_return=1
@@ -80,27 +82,6 @@ function Install_PHP_Tools()
 ;xdebug.remote_handler=dbgp
 ;xdebug.idekey="PHPSTORM"  
 ' >> $php_ini
-	
-	echo "======================= phpMyAdmin install ============================"
-    local IN_LOG=$LOGPATH/install_Install_PHPMyadmin.sh.lock
-	echo
-    [ -f $IN_LOG ] && return
-	
-	cd $IN_DOWN
-	tar zxvf phpMyAdmin-${VERS['phpMyAdmin']}-all-languages.tar.gz
-	mv phpMyAdmin-${VERS['phpMyAdmin']}-all-languages $IN_WEB_DIR/default/_phpmyadmin/
-	mv $IN_WEB_DIR/default/_phpmyadmin/config.sample.inc.php $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
-	sed -i "s:UploadDir'] = '':UploadDir'] = 'upload':g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
-	sed -i "s#localhost#localhost:3306#g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
-	sed -i "s:SaveDir'] = '':SaveDir'] = 'save':g" $IN_WEB_DIR/default/_phpmyadmin/config.inc.php
-	
-	mkdir $IN_WEB_DIR/default/_phpmyadmin/upload/
-	mkdir $IN_WEB_DIR/default/_phpmyadmin/save/
-	chmod 755 -R $IN_WEB_DIR/default/_phpmyadmin/
-	chown www:www -R $IN_WEB_DIR/default/_phpmyadmin/
-	
-	touch $IN_LOG
-	echo "============================phpMyAdmin install completed======================"
 	
 	echo "Create PHP Info Tool..."
 	#TOOLS

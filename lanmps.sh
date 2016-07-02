@@ -24,7 +24,7 @@ fi
 
 Install_PHP;
 
-Install_PHP_Tools;
+Install_PHP_phpMyAdmin;
 
 Install_Memcached;
 
