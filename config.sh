@@ -122,8 +122,8 @@ VERS['libmhash']="0.9.9.9"
 DUS['mcrypt']="http://download.lanmps.com/basic/mcrypt-2.6.8.tar.gz"
 VERS['mcrypt']="2.6.8"
 
-DUS['xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
-VERS['xdebug']="2.4.0"
+DUS['php-xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
+VERS['php-xdebug']="2.4.0"
 
 #http://sphinxsearch.com/files/sphinx-2.2.9-release.tar.gz
 DUS['sphinx']="http://sphinxsearch.com/files/sphinx-2.2.9-release.tar.gz"
