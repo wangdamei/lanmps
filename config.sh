@@ -1,19 +1,29 @@
 # common var
-
+#源程序目录
 IN_DOWN=${IN_PWD}/down
+#安装日志目录
 LOGPATH=${IN_PWD}/logs
+#安装后 程序目录
 IN_DIR="/www/lanmps"
+#安装后 站点项目目录
 IN_WEB_DIR="/www/wwwroot"
+#安装后 站点日志目录
 IN_WEB_LOG_DIR="/www/wwwLogs"
+
+#Asia/Shanghai  时区 设置为上海
+TIME_ZONE=1;
 SERVER="nginx"
 RE_INS=0
 SOFT_DOWN=1
 ETC_INIT_D_LN=2;#1:ln x to $IN_DIR/init.d/x;2:no
 INNODB_ID=2
-YUM_APT_GET_UPDATE=1;#1:Update the kernel and software(yum install -7 update or apt-get install -y update);2:no
+
+#1:Update the kernel and software(yum install -7 update or apt-get install -y update);2:no
+YUM_APT_GET_UPDATE=1;
 FName="LANMPS"
-TIME_ZONE=1;#Asia/Shanghai
-MysqlPassWord="root";#mysql username and password
+
+#mysql username and password  数据库用户名及密码
+MysqlPassWord="root";
 
 if [ "${IS_EXISTS_REMOVE}" = "0" ]; then
 	IS_EXISTS_REMOVE=1
@@ -34,28 +44,32 @@ declare -A DUS;
 declare -A IN_DIR_SETS;
 # soft url and down
 #http://nginx.org/download/nginx-1.8.0.tar.gz
-DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.8.0.tar.gz"
-VERS['nginx']="1.8.0"
+DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.10.1.tar.gz"
+VERS['nginx']="1.10.1"
 #http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.29.tar.gz
-DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.29.tar.gz"
-VERS['mysql']="5.6.29"
+DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
+VERS['mysql']="5.6.31"
 
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
-DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.0.20.tar.gz"
-VERS['MariaDB']="10.0.20"
+DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
+VERS['MariaDB']="10.1.14"
+
+#http://cn2.php.net/distributions/php-7.0.8.tar.gz
+DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.8.tar.gz"
+VERS['php7.0.x']="7.0.8"
 
 #http://cn2.php.net/distributions/php-5.6.10.tar.gz
-DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.10.tar.gz"
-VERS['php5.6.x']="5.6.10"
+DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.23.tar.gz"
+VERS['php5.6.x']="5.6.23"
 
 #http://cn2.php.net/distributions/php-5.5.26.tar.gz
-DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.26.tar.gz"
-VERS['php5.5.x']="5.5.26"
+DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.37.tar.gz"
+VERS['php5.5.x']="5.5.37"
 
 #http://cn2.php.net/distributions/php-5.4.42.tar.gz
-DUS['php5.4.x']="http://download.lanmps.com/php/php-5.4.42.tar.gz"
-VERS['php5.4.x']="5.4.42"
+DUS['php5.4.x']="http://download.lanmps.com/php/php-5.4.45.tar.gz"
+VERS['php5.4.x']="5.4.45"
 
 #http://cn2.php.net/distributions/php-5.3.29.tar.gz
 DUS['php5.3.x']="http://download.lanmps.com/php/php-5.3.29.tar.gz"
@@ -63,8 +77,8 @@ VERS['php5.3.x']="5.3.29"
 IN_DIR_SETS['php5.3.x']=${IN_DIR}/php
 
 #http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.4.10/phpMyAdmin-4.4.10-all-languages.tar.gz
-DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.4.10-all-languages.tar.gz"
-VERS['phpMyAdmin']="4.4.10"
+DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.6.3-all-languages.tar.gz"
+VERS['phpMyAdmin']="4.6.3"
 
 DUS['libpcre']="http://download.lanmps.com/basic/pcre-8.33.tar.gz"
 VERS['libpcre']="8.33"
@@ -77,6 +91,14 @@ VERS['autoconf']="2.69"
 
 DUS['libevent']="http://download.lanmps.com/basic/libevent-2.0.21-stable.tar.gz"
 VERS['libevent']="2.0.21"
+
+#http://download.redis.io/releases/redis-3.2.1.tar.gz
+DUS['redis']="http://download.lanmps.com/redis/redis-3.2.1.tar.gz"
+VERS['redis']="3.4.1"
+
+DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tar.gz"
+VERS['php-redis']="3.0.0"
+
 
 DUS['memcached']="http://download.lanmps.com/memcache/memcached-1.4.24.tar.gz"
 VERS['memcached']="1.4.24"
@@ -99,22 +121,16 @@ VERS['libmhash']="0.9.9.9"
 DUS['mcrypt']="http://download.lanmps.com/basic/mcrypt-2.6.8.tar.gz"
 VERS['mcrypt']="2.6.8"
 
-DUS['xdebug']="http://xdebug.org/files/xdebug-2.3.3.tgz"
-VERS['xdebug']="2.3.3"
+DUS['xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
+VERS['xdebug']="2.4.0"
 
 #http://sphinxsearch.com/files/sphinx-2.2.9-release.tar.gz
 DUS['sphinx']="http://sphinxsearch.com/files/sphinx-2.2.9-release.tar.gz"
 VERS['sphinx']="2.2.9"
-#http://www.sphinx-search.com/downloads/sphinx-for-chinese-2.2.1-dev-r4311.tar.gz
-DUS['sphinx-for-chinese']="http://download.lanmps.com/sphinx/sphinx-for-chinese-2.2.1-dev-r4311.tar.gz"
-VERS['sphinx-for-chinese']="2.2.1"
-#http://www.coreseek.cn/uploads/csft/4.0/coreseek-4.1-beta.tar.gz
-DUS['sphinx-coreseek']="http://download.lanmps.com/sphinx/coreseek-4.1-beta.tar.gz"
-VERS['sphinx-coreseek']="4.1"
 
 #http://mirrors.hust.edu.cn/apache/httpd/httpd-2.4.12.tar.gz
-DUS['apache']="http://download.lanmps.com/Apache/httpd-2.4.12.tar.gz"
-VERS['apache']="2.4.12"
+DUS['apache']="http://download.lanmps.com/Apache/httpd-2.4.20.tar.gz"
+VERS['apache']="2.4.20"
 
 #http://mirrors.axint.net/apache/apr/apr-1.5.1.tar.gz
 DUS['apr']="http://download.lanmps.com/Apache/apr-1.5.1.tar.gz"

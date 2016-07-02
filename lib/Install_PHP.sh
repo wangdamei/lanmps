@@ -8,9 +8,11 @@ function Install_PHP {
 	echo "Install_PHP_VER $PHP_VER $PHP_KEY"
 	echo "${IN_PWD}/lib/Install_PHP_${PHP_VER}.sh"
 	
-	local ver_tmp="5.6.x"
-	if echo "${PHP_VER}" | grep -q "5.6."; then
-	    ver_tmp="5.6.x"
+	local ver_tmp="7.0.x"
+	if echo "${PHP_VER}" | grep -q "7.0."; then
+	    ver_tmp="7.0.x"
+    elif echo "${PHP_VER}" | grep -q "5.6."; then
+    		ver_tmp="5.6.x"
 	elif echo "${PHP_VER}" | grep -q "5.5."; then
 		ver_tmp="5.5.x"
 	elif echo "${PHP_VER}" | grep -q "5.4."; then

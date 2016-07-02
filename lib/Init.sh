@@ -104,7 +104,7 @@ function Init()
 
 		cp /etc/yum.conf /etc/yum.conf.lnmp
 		sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
-		yum -y install gcc gcc-c++ gcc-g77 make
+		yum -y install wget iproute iproute-doc gcc gcc-c++ gcc-g77 make
 
 		for packages in patch cmake autoconf \
 		flex bison file libtool libtool-libs \
@@ -120,9 +120,8 @@ function Init()
 		openssl openssl-devel \
 		vim-minimal nano fonts-chinese \
 		pcre pcre-devel libtool-ltdl-devel \
-		wget \
-		libmcrypt-devel libmhash-devel \
-		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel;
+		libmcrypt libmcrypt-devel libmhash-devel \
+		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel libxslt-devel ;
 		do 
 			yum -y install $packages;
 			echo

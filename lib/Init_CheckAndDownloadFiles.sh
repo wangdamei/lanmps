@@ -5,6 +5,8 @@ function Init_CheckAndDownloadFiles()
 	ProgramDownloadFiles "$PHP_KEY" "php-${PHP_VER}.tar.gz"
 	
 	#ProgramDownloadFiles "memcache" "memcache-${VERS['memcache']}.tar.gz"
+
+	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tar.gz"
 	
 	ProgramDownloadFiles "nginx" "nginx-${VERS['nginx']}.tar.gz"
 	

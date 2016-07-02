@@ -73,12 +73,10 @@ unset t_median x1
 if [[ "$START"x != "no"x  ]]; then
 
 echo ""
-#    1 Apache + php + mysql + opcache + phpmyadmin
-#3 Nginx + apache + php + mysql + opcache + phpmyadmin
-#4 install all service
+
 echo "Select Install  ( 1 default ):
-    1 Nginx + php + mysql + sphinx + opcache + memcache + phpmyadmin
-    2 Apache + php + mysql + sphinx + opcache + memcache + phpmyadmin
+    1 Nginx + php + mysql + es  + memcache + phpmyadmin
+    2 Apache + php + mysql + es  + memcache + phpmyadmin
     5 don't install is now"
 sleep 0.1
 
@@ -105,30 +103,36 @@ echo $SERVER
 #PHP Version
 echo
 echo "Select php version:
-    1 php-${VERS['php5.6.x']} (default)
-    2 php-${VERS['php5.5.x']}
-    3 php-${VERS['php5.4.x']}
-    4 php-${VERS['php5.3.x']}
-    5 don't install is now "
-read -p "Please Input 1-5: " PHP_VER_ID
+    1 php-${VERS['php7.0.x']} (default)
+    2 php-${VERS['php5.6.x']}
+    3 php-${VERS['php5.5.x']}
+    4 php-${VERS['php5.4.x']}
+    5 php-${VERS['php5.3.x']}
+    6 don't install is now "
+read -p "Please Input 1-6: " PHP_VER_ID
 if [ "$PHP_VER_ID" = "" ]; then
 	PHP_VER_ID="1"
 fi
 
-if [ "${PHP_VER_ID}" == "4" ]; then
+if [ "${PHP_VER_ID}" == "5" ]; then
     PHP_VER=${VERS['php5.3.x']}
 	PHP_KEY="php5.3.x"
-elif [ "${PHP_VER_ID}" == "3" ]; then
+	PHP_VER_ID=5
+elif [ "${PHP_VER_ID}" == "4" ]; then
     PHP_VER=${VERS['php5.5.x']}
 	PHP_KEY="php5.4.x"
-	PHP_VER_ID=3
-elif [ "${PHP_VER_ID}" == "2" ]; then
+	PHP_VER_ID=4
+elif [ "${PHP_VER_ID}" == "3" ]; then
     PHP_VER=${VERS['php5.5.x']}
 	PHP_KEY="php5.5.x"
-	PHP_VER_ID=2
-elif [ $PHP_VER_ID == "1" ]; then
+	PHP_VER_ID=3
+elif [ "${PHP_VER_ID}" == "2" ]; then
     PHP_VER=${VERS['php5.6.x']}
 	PHP_KEY="php5.6.x"
+	PHP_VER_ID=2
+elif [ $PHP_VER_ID == "1" ]; then
+    PHP_VER=${VERS['php7.0.x']}
+	PHP_KEY="php7.0.x"
 	PHP_VER_ID=1
 else
     echo ${PHP_VER_ID}

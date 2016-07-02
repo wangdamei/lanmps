@@ -1,7 +1,9 @@
 function Install_PHP_Tools()
 {
 	local php_ini=$IN_DIR/php/php.ini
-	
+	echo "================================="
+    echo "================================="
+    echo "================================="
 	echo "Install memcache php extension..."
 	
 	echo "tar zxvf memcache-${VERS['memcache']}.tgz"
@@ -12,12 +14,27 @@ function Install_PHP_Tools()
 	./configure --enable-memcache --with-php-config=${IN_DIR}/php/bin/php-config --with-zlib-dir
 	make && make install
 
+	echo "================================="
+	echo "================================="
+	echo "================================="
+	echo "Install Redis php extension..."
+    echo "tar zxvf Redis-${VERS['php-redis']}.tgz"
+    tar zxvf redis-${VERS['php-redis']}.tgz
+	${IN_DIR}/php/bin/phpize
+	./configure --with-php-config=${IN_DIR}/php/bin/php-config
+    make & make install
+	echo "================================="
+	echo "================================="
+	echo "================================="
+
 	local php_v=`${IN_DIR}/php/bin/php -v`
 	local php_ext_date="20131226"
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
 	echo "${IN_DIR}/php/bin/php -v"
 	echo $php_v
-	if echo "$php_v" | grep -q "5.6."; then
+	if echo "$php_v" | grep -q "7.0."; then
+    		php_ext_date="20151012"
+	elif echo "$php_v" | grep -q "5.6."; then
 		php_ext_date="20131226"
 	elif echo "$php_v" | grep -q "5.5."; then
 		php_ext_date="20121212"
@@ -36,8 +53,8 @@ function Install_PHP_Tools()
 	    php_ext_date="no-debug-non-zts-${php_ext_date}"
 	fi
 	
-	sed -i 's#extension_dir = "./"#extension_dir = "'$IN_DIR'/php/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\n#' $php_ini
-	echo 's#extension_dir = "./"#extension_dir = "'$IN_DIR'/php/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\n#'
+	sed -i 's#extension_dir = "./"#extension_dir = "'$IN_DIR'/php/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#' $php_ini
+	echo 's#extension_dir = "./"#extension_dir = "'$IN_DIR'/php/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#'
 	
 	echo "Install xdebug php extension..."
 	cd $IN_DOWN

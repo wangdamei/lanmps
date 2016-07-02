@@ -1,4 +1,5 @@
 
+PHP7_PATH=${IN_DIR}/php
 tmp_configure=""
 if [ $SERVER == "nginx" ]; then
 	tmp_configure="--enable-fpm --with-fpm-user=www --with-fpm-group=www"
@@ -6,58 +7,72 @@ else
 	tmp_configure="--with-apxs2=${IN_DIR}/apache/bin/apxs"
 fi
 
-echo "php-${VERS['php5.6.x']}.tar.gz"
+echo "php-${VERS['php7.0.x']}.tar.gz"
 
 cd $IN_DOWN
 tar zxvf php-${PHP_VER}.tar.gz
 cd php-${PHP_VER}/
-./configure --prefix="${IN_DIR}/php" \
---with-config-file-path="${IN_DIR}/php" \
---with-mysql=mysqlnd \
---with-mysqli=mysqlnd \
---with-pdo-mysql=mysqlnd \
---with-iconv-dir=/usr/local/libiconv \
---with-freetype-dir \
---with-jpeg-dir \
---with-png-dir \
---with-zlib \
---with-libxml-dir=/usr \
---enable-xml \
---enable-opcache \
---disable-rpath \
---enable-bcmath \
---enable-shmop \
---enable-sysvsem \
---enable-inline-optimization \
+./configure --prefix="${PHP7_PATH}" \
+--with-config-file-path="${PHP7_PATH}" \
 --with-curl \
+--with-freetype-dir \
+--with-gd \
+--with-gettext \
+--with-iconv-dir \
+--with-jpeg-dir \
+--with-kerberos \
+--with-libdir=lib64 \
+--with-libxml-dir \
+--with-mysqli \
+--with-openssl \
+--with-pcre-regex \
+--with-pdo-mysql \
+--with-pdo-sqlite \
+--with-pear \
+--with-png-dir \
+--with-mcrypt \
+--with-xmlrpc \
+--with-xsl \
+--with-zlib \
+--with-mhash \
+--with-xmlrpc \
+--without-gdbm \
+--without-pear \
+--enable-ftp \
+--enable-bcmath \
+--enable-libxml \
+--enable-inline-optimization \
+--enable-gd-native-ttf \
 --enable-mbregex \
 --enable-mbstring \
---with-mcrypt \
---enable-ftp \
---with-gd \
---enable-gd-native-ttf \
---with-openssl \
---with-mhash \
+--enable-opcache \
 --enable-pcntl \
---enable-sockets \
---with-xmlrpc \
---enable-zip \
+--enable-shmop \
 --enable-soap \
---without-pear \
---with-gettext \
+--enable-sockets \
+--enable-sysvsem \
+--enable-session \
+--enable-xml \
+--enable-zip \
+--disable-rpath \
 --disable-fileinfo $tmp_configure
-
 #make ZEND_EXTRA_LIBS='-liconv'
 make
 make install
-[ -e /usr/bin/php ] && rm -f "/usr/bin/php"
-ln -s "${IN_DIR}/php/bin/php" /usr/bin/php
-ln -s "${IN_DIR}/php/bin/phpize" /usr/bin/phpize
-ln -s "${IN_DIR}/php/sbin/php-fpm" /usr/bin/php-fpm
 
-php_ini="${IN_DIR}/php/php.ini"
+if [ -e /usr/bin/php ]; then
+#rm -f "/usr/bin/php"
+    ln -s "${PHP7_PATH}/bin/php" /usr/bin/php7
+    ln -s "${PHP7_PATH}/bin/phpize" /usr/bin/phpize7
+    ln -s "${PHP7_PATH}/sbin/php-fpm" /usr/bin/php-fpm7
+else
+    ln -s "${PHP7_PATH}/bin/php" /usr/bin/php
+    ln -s "${PHP7_PATH}/bin/phpize" /usr/bin/phpize
+    ln -s "${PHP7_PATH}/sbin/php-fpm" /usr/bin/php-fpm
+fi
+
+php_ini="${PHP7_PATH}/php.ini"
 echo "Copy new php configure file. $php_ini "
-#mkdir -p "${IN_DIR}/etc"
 cp php.ini-production $php_ini
 
 echo "Modify php.ini......"
@@ -69,8 +84,6 @@ sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' $php_ini
 sed -i 's/;cgi.fix_pathinfo=0/cgi.fix_pathinfo=0/g' $php_ini
 sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' $php_ini
 sed -i 's/max_execution_time = 30/max_execution_time = 300/g' $php_ini
-sed -i 's/register_long_arrays = On/;register_long_arrays = On/g' $php_ini
-sed -i 's/magic_quotes_gpc = On/;magic_quotes_gpc = On/g' $php_ini
 sed -i 's/disable_functions =.*/disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server/g' $php_ini
 sed -i 's:mysql.default_socket =:mysql.default_socket ='$IN_DIR'/mysql/data/mysql.sock:g' $php_ini
 sed -i 's:pdo_mysql.default_socket.*:pdo_mysql.default_socket ='$IN_DIR'/mysql/data/mysql.sock:g' $php_ini
@@ -99,6 +112,9 @@ mv $IN_DIR/php/etc/php-fpm.conf.default $conf
 sed -i 's:;pid = run/php-fpm.pid:pid = run/php-fpm.pid:g' $conf
 sed -i 's:;error_log = log/php-fpm.log:error_log = '"$IN_WEB_LOG_DIR"'/php-fpm.log:g' $conf
 sed -i 's:;log_level = notice:log_level = notice:g' $conf
+
+conf=$IN_DIR/php/etc/php-fpm.d/www.conf;
+mv $IN_DIR/php/etc/php-fpm.d/www.conf.default $conf
 sed -i 's:pm.max_children = 5:pm.max_children = 10:g' $conf
 sed -i 's:pm.max_spare_servers = 3:pm.max_spare_servers = 6:g' $conf
 sed -i 's:;request_terminate_timeout = 0:request_terminate_timeout = 100:g' $conf
