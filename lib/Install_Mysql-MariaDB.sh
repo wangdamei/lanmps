@@ -9,12 +9,15 @@
 	cd mariadb-${VERS['MariaDB']}/
 	cmake . \
 	-DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
+	-DINSTALL_SBINDIR=$MYSQL_PATH/bin
 	-DMYSQL_DATADIR=$MYSQL_PATH/data \
 	-DSYSCONFDIR=$MYSQL_PATH \
 	-DMYSQL_UNIX_ADDR=$MYSQL_PATH/data/mysql.sock \
 	-DMYSQL_TCP_PORT=3306 \
 	-DWITH_INNOBASE_STORAGE_ENGINE=1 \
 	-DWITH_MEMORY_STORAGE_ENGINE=1 \
+	-DWITH_SPHINX_STORAGE_ENGINE=1 \
+    -DWITH_XTRADB_STORAGE_ENGINE=1 \
 	-DWITH_PARTITION_STORAGE_ENGINE=1 \
 	-DEXTRA_CHARSETS=all \
 	-DDEFAULT_CHARSET=utf8 \
@@ -23,13 +26,15 @@
 	-DWITH_SSL=system \
 	-DWITH_ZLIB=system \
 	-DMYSQL_USER=mysql \
+	-DWITH_EXTRA_CHARSETS=all \
 	-DWITH_EMBEDDED_SERVER=1 \
 	-DENABLED_LOCAL_INFILE=1
 	make && make install
 
 	local cnf=$MYSQL_PATH/my.cnf
-	#cp $IN_PWD/conf/conf.mariadb.conf $cnf
-	cp $MYSQL_PATH/my-new.cnf $cnf
+	cp $IN_PWD/conf/conf.mariadb.conf $cnf
+	#cp $MYSQL_PATH/my-new.cnf $cnf
+	#cp support-files/my-innodb-heavy-4G.cnf $cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
@@ -39,12 +44,15 @@
 	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
 	chown -R mysql $MYSQL_PATH/data
 	chgrp -R mysql $MYSQL_PATH/.
-	
-	cp support-files/mysql.server $IN_DIR/bin/mariadb
-	chmod 755 $IN_DIR/bin/mariadb
+
+	MYSQL_BIN_PATH=$IN_DIR/bin/mariadb
+	cp support-files/mysql.server $MYSQL_BIN_PATH
+	chmod 755 $MYSQL_BIN_PATH
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/mariadb
+		sed -i "s:/www/lanmps:$IN_DIR:g" $MYSQL_BIN_PATH
 	fi
+    sed -i 's#$bindir/mysqld_safe#$bindir/mysqld_safe --defaults-file="$basedir/my.cnf"#g' $MYSQL_BIN_PATH
+    sed -i 's:parse_server_arguments :#parse_server_arguments :g' $MYSQL_BIN_PATH
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
 ${MYSQL_PATH}/lib
@@ -54,7 +62,7 @@ EOF
 	ldconfig
 	
 	#start
-	$IN_DIR/bin/mariadb start
+	$MYSQL_BIN_PATH start
 	
 
 
@@ -77,14 +85,10 @@ EOF
 	mkdir -p /var/log/mysqld
 	ln -s $MYSQL_PATH/data/mysql.sock /var/log/mysqld/mysql.sock
 	
-	$IN_DIR/bin/mariadb restart
-	$IN_DIR/bin/mariadb stop
+	$MYSQL_BIN_PATH restart
+	$MYSQL_BIN_PATH stop
 
-    ln -s $MYSQL_PATH/lib/mysql /usr/lib/mysql
-	ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
-	if [ -d "/proc/vz" ];then
-		ulimit -s unlimited
-	fi
+
 
 ln -s $MYSQL_PATH/bin/mysql /usr/bin/mariadb
 ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mariadbdump
@@ -94,8 +98,11 @@ else
         ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
         ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
 fi
+if [ -d "/proc/vz" ];then
+    ulimit -s unlimited
+fi
 
-if [ ! -d "$IN_DIR/mysql" ]; then
+if [ ! -d "$IN_DIR/mysql/" ]; then
         ln -s $MYSQL_PATH $IN_DIR/mysql
 fi
 
