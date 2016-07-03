@@ -61,7 +61,7 @@ function Install_Installed()
 	/sbin/ldconfig
 	
 	ProgramInstalled "autoconf" "autoconf-${VERS['autoconf']}.tar.gz" "--prefix=/usr/local/autoconf"
-	
+
 	/sbin/ldconfig
 	
 	ProgramInstalled "libmcrypt" "libmcrypt-${VERS['libmcrypt']}.tar.gz"

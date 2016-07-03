@@ -53,7 +53,7 @@ function Init()
 			apt-get autoremove -y
 			apt-get -fy install
 		fi
-		echo "apt-get -y install build-essential gcc g++ make cmake autoconf"
+		echo "apt-get -y install build-essential gcc g++ make autoconf"
 		apt-get -y install build-essential gcc g++ make autoconf
         #安装新版cmake
 		Init_basic
@@ -64,7 +64,7 @@ function Init()
 		libzip-dev automake re2c wget cron libc6-dev file rcconf \
 		flex vim nano bison m4 gawk less cpp binutils diffutils \
 		unzip tar bzip2 unrar p7zip libncurses5-dev libncurses5 \
-		libtool libevent-dev libpcre3 libpcre3-dev \
+		libevent-dev libpcre3 libpcre3-dev \
 		zlibc libssl-dev libsasl2-dev libltdl3-dev  \
         libmcrypt-dev zlib1g zlib1g-dev libbz2-1.0 libbz2-dev \
         libglib2.0-0 libglib2.0-dev libpng3 libfreetype6 libfreetype6-dev libjpeg62 \
@@ -112,7 +112,7 @@ function Init()
         Init_basic
 
 		for packages in patch autoconf \
-		flex bison file libtool libtool-libs \
+		flex bison files libtool-libs \
 		kernel-devel \
 		libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel \
 		gd gd-devel \
@@ -220,11 +220,17 @@ eof
 
 function Init_basic()
 {
-     #新版
+    #新版
     ProgramDownloadFiles "cmake" "cmake-${VERS['cmake']}.tar.gz"
     cd $IN_DOWN/
     tar zxvf cmake-${VERS['cmake']}.tar.gz
     cd $IN_DOWN/cmake-${VERS['cmake']}
-     ./configure
-     make && make install
+    ./configure
+    make && make install
+
+    ProgramDownloadFiles "libtool" "libtool-${VERS['libtool']}.tar.gz"
+    tar xzvf libtool-${VERS['libtool']}.tar.gz
+    cd libtool-${VERS['libtool']}
+    ./configure --prefix=/usr
+    make && make install
 }

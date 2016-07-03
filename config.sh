@@ -81,8 +81,8 @@ VERS['php5.3.x']="5.3.29"
 DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.6.3-all-languages.tar.gz"
 VERS['phpMyAdmin']="4.6.3"
 
-DUS['libpcre']="http://download.lanmps.com/basic/pcre-8.33.tar.gz"
-VERS['libpcre']="8.33"
+DUS['libpcre']="http://download.lanmps.com/basic/pcre-8.39.tar.gz"
+VERS['libpcre']="8.39"
 
 DUS['libiconv']="http://download.lanmps.com/basic/libiconv-1.14.tar.gz"
 VERS['libiconv']="1.14"
@@ -95,7 +95,7 @@ VERS['libevent']="2.0.21"
 
 #http://download.redis.io/releases/redis-3.2.1.tar.gz
 DUS['redis']="http://download.lanmps.com/redis/redis-3.2.1.tar.gz"
-VERS['redis']="3.4.1"
+VERS['redis']="3.2.1"
 
 DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tgz"
 VERS['php-redis']="3.0.0"
@@ -144,3 +144,7 @@ VERS['apr-util']="1.5.4"
 #https://cmake.org/files/v3.5/cmake-3.5.2.tar.gz
 DUS['cmake']="http://download.lanmps.com/basic/cmake-3.5.2.tar.gz"
 VERS['cmake']="3.5.2"
+
+#http://mirror.hust.edu.cn/gnu/libtool/libtool-2.4.6.tar.gz
+DUS['libtool']="http://download.lanmps.com/basic/libtool-2.4.6.tar.gz"
+VERS['libtool']="2.4.6"

@@ -2,6 +2,7 @@ function Install_PHP_Tools()
 {
     # $1 第一个参数为 PHP安装后路径
     PHP_PATH=$1
+    echo "PHP_PATH = ${PHP_PATH}"
 	local php_ini=$PHP_PATH/php.ini
 	echo "================================="
     echo "================================="
@@ -22,6 +23,7 @@ function Install_PHP_Tools()
 	echo "Install Redis php extension..."
     echo "tar zxvf redis-${VERS['php-redis']}.tgz"
     tar zxvf redis-${VERS['php-redis']}.tgz
+    cd redis-${VERS['php-redis']}
 	${PHP_PATH}/bin/phpize
 	./configure --with-php-config=${PHP_PATH}/bin/php-config
     make & make install
@@ -31,11 +33,13 @@ function Install_PHP_Tools()
 
 	local php_v=`${PHP_PATH}/bin/php -v`
 	local php_ext_date="20131226"
+	local PHP_EXT='"\nextension = "memcache.so"\nextension = "redis.so"\n'
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
 	if echo "$php_v" | grep -q "7.0."; then
     		php_ext_date="20151012"
+    		PHP_EXT='"\nextension = "redis.so"\n'
 	elif echo "$php_v" | grep -q "5.6."; then
 		php_ext_date="20131226"
 	elif echo "$php_v" | grep -q "5.5."; then
@@ -55,8 +59,8 @@ function Install_PHP_Tools()
 	    php_ext_date="no-debug-non-zts-${php_ext_date}"
 	fi
 	
-	sed -i 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#' $php_ini
-	echo 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"\nextension = "memcache.so"\nextension = "redis.so"\n#'
+	sed -i 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"'$PHP_EXT'#' $php_ini
+	echo 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"'$PHP_EXT'#'
 	
 	echo "Install xdebug php extension..."
 	cd $IN_DOWN
@@ -93,4 +97,15 @@ function Install_PHP_Tools()
 phpinfo();
 ?>
 EOF
+        echo "==================================="
+        echo "==================================="
+        echo "==================================="
+        echo "安装 composer "
+        php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
+
+        php composer-setup.php
+
+        php -r "unlink('composer-setup.php');"
+
+        mv composer.phar /usr/local/bin/composer
 }
