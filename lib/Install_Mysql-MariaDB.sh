@@ -38,6 +38,7 @@
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
+	ln -s $MYSQL_PATH/data/mysql.sock /tmp/mysql.sock
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
 
@@ -51,7 +52,7 @@
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $MYSQL_BIN_PATH
 	fi
-    sed -i 's#$bindir/mysqld_safe#$bindir/mysqld_safe --defaults-file="$basedir/my.cnf"#g' $MYSQL_BIN_PATH
+    sed -i 's#$bindir/mysqld_safe --datadir#$bindir/mysqld_safe --defaults-file="$basedir/my.cnf" --datadir#g' $MYSQL_BIN_PATH
     sed -i 's:parse_server_arguments :#parse_server_arguments :g' $MYSQL_BIN_PATH
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF

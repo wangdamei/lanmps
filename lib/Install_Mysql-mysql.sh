@@ -1,3 +1,7 @@
+
+
+MYSQL_PATH=$IN_DIR/mysql{VERS['mysql']}
+
 # mysql install function
 
 	echo "Delete the old configuration files and directory   /etc/my.cnf /etc/mysql/my.cnf /etc/mysql/"
@@ -9,10 +13,10 @@
 	tar zxvf mysql-${VERS['mysql']}.tar.gz
 	cd mysql-${VERS['mysql']}/
 cmake . \
--DCMAKE_INSTALL_PREFIX=$IN_DIR/mysql \
--DMYSQL_DATADIR=$IN_DIR/mysql/data \
--DSYSCONFDIR=$IN_DIR/mysql \
--DMYSQL_UNIX_ADDR=$IN_DIR/mysql/data/mysql.sock \
+-DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
+-DMYSQL_DATADIR=$MYSQL_PATH/data \
+-DSYSCONFDIR=$MYSQL_PATH \
+-DMYSQL_UNIX_ADDR=$MYSQL_PATH/data/mysql.sock \
 -DMYSQL_TCP_PORT=3306 \
 -DWITH_INNOBASE_STORAGE_ENGINE=1 \
 -DWITH_PARTITION_STORAGE_ENGINE=1 \
@@ -25,7 +29,8 @@ cmake . \
 -DENABLED_LOCAL_INFILE=1
 	make && make install
 
-	local cnf=$IN_DIR/mysql/my.cnf
+    ln -s $MYSQL_PATH $IN_DIR/mysql
+	local cnf=$MYSQL_PATH/my.cnf
 	#cp $IN_PWD/conf/conf.mysql.conf $cnf
 	cp $MYSQL_PATH/my-new.cnf $cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
@@ -34,9 +39,9 @@ cmake . \
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
 
-	$IN_DIR/mysql/scripts/mysql_install_db --defaults-file=$cnf --basedir=$IN_DIR/mysql --datadir=$IN_DIR/mysql/data --user=mysql
-	chown -R mysql $IN_DIR/mysql/data
-	chgrp -R mysql $IN_DIR/mysql/.
+	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
+	chown -R mysql $MYSQL_PATH/data
+	chgrp -R mysql $MYSQL_PATH/.
 	
 	cp support-files/mysql.server $IN_DIR/bin/mysql
 	chmod 755 $IN_DIR/bin/mysql
@@ -51,8 +56,8 @@ EOF
 
 	ldconfig
 
-	ln -s $IN_DIR/mysql/lib/mysql /usr/lib/mysql
-	ln -s $IN_DIR/mysql/include/mysql /usr/include/mysql
+	ln -s $MYSQL_PATH/lib/mysql /usr/lib/mysql
+	ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
 	if [ -d "/proc/vz" ];then
 		ulimit -s unlimited
 	fi
@@ -60,10 +65,10 @@ EOF
 	#start
 	$IN_DIR/bin/mysql start
 	
-	ln -s $IN_DIR/mysql/bin/mysql /usr/bin/mysql
-	ln -s $IN_DIR/mysql/bin/mysqldump /usr/bin/mysqldump
+	ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
+	ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
 
-	$IN_DIR/mysql/bin/mysqladmin -u root password $MysqlPassWord
+	$MYSQL_PATH/bin/mysqladmin -u root password $MysqlPassWord
 
 	cat > /tmp/mysql_sec_script<<EOF
 use mysql;
@@ -75,10 +80,9 @@ DROP USER ''@'%';
 flush privileges;
 EOF
 
-	$IN_DIR/mysql/bin/mysql -u root -p$MysqlPassWord -h localhost < /tmp/mysql_sec_script
+	$MYSQL_PATH/bin/mysql -u root -p$MysqlPassWord -h localhost < /tmp/mysql_sec_script
 
 	rm -f /tmp/mysql_sec_script
 	
 	$IN_DIR/bin/mysql restart
 	$IN_DIR/bin/mysql stop
-
