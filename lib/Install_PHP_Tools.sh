@@ -22,6 +22,7 @@ function Install_PHP_Tools()
 	echo "================================="
 	echo "Install Redis php extension..."
     echo "tar zxvf redis-${VERS['php-redis']}.tgz"
+    cd $IN_DOWN
     tar zxvf redis-${VERS['php-redis']}.tgz
     cd redis-${VERS['php-redis']}
 	${PHP_PATH}/bin/phpize
@@ -100,6 +101,7 @@ EOF
         echo "==================================="
         echo "==================================="
         echo "==================================="
+        cd $IN_DOWN
         echo "安装 composer "
         php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
 
