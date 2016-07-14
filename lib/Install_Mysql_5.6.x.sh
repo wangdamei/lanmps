@@ -1,6 +1,6 @@
 
 
-MYSQL_PATH=$IN_DIR/mysql{VERS['mysql']}
+MYSQL_PATH=$IN_DIR/mysql${VERS['mysql']}
 
 # mysql install function
 
@@ -50,7 +50,7 @@ cmake . \
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
-${IN_DIR}/mysql/lib
+${MYSQL_PATH}/lib
 /usr/local/lib
 EOF
 
