@@ -1,12 +1,12 @@
 # mariadb install function
 
-    MYSQL_PATH=$IN_DIR/mariadb${VERS['MariaDB']}
-    echo "============================Install MariaDB ${VERS['MariaDB']}=================================="
+    MYSQL_PATH=$IN_DIR/mariadb${VERS['mariadb10.1.x']}
+    echo "============================Install MariaDB ${VERS['mariadb10.1.x']}=================================="
 	echo "Delete the old configuration files and directory   /etc/my.cnf /etc/mysql/my.cnf /etc/mysql/"
 	
 	cd $IN_DOWN
-	tar zxvf mariadb-${VERS['MariaDB']}.tar.gz
-	cd mariadb-${VERS['MariaDB']}/
+	tar zxvf mariadb-${VERS['mariadb10.1.x']}.tar.gz
+	cd mariadb-${VERS['mariadb10.1.x']}/
 	cmake . \
 	-DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
 	-DINSTALL_SBINDIR=$MYSQL_PATH/bin

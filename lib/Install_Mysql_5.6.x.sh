@@ -1,6 +1,6 @@
 
 
-MYSQL_PATH=$IN_DIR/mysql${VERS['mysql']}
+MYSQL_PATH=$IN_DIR/mysql${VERS['mysql5.6.x']}
 
 # mysql install function
 
@@ -10,8 +10,8 @@ MYSQL_PATH=$IN_DIR/mysql${VERS['mysql']}
 	[ -e /etc/mysql/ ] && file_bk "/etc/mysql/"
 	
 	cd $IN_DOWN
-	tar zxvf mysql-${VERS['mysql']}.tar.gz
-	cd mysql-${VERS['mysql']}/
+	tar zxvf mysql-${VERS['mysql5.6.x']}.tar.gz
+	cd mysql-${VERS['mysql5.6.x']}/
 cmake . \
 -DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
 -DMYSQL_DATADIR=$MYSQL_PATH/data \
