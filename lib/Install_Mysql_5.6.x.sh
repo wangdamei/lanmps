@@ -44,11 +44,12 @@ cmake . \
 	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
 	chown -R mysql $MYSQL_PATH/data
 	chgrp -R mysql $MYSQL_PATH/.
-	
-	cp support-files/mysql.server $IN_DIR/bin/mysql
-	chmod 755 $IN_DIR/bin/mysql
+
+	MYSQL_BIN_PATH=$IN_DIR/bin/mysql
+	cp support-files/mysql.server $MYSQL_BIN_PATH
+	chmod 755 $MYSQL_BIN_PATH
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/mysql
+		sed -i "s:/www/lanmps:$IN_DIR:g" $MYSQL_BIN_PATH
 	fi
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
@@ -58,14 +59,12 @@ EOF
 
 	ldconfig
 
-#	ln -s $MYSQL_PATH/lib/mysql /usr/lib/mysql
-#	ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
 	if [ -d "/proc/vz" ];then
 		ulimit -s unlimited
 	fi
 	
 	#start
-	$IN_DIR/bin/mysql start
+	$MYSQL_BIN_PATH start
 	
 #	ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
 #	ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
@@ -86,5 +85,5 @@ EOF
 
 	rm -f /tmp/mysql_sec_script
 	
-	$IN_DIR/bin/mysql restart
-	$IN_DIR/bin/mysql stop
+	$MYSQL_BIN_PATH restart
+	$MYSQL_BIN_PATH stop
