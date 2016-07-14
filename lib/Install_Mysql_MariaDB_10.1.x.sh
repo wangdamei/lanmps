@@ -12,7 +12,7 @@
 	-DINSTALL_SBINDIR=$MYSQL_PATH/bin
 	-DMYSQL_DATADIR=$MYSQL_PATH/data \
 	-DSYSCONFDIR=$MYSQL_PATH \
-	-DMYSQL_UNIX_ADDR=$MYSQL_PATH/data/mysql.sock \
+	-DMYSQL_UNIX_ADDR=/tmp/mysql.sock \
 	-DMYSQL_TCP_PORT=3306 \
 	-DWITH_INNOBASE_STORAGE_ENGINE=1 \
 	-DWITH_MEMORY_STORAGE_ENGINE=1 \
@@ -29,18 +29,20 @@
 	-DWITH_EXTRA_CHARSETS=all \
 	-DWITH_EMBEDDED_SERVER=1 \
 	-DENABLED_LOCAL_INFILE=1
-	make && make install
+	make -j8 && make install
 
 	local cnf=$MYSQL_PATH/my.cnf
-	cp $IN_PWD/conf/conf.mariadb.conf $cnf
+	#cp $IN_PWD/conf/conf.mariadb.conf $cnf
 	#cp $MYSQL_PATH/my-new.cnf $cnf
 	#cp support-files/my-innodb-heavy-4G.cnf $cnf
+	cp support-files/my-huge.cnf $cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
-	ln -s $MYSQL_PATH/data/mysql.sock /tmp/mysql.sock
+	#ln -s $MYSQL_PATH/data/mysql.sock /tmp/mysql.sock
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
+	sed -i 's:innodb_additional_mem_pool_size:#innodb_additional_mem_pool_size:g' $cnf
 	sed -i "s#/www/lanmps/mysql#${MYSQL_PATH}#g" $cnf
 
 	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
@@ -85,7 +87,7 @@ EOF
 	rm -f /tmp/mysql_sec_script
 	
 	mkdir -p /var/log/mysqld
-	ln -s $MYSQL_PATH/data/mysql.sock /var/log/mysqld/mysql.sock
+	#ln -s $MYSQL_PATH/data/mysql.sock /var/log/mysqld/mysql.sock
 	
 	$MYSQL_BIN_PATH restart
 	$MYSQL_BIN_PATH stop
