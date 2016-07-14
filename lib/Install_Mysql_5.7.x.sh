@@ -1,6 +1,6 @@
 
 
-MYSQL_PATH=$IN_DIR/mysql{VERS['mysql']}
+MYSQL_PATH=$IN_DIR/mysql${VERS['mysql']}
 
 # mysql install function
 
@@ -38,6 +38,7 @@ cmake . \
 	fi
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
+	sed -i "s#/www/lanmps/mysql#${MYSQL_PATH}#g" $cnf
 
 	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
 	chown -R mysql $MYSQL_PATH/data
@@ -56,17 +57,12 @@ EOF
 
 	ldconfig
 
-	ln -s $MYSQL_PATH/lib/mysql /usr/lib/mysql
-	ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
 	if [ -d "/proc/vz" ];then
 		ulimit -s unlimited
 	fi
 	
 	#start
 	$IN_DIR/bin/mysql start
-	
-	ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
-	ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump
 
 	$MYSQL_PATH/bin/mysqladmin -u root password $MysqlPassWord
 

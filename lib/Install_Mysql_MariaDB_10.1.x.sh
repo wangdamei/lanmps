@@ -41,6 +41,7 @@
 	ln -s $MYSQL_PATH/data/mysql.sock /tmp/mysql.sock
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
+	sed -i "s#/www/lanmps/mysql#${MYSQL_PATH}#g" $cnf
 
 	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
 	chown -R mysql $MYSQL_PATH/data

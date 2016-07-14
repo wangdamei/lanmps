@@ -8,10 +8,17 @@ function Install_Mysql {
 	
 	echo "Input $MYSQL_SELECT"
 	echo "Install $MYSQL_ID ${VERS[$MYSQL_ID]} "
-	echo "${IN_PWD}/lib/Install_Mysql-${MYSQL_ID}.sh"
-	
-	import "${IN_PWD}/lib/Install_Mysql-${MYSQL_ID}.sh"
-	
+
+
+	if [ $MYSQL_ID == "mysql" ]; then
+	    echo "${IN_PWD}/lib/Install_Mysql_${MYSQL_VER}.sh"
+
+    	import "${IN_PWD}/lib/Install_Mysql_${MYSQL_VER}.sh"
+    else
+        echo "${IN_PWD}/lib/Install_Mysql_MariaDB_${MYSQL_VER}.sh"
+
+        import "${IN_PWD}/lib/Install_Mysql_MariaDB_${MYSQL_VER}.sh"
+    fi
 	echo "============================MySQL ${VERS['mysql']} install completed========================="
 	touch $IN_LOG
 }

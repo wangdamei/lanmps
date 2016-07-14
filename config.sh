@@ -52,10 +52,19 @@ VERS['nginx']="1.10.1"
 DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
 VERS['mysql']="5.6.31"
 
+DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
+VERS['mysql5.6.x']="5.6.31"
+
+DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
+VERS['mysql5.7.x']="5.6.31"
+
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
 DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
 VERS['MariaDB']="10.1.14"
+
+DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
+VERS['mariadb10.1.x']="10.1.14"
 
 #http://cn2.php.net/distributions/php-7.0.8.tar.gz
 DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.8.tar.gz"
