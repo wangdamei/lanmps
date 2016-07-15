@@ -55,8 +55,9 @@ VERS['mysql']="5.6.31"
 DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
 VERS['mysql5.6.x']="5.6.31"
 
-DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
-VERS['mysql5.7.x']="5.6.31"
+#http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.13.tar.gz
+DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.13.tar.gz"
+VERS['mysql5.7.x']="5.7.13"
 
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz

@@ -63,7 +63,7 @@ ln -s "${PHP_PATH}/bin/phpize" /usr/bin/phpize54
 ln -s "${PHP_PATH}/sbin/php-fpm" /usr/bin/php-fpm54
 
 if [ -e /usr/bin/php ]; then
-
+    echo ""
 else
     ln -s "${PHP_PATH}/bin/php" /usr/bin/php
     ln -s "${PHP_PATH}/bin/phpize" /usr/bin/phpize

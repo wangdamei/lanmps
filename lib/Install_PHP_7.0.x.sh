@@ -61,7 +61,6 @@ make
 make install
 
 if [ -e /usr/bin/php ]; then
-#rm -f "/usr/bin/php"
     ln -s "${PHP_PATH}/bin/php" /usr/bin/php7
     ln -s "${PHP_PATH}/bin/phpize" /usr/bin/phpize7
     ln -s "${PHP_PATH}/sbin/php-fpm" /usr/bin/php-fpm7
