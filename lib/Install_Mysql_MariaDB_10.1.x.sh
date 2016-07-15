@@ -29,7 +29,7 @@
 	-DWITH_EXTRA_CHARSETS=all \
 	-DWITH_EMBEDDED_SERVER=1 \
 	-DENABLED_LOCAL_INFILE=1
-	make -j8 && make install
+	make && make install
 
 	local cnf=$MYSQL_PATH/my.cnf
 	#cp $IN_PWD/conf/conf.mariadb.conf $cnf
