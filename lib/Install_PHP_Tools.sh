@@ -28,7 +28,7 @@ function Install_PHP_Tools()
     make distclean
 	${PHP_PATH}/bin/phpize
 	./configure --with-php-config=${PHP_PATH}/bin/php-config
-    make & make install
+    make && make install
 	echo "================================="
 	echo "================================="
 	echo "================================="

@@ -60,17 +60,7 @@ function Starup()
 	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
-	
-	if [ "${FAST}" = "1" ];then
-		echo "FAST"
-	else
-		file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
-		if [ ! $IN_DIR = "/www/lanmps" ]; then
-			sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
-		fi
-		chmod +x "${IN_DIR}/lanmps"
-	fi
-	ln -s $IN_DIR/lanmps /root/lanmps
+
 	
 	echo "Starting LANMPS..."
 	if [ ! -d "$systemd_path" ]; then

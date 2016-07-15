@@ -26,6 +26,9 @@ echo "   Usage: /root/lanmps {start|stop|reload|restart|kill|status}"
 echo "or Usage: $IN_DIR/lanmps {start|stop|reload|restart|kill|status}"
 echo "========================================================================="
 
+PHP_FPM=$IN_DIR/bin/php-fpm
+
+
 function_start()
 {
     echo "Starting LANMPS..."
@@ -34,7 +37,7 @@ function_start()
 	    $IN_DIR/bin/httpd start
 	else
 	    $IN_DIR/bin/nginx start
-		$IN_DIR/bin/php-fpm start
+		$PHP_FPM start
 	fi
     
     $IN_DIR/bin/mysql start
@@ -50,7 +53,7 @@ function_stop()
 	    $IN_DIR/bin/httpd stop
 	else
 	    $IN_DIR/bin/nginx stop
-		$IN_DIR/bin/php-fpm stop
+		$PHP_FPM stop
 	fi
 
     $IN_DIR/bin/mysql stop
@@ -66,7 +69,7 @@ function_reload()
 	    $IN_DIR/bin/httpd reload
 	else
 	    $IN_DIR/bin/nginx reload
-		$IN_DIR/bin/php-fpm reload
+		$PHP_FPM reload
 	fi
 
     $IN_DIR/bin/mysql reload
@@ -92,7 +95,7 @@ function_status()
 	    $IN_DIR/bin/httpd status
 	else
 	    $IN_DIR/bin/nginx status
-		$IN_DIR/bin/php-fpm status
+		$PHP_FPM status
 	fi
 
 	$IN_DIR/bin/mysql status

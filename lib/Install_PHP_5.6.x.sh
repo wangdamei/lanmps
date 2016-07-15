@@ -120,7 +120,8 @@ if [ $SERVER == "nginx" ]; then
             sed -i "s:/www/lanmps:$IN_DIR:g" $PHP_BIN_PATH
         fi
 
-
+        sed -i "s#bin/php-fpm#bin/php-fpm56#g" $IN_DIR/lanmps
+        sed -i "s#bin/php-fpm#bin/php-fpm56#g" $IN_DIR/vhost.sh
 
 fi
 #PHP-FPM

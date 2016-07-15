@@ -127,7 +127,8 @@ if [ $SERVER == "nginx" ]; then
         if [ ! $IN_DIR = "/www/lanmps" ]; then
             sed -i "s:/www/lanmps:$IN_DIR:g" $PHP_BIN_PATH
         fi
-
+        sed -i "s#bin/php-fpm#bin/php-fpm55#g" $IN_DIR/lanmps
+        sed -i "s#bin/php-fpm#bin/php-fpm55#g" $IN_DIR/vhost.sh
 fi
 #PHP-FPM
 unset php_ini conf

@@ -77,6 +77,14 @@ function Install_Nginx {
 	fi
 	chmod +x $IN_DIR/vhost.sh
 	ln -s $IN_DIR/vhost.sh /root/vhost.sh
+
+	file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
+    if [ ! $IN_DIR = "/www/lanmps" ]; then
+        sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
+    fi
+    chmod +x "${IN_DIR}/lanmps"
+    ln -s $IN_DIR/lanmps /root/lanmps
+
 	
 	cd $IN_PWD
 	#cp conf/dabr.conf $IN_DIR/nginx/conf/dabr.conf
