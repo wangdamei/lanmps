@@ -28,6 +28,8 @@ Install_PHP_phpMyAdmin;
 
 Install_Memcached;
 
+Install_Redis;
+
 Install_Mysql;
 
  }  2>&1 | tee -a "${LOGPATH}/3.Install.log"
