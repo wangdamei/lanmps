@@ -4,21 +4,21 @@ function Install_Mysql {
 	echo
     [ -f "$IN_LOG" ] && return
 	
-    echo "============================Install MySQL ${VERS['mysql']}=================================="
+    echo "============================Install MySQL ${MYSQL_KEY}=================================="
 	
 	echo "Input $MYSQL_SELECT"
-	echo "Install $MYSQL_ID ${VERS[$MYSQL_ID]} "
+	echo "Install $MYSQL_ID ${MYSQL_KEY} "
 
 
 	if [ $MYSQL_ID == "mysql" ]; then
-	    echo "${IN_PWD}/lib/Install_Mysql_${MYSQL_VER}.sh"
+	    echo "${IN_PWD}/lib/Install_Mysql_${MYSQL_KEY}.sh"
 
-    	import "${IN_PWD}/lib/Install_Mysql_${MYSQL_VER}.sh"
+    	import "${IN_PWD}/lib/Install_Mysql_${MYSQL_KEY}.sh"
     else
-        echo "${IN_PWD}/lib/Install_Mysql_MariaDB_${MYSQL_VER}.sh"
+        echo "${IN_PWD}/lib/Install_Mysql_MariaDB_${MYSQL_KEY}.sh"
 
-        import "${IN_PWD}/lib/Install_Mysql_MariaDB_${MYSQL_VER}.sh"
+        import "${IN_PWD}/lib/Install_Mysql_MariaDB_${MYSQL_KEY}.sh"
     fi
-	echo "============================MySQL ${VERS['mysql']} install completed========================="
+	echo "============================MySQL ${MYSQL_KEY} install completed========================="
 	touch $IN_LOG
 }
