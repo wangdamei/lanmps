@@ -96,8 +96,9 @@ EOF
 
 ln -s $MYSQL_PATH/bin/mysql /usr/bin/mariadb
 ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mariadbdump
-if [ -e /usr/bin/mysql ]; then
 
+if [ -e /usr/bin/mysql ]; then
+       echo ""
 else
         ln -s $MYSQL_PATH/bin/mysql /usr/bin/mysql
         ln -s $MYSQL_PATH/bin/mysqldump /usr/bin/mysqldump

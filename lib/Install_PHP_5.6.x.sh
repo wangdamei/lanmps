@@ -113,10 +113,11 @@ if [ $SERVER == "nginx" ]; then
         sed -i 's/127.0.0.1:9000/127.0.0.1:9950/g' $conf
 
         echo "Copy php-fpm init.d file......"
-        cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/bin/php-fpm
-        chmod +x $IN_DIR/bin/php-fpm
+        PHP_BIN_PATH=$IN_DIR/bin/php-fpm56
+        cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $PHP_BIN_PATH
+        chmod +x $PHP_BIN_PATH
         if [ ! $IN_DIR = "/www/lanmps" ]; then
-            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/bin/php-fpm
+            sed -i "s:/www/lanmps:$IN_DIR:g" $PHP_BIN_PATH
         fi
 
 

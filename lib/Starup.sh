@@ -49,7 +49,7 @@ function Starup()
 		systemctl start nginx.service
 		systemctl start php-fpm.service
 		systemctl start mysql.service
-		systemctl start memcached.service
+		#systemctl start memcached.service
 	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
