@@ -40,8 +40,9 @@ function Install_Nginx {
 	fi
 	
 	cd $IN_PWD
-	#rm -f $IN_DIR/nginx/conf/fastcgi.conf
-	file_cp conf.fastcgi.conf $IN_DIR/nginx/conf/fastcgi.conf
+	local FASTCGI_FILE=nginx/$nginx_version
+    sed -i "s#nginx/\$nginx_version#nginx#g" $FASTCGI_FILE
+
 	file_cp conf.upstream.conf $IN_DIR/nginx/conf/upstream.conf
 	
 	mkdir -p $IN_DIR/nginx/conf/vhost

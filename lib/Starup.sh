@@ -35,6 +35,13 @@ function Starup()
 			update-rc.d -f memcached defaults
 		fi
 	else
+	    if [ ! $IN_DIR = "/www/lanmps" ]; then
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.nginx.service
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.php-fpm.service
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.mysql.service
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.memcached.service
+        fi
+
 		file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
 		file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
 		file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"

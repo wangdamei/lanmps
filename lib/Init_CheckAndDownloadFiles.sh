@@ -18,7 +18,7 @@ function Init_CheckAndDownloadFiles()
 	
 	ProgramDownloadFiles "xdebug" "xdebug-${VERS['php-xdebug']}.tgz"
 
-	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tar.gz"
+	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tgz"
 	
 	
 	#ProgramIsInstalled "iconv" "libiconv-${VERS['libiconv']}.tar.gz" "libiconv"

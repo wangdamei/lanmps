@@ -25,6 +25,7 @@ function Install_PHP_Tools()
     cd $IN_DOWN
     tar zxvf redis-${VERS['php-redis']}.tgz
     cd redis-${VERS['php-redis']}
+    make distclean
 	${PHP_PATH}/bin/phpize
 	./configure --with-php-config=${PHP_PATH}/bin/php-config
     make & make install
@@ -34,13 +35,13 @@ function Install_PHP_Tools()
 
 	local php_v=`${PHP_PATH}/bin/php -v`
 	local php_ext_date="20131226"
-	local PHP_EXT='"\nextension = "memcache.so"\nextension = "redis.so"\n'
+	local PHP_EXT='\nextension = "memcache.so"\nextension = "redis.so"\n'
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
 	if echo "$php_v" | grep -q "7.0."; then
     		php_ext_date="20151012"
-    		PHP_EXT='"\nextension = "redis.so"\n'
+    		PHP_EXT='\nextension = "redis.so"\n'
 	elif echo "$php_v" | grep -q "5.6."; then
 		php_ext_date="20131226"
 	elif echo "$php_v" | grep -q "5.5."; then
@@ -59,9 +60,10 @@ function Install_PHP_Tools()
 	else
 	    php_ext_date="no-debug-non-zts-${php_ext_date}"
 	fi
-	
-	sed -i 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"'$PHP_EXT'#' $php_ini
-	echo 's#extension_dir = "./"#extension_dir = "'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/"'$PHP_EXT'#'
+
+	EXTENSION_DIR=${PHP_PATH}/lib/php/extensions/${php_ext_date}
+	sed -i "s#extension_dir = \"./\"#extension_dir=${EXTENSION_DIR}${PHP_EXT}#" $php_ini
+	echo 's#extension_dir = "./"#extension_dir = '${EXTENSION_DIR}${PHP_EXT}'#'
 	
 	echo "Install xdebug php extension..."
 	cd $IN_DOWN
