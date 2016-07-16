@@ -110,6 +110,9 @@ VERS['redis']="3.2.1"
 DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tgz"
 VERS['php-redis']="3.0.0"
 
+DUS['php-redis2.x']="http://download.lanmps.com/php_ext/redis-2.2.8.tgz"
+VERS['php-redis2.x']="2.2.8"
+
 
 DUS['memcached']="http://download.lanmps.com/memcache/memcached-1.4.24.tar.gz"
 VERS['memcached']="1.4.24"

@@ -23,8 +23,15 @@ function Install_PHP_Tools()
 	echo "Install Redis php extension..."
     echo "tar zxvf redis-${VERS['php-redis']}.tgz"
     cd $IN_DOWN
-    tar zxvf redis-${VERS['php-redis']}.tgz
-    cd redis-${VERS['php-redis']}
+
+    if [ $PHP_KEY == "php7.0.x" ]; then
+        tar zxvf redis-${VERS['php-redis']}.tgz
+        cd redis-${VERS['php-redis']}
+    else
+        tar zxvf redis-${VERS['php-redis2.x']}.tgz
+        cd redis-${VERS['php-redis2.x']}
+    fi
+
     make distclean
 	${PHP_PATH}/bin/phpize
 	./configure --with-php-config=${PHP_PATH}/bin/php-config
