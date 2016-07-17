@@ -70,7 +70,7 @@ function Init()
         libglib2.0-0 libglib2.0-dev libpng3 libfreetype6 libfreetype6-dev libjpeg62 \
         libjpeg-dev libpng-dev libpng12-0 libpng12-dev curl libcurl3 libcurl4-gnutls-dev \
         libmhash2 libmhash-dev libpq-dev libpq5 gettext libxml2-dev  libxslt1-dev \
-        mcrypt libcap-dev libexpat1-dev mysql-client;
+        mcrypt libcap-dev libexpat1-dev mysql-client libboost-dev;
 		
 		do 
 			apt-get install -y $packages --force-yes;

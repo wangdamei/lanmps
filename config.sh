@@ -161,3 +161,7 @@ VERS['cmake']="3.5.2"
 #http://mirror.hust.edu.cn/gnu/libtool/libtool-2.4.6.tar.gz
 DUS['libtool']="http://download.lanmps.com/basic/libtool-2.4.6.tar.gz"
 VERS['libtool']="2.4.6"
+
+
+DUS['boost']="http://download.lanmps.com/basic/boost_1_59_0.tar.gz"
+VERS['boost']="1_59_0"

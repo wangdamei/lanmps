@@ -4,11 +4,30 @@ MYSQL_PATH=$IN_DIR/mysql${VERS['mysql5.7.x']}
 
 # mysql install function
 
+local OTHER_MAKE=" -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/usr/local/include/boost "
+
+if [ $OS_RL = "centos" ]; then
+    OTHER_MAKE=""
+    echo ""
+else
+    cd $IN_DOWN
+    BOOST_FILE=boost_${VERS['boost']}.tar.gz
+    ProgramDownloadFiles "boost" "boost-${VERS['boost']}.tar.gz"
+    if [ -f "$IN_DOWN/$BOOST_FILE" ]; then
+        echo ""
+    else
+        wget http://download.lanmps.com/basic/boost_${VERS['boost']}.tar.gz
+    fi
+
+    mkdir -p /usr/local/include/boost
+    cp -rf boost_1_59_0.tar.gz /usr/local/include/boost
+fi
+
 	echo "Delete the old configuration files and directory   /etc/my.cnf /etc/mysql/my.cnf /etc/mysql/"
 	[ -s /etc/my.cnf ] && file_bk "/etc/my.cnf"
 	[ -s /etc/mysql/my.cnf ] && file_bk "/etc/mysql/my.cnf"
 	[ -e /etc/mysql/ ] && file_bk "/etc/mysql/"
-	
+
 	cd $IN_DOWN
 	tar zxvf mysql-${VERS['mysql5.7.x']}.tar.gz
 	cd mysql-${VERS['mysql5.7.x']}/
@@ -26,7 +45,7 @@ cmake . \
 -DWITH_SSL=system \
 -DWITH_ZLIB=system \
 -DWITH_EMBEDDED_SERVER=1 \
--DENABLED_LOCAL_INFILE=1
+-DENABLED_LOCAL_INFILE=1 $OTHER_MAKE
 	make && make install
 
     ln -s $MYSQL_PATH $IN_DIR/mysql
