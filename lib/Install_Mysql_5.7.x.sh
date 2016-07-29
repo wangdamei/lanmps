@@ -43,21 +43,24 @@ cmake . \
 -DENABLED_LOCAL_INFILE=1 $OTHER_MAKE
 	make && make install
 
-    ln -s $MYSQL_PATH $IN_DIR/mysql
+    ln -s ln $IN_DIR/mysql
 	local cnf=$MYSQL_PATH/my.cnf
 	#cp $IN_PWD/conf/conf.mysql.conf $cnf
 	#cp $MYSQL_PATH/my-new.cnf $cnf
-	cp support-files/my-huge.cnf $cnf
+	#cp support-files/my-huge.cnf $cnf
+	cp support-files/my-default.cnf $cnf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $cnf
 	fi
 	
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
 	sed -i "s#/www/lanmps/mysql#${MYSQL_PATH}#g" $cnf
-
-	$MYSQL_PATH/scripts/mysql_install_db --defaults-file=$cnf --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
+#--defaults-file=$cnf
+	$MYSQL_PATH/bin/mysqld --initialize-insecure --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
 	chown -R mysql $MYSQL_PATH/data
 	chgrp -R mysql $MYSQL_PATH/.
+
+	$MYSQL_PATH/bin/mysql_ssl_rsa_setup
 
 	MYSQL_BIN_PATH=$IN_DIR/bin/mysql
 	cp support-files/mysql.server $MYSQL_BIN_PATH
@@ -84,10 +87,9 @@ EOF
 
 	cat > /tmp/mysql_sec_script<<EOF
 use mysql;
-update user set password=password('$MysqlPassWord') where user='root';
+update user set authentication_string=password('$MysqlPassWord') where user='root';
 delete from user where not (user='root') ;
-delete from user where user='root' and password=''; 
-drop database test;
+delete from user where user='root' and authentication_string='';
 DROP USER ''@'%';
 flush privileges;
 EOF
