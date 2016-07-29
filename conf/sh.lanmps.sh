@@ -27,7 +27,7 @@ echo "or Usage: $IN_DIR/lanmps {start|stop|reload|restart|kill|status}"
 echo "========================================================================="
 
 PHP_FPM=$IN_DIR/bin/php-fpm
-
+MYSQL_BIN=$IN_DIR/bin/mysql
 
 function_start()
 {
@@ -40,7 +40,7 @@ function_start()
 		$PHP_FPM start
 	fi
     
-    $IN_DIR/bin/mysql start
+    $MYSQL_BIN start
 	
 	$IN_DIR/bin/memcached start
 }
@@ -56,7 +56,7 @@ function_stop()
 		$PHP_FPM stop
 	fi
 
-    $IN_DIR/bin/mysql stop
+    $MYSQL_BIN stop
 	
 	$IN_DIR/bin/memcached stop
 }
@@ -72,7 +72,7 @@ function_reload()
 		$PHP_FPM reload
 	fi
 
-    $IN_DIR/bin/mysql reload
+    $MYSQL_BIN reload
 }
 
 function_kill()
@@ -98,7 +98,7 @@ function_status()
 		$PHP_FPM status
 	fi
 
-	$IN_DIR/bin/mysql status
+	$MYSQL_BIN status
 }
 
 case "$1" in

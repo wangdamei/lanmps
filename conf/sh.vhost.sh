@@ -100,16 +100,16 @@ server
 	
 	root  $IN_WEB_DIR/$domain;
 
+	location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
+        expires      30d;
+    }
+
+    location ~ .*\.(js|css)?$ {
+        expires      12h;
+    }
+
 	location / {
 		index index.html index.htm index.php default.html default.htm default.php;
-	}
-	
-	location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
-		expires      30d;
-	}
-
-	location ~ .*\.(js|css)?$ {
-		expires      12h;
 	}
 	
 	location ~ \.php$ {
@@ -161,7 +161,7 @@ if [[ $ftp_account == "y" || $ftp_account == "Y" ]];then
 fi
 
 if [[ $SERVER == "nginx" ]];then
-	$IN_DIR/bin/php-fpm restart
+	#$IN_DIR/bin/php-fpm restart
 	$IN_DIR/bin/nginx restart
 else
 	service httpd restart

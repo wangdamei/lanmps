@@ -100,6 +100,8 @@ EOF
 	$MYSQL_PATH/bin/mysql -u root -p$MysqlPassWord -h localhost < /tmp/mysql_sec_script
 
 	rm -f /tmp/mysql_sec_script
+
+	sed -i "s#bin/mysql#bin/mysql#g" $IN_DIR/lanmps
 	
 	$MYSQL_BIN_PATH restart
 	$MYSQL_BIN_PATH stop
