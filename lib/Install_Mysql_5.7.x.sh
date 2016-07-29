@@ -6,22 +6,17 @@ MYSQL_PATH=$IN_DIR/mysql${VERS['mysql5.7.x']}
 
 local OTHER_MAKE=" -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/usr/local/include/boost "
 
-if [ $OS_RL = "centos" ]; then
-    OTHER_MAKE=""
+cd $IN_DOWN
+BOOST_FILE=boost_${VERS['boost']}.tar.gz
+ProgramDownloadFiles "boost" "boost-${VERS['boost']}.tar.gz"
+if [ -f "$IN_DOWN/$BOOST_FILE" ]; then
     echo ""
 else
-    cd $IN_DOWN
-    BOOST_FILE=boost_${VERS['boost']}.tar.gz
-    ProgramDownloadFiles "boost" "boost-${VERS['boost']}.tar.gz"
-    if [ -f "$IN_DOWN/$BOOST_FILE" ]; then
-        echo ""
-    else
-        wget http://download.lanmps.com/basic/boost_${VERS['boost']}.tar.gz
-    fi
-
-    mkdir -p /usr/local/include/boost
-    cp -rf boost_1_59_0.tar.gz /usr/local/include/boost
+    wget http://download.lanmps.com/basic/boost_${VERS['boost']}.tar.gz
 fi
+
+mkdir -p /usr/local/include/boost
+cp -rf boost_1_59_0.tar.gz /usr/local/include/boost
 
 	echo "Delete the old configuration files and directory   /etc/my.cnf /etc/mysql/my.cnf /etc/mysql/"
 	[ -s /etc/my.cnf ] && file_bk "/etc/my.cnf"
