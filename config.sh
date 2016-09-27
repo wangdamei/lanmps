@@ -52,20 +52,20 @@ VERS['mysql']="5.6.31"
 
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
-DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
-VERS['MariaDB']="10.1.14"
+DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.17.tar.gz"
+VERS['MariaDB']="10.1.17"
 
 #http://cn2.php.net/distributions/php-7.0.8.tar.gz
-DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.8.tar.gz"
-VERS['php7.0.x']="7.0.8"
+DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.11.tar.gz"
+VERS['php7.0.x']="7.0.11"
 
 #http://cn2.php.net/distributions/php-5.6.10.tar.gz
-DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.23.tar.gz"
-VERS['php5.6.x']="5.6.23"
+DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.26.tar.gz"
+VERS['php5.6.x']="5.6.26"
 
 #http://cn2.php.net/distributions/php-5.5.26.tar.gz
-DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.37.tar.gz"
-VERS['php5.5.x']="5.5.37"
+DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.38.tar.gz"
+VERS['php5.5.x']="5.5.38"
 
 #http://cn2.php.net/distributions/php-5.4.42.tar.gz
 DUS['php5.4.x']="http://download.lanmps.com/php/php-5.4.45.tar.gz"
@@ -93,8 +93,8 @@ DUS['libevent']="http://download.lanmps.com/basic/libevent-2.0.21-stable.tar.gz"
 VERS['libevent']="2.0.21"
 
 #http://download.redis.io/releases/redis-3.2.1.tar.gz
-DUS['redis']="http://download.lanmps.com/redis/redis-3.2.1.tar.gz"
-VERS['redis']="3.4.1"
+DUS['redis']="http://download.lanmps.com/redis/redis-3.2.4.tar.gz"
+VERS['redis']="3.2.4"
 
 DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tar.gz"
 VERS['php-redis']="3.0.0"
@@ -123,10 +123,6 @@ VERS['mcrypt']="2.6.8"
 
 DUS['xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
 VERS['xdebug']="2.4.0"
-
-#http://sphinxsearch.com/files/sphinx-2.2.9-release.tar.gz
-DUS['sphinx']="http://sphinxsearch.com/files/sphinx-2.2.9-release.tar.gz"
-VERS['sphinx']="2.2.9"
 
 #http://mirrors.hust.edu.cn/apache/httpd/httpd-2.4.12.tar.gz
 DUS['apache']="http://download.lanmps.com/Apache/httpd-2.4.20.tar.gz"
