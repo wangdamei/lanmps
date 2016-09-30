@@ -38,26 +38,19 @@ function Install_Mysql {
 	ln -s $cnf $IN_DIR/etc/my.cnf
 	sed -i "s:skip-external-locking:#skip-external-locking:g" $cnf
 	
-	if [ $INNODB_ID = 2 ]; then
-		sed -i 's:#innodb:innodb:g' $cnf
-		sed -i 's#ibdata1:10M:autoextend#ibdata1:1000M:autoextend#g' $cnf
-		sed -i 's#innodb_buffer_pool_size = 16M#innodb_buffer_pool_size = 1024M#g' $cnf
-		sed -i 's#innodb_log_file_size = 5M#innodb_log_file_size = 256M#g' $cnf
-		sed -i 's#innodb_log_buffer_size = 8M#innodb_log_buffer_size = 64M#g' $cnf
-		sed -i '/innodb_lock_wait_timeout = 50/ainnodb_file_per_table = 1\nlong_query_time=1\ninnodb_log_files_in_group=2' $cnf
-	else
-		sed -i '/skip-external-locking/i\default-storage-engine=MyISAM\nloose-skip-innodb' $cnf
-	fi
+	sed -i 's:#innodb:innodb:g' $cnf
+    		sed -i 's#ibdata1:10M:autoextend#ibdata1:1000M:autoextend#g' $cnf
+    		sed -i 's#innodb_buffer_pool_size = 16M#innodb_buffer_pool_size = 1024M#g' $cnf
+    		sed -i 's#innodb_log_file_size = 5M#innodb_log_file_size = 256M#g' $cnf
+    		sed -i 's#innodb_log_buffer_size = 8M#innodb_log_buffer_size = 64M#g' $cnf
+    		sed -i '/innodb_lock_wait_timeout = 50/ainnodb_file_per_table = 1\nlong_query_time=1\ninnodb_log_files_in_group=2' $cnf
 
 	$IN_DIR/mysql/scripts/mysql_install_db --defaults-file=$cnf --basedir=$IN_DIR/mysql --datadir=$IN_DIR/mysql/data --user=mysql
 	chown -R mysql $IN_DIR/mysql/data
 	chgrp -R mysql $IN_DIR/mysql/.
 	
-	cp support-files/mysql.server $IN_DIR/action/mysql
-	chmod 755 $IN_DIR/action/mysql
-	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/action/mysql $IN_DIR/init.d/mysql
-	fi
+	cp support-files/mysql.server $IN_DIR/bin/mysql
+	chmod 755 $IN_DIR/bin/mysql
 
 	cat > /etc/ld.so.conf.d/mysql.conf<<EOF
 ${IN_DIR}/mysql/lib
@@ -73,7 +66,7 @@ EOF
 	fi
 	
 	#start
-	$IN_DIR/action/mysql start
+	$IN_DIR/bin/mysql start
 	
 	ln -s $IN_DIR/mysql/bin/mysql /usr/bin/mysql
 	ln -s $IN_DIR/mysql/bin/mysqldump /usr/bin/mysqldump
@@ -96,8 +89,8 @@ EOF
 
 	rm -f /tmp/mysql_sec_script
 	
-	$IN_DIR/action/mysql restart
-	$IN_DIR/action/mysql stop
+	$IN_DIR/bin/mysql restart
+	$IN_DIR/bin/mysql stop
 	echo "============================MySQL ${VERS['mysql']} install completed========================="
 	touch $IN_LOG
 }

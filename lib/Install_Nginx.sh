@@ -40,8 +40,9 @@ function Install_Nginx {
 	fi
 	
 	cd $IN_PWD
-	#rm -f $IN_DIR/nginx/conf/fastcgi.conf
-	file_cp conf.fastcgi.conf $IN_DIR/nginx/conf/fastcgi.conf
+	local FASTCGI_FILE=nginx/$nginx_version
+    sed -i "s#nginx/\$nginx_version#nginx#g" $FASTCGI_FILE
+
 	file_cp conf.upstream.conf $IN_DIR/nginx/conf/upstream.conf
 	
 	mkdir -p $IN_DIR/nginx/conf/vhost
@@ -58,14 +59,11 @@ function Install_Nginx {
 		sed -i "s:/www/wwwLogs:$IN_WEB_LOG_DIR:g" $conf_default
 	fi
 	
-	file_cp action.nginx $IN_DIR/action/nginx
+	file_cp bin.nginx $IN_DIR/bin/nginx
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
-		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/action/nginx
+		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/bin/nginx
 	fi
-	chmod +x $IN_DIR/action/nginx
-	if [ $ETC_INIT_D_LN = 1 ]; then
-		ln -s $IN_DIR/action/nginx $IN_DIR/init.d/nginx
-	fi
+	chmod +x $IN_DIR/bin/nginx
 	
 	file_cp sh.vhost.sh $IN_DIR/vhost.sh
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
@@ -79,6 +77,14 @@ function Install_Nginx {
 	fi
 	chmod +x $IN_DIR/vhost.sh
 	ln -s $IN_DIR/vhost.sh /root/vhost.sh
+
+	file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
+    if [ ! $IN_DIR = "/www/lanmps" ]; then
+        sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
+    fi
+    chmod +x "${IN_DIR}/lanmps"
+    ln -s $IN_DIR/lanmps /root/lanmps
+
 	
 	cd $IN_PWD
 	#cp conf/dabr.conf $IN_DIR/nginx/conf/dabr.conf

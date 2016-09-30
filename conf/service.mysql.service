@@ -4,9 +4,9 @@ After=network.target
    
 [Service]  
 Type=forking  
-ExecStart=/www/lanmps/action/mysql start  
-ExecReload=/www/lanmps/action/mysql restart  
-ExecStop=/www/lanmps/action/mysql  stop  
+ExecStart=/www/lanmps/bin/mysql start
+ExecReload=/www/lanmps/bin/mysql restart
+ExecStop=/www/lanmps/bin/mysql  stop
 PrivateTmp=true  
    
 [Install]  

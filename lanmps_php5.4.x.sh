@@ -104,11 +104,8 @@ sed -i 's:;request_terminate_timeout = 0:request_terminate_timeout = 100:g' $con
 ln -s $IN_DIR/php/etc/php-fpm.conf $IN_DIR/etc/php-fpm.conf
 
 echo "Copy php-fpm action file......"
-cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/action/php-fpm
+cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $IN_DIR/bin/php-fpm
 chmod +x $IN_DIR/action/php-fpm
-if [ $ETC_INIT_D_LN = 1 ]; then
-	ln -s $IN_DIR/action/php-fpm $IN_DIR/init.d/php-fpm
-fi
 if [ ! $IN_DIR = "/www/lanmps" ]; then
 	sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/action/php-fpm
 fi

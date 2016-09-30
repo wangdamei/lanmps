@@ -4,9 +4,9 @@ After=network.target
    
 [Service]  
 Type=forking  
-ExecStart=/www/lanmps/action/memcached start  
-ExecReload=/www/lanmps/action/memcached restart  
-ExecStop=/www/lanmps/action/memcached  stop  
+ExecStart=/www/lanmps/bin/memcached start
+ExecReload=/www/lanmps/bin/memcached restart
+ExecStop=/www/lanmps/bin/memcached  stop
 PrivateTmp=true  
    
 [Install]

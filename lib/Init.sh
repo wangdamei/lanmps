@@ -53,21 +53,24 @@ function Init()
 			apt-get autoremove -y
 			apt-get -fy install
 		fi
-		echo "apt-get -y install build-essential gcc g++ make cmake autoconf"
-		apt-get -y install build-essential gcc g++ make cmake autoconf
+		echo "apt-get -y install build-essential gcc g++ make autoconf"
+		apt-get -y install build-essential gcc g++ make autoconf
+        #安装新版cmake
+		Init_basic
+
 		#ln -s /bin/gcc /bin/cc
 		
-		for packages in libltdl-dev openssl \
+		for packages in iproute iproute-doc libltdl-dev openssl \
 		libzip-dev automake re2c wget cron libc6-dev file rcconf \
 		flex vim nano bison m4 gawk less cpp binutils diffutils \
 		unzip tar bzip2 unrar p7zip libncurses5-dev libncurses5 \
-		libtool libevent-dev libpcre3 libpcre3-dev \
-		libpcrecpp0  zlibc libssl-dev libsasl2-dev libltdl3-dev  \
-		libmcrypt-dev libmysqlclient15-dev zlib1g zlib1g-dev libbz2-1.0 libbz2-dev \
-		libglib2.0-0 libglib2.0-dev libpng3 libfreetype6 libfreetype6-dev libjpeg62 \
-		libjpeg62-dev libjpeg-dev libpng-dev libpng12-0 libpng12-dev curl libcurl3 \
-		libmhash2 libmhash-dev libpq-dev libpq5 gettext libxml2-dev  \
-		libcurl4-openssl-dev libcurl4-gnutls-dev mcrypt libcap-dev libexpat1-dev mysql-client;
+		libevent-dev libpcre3 libpcre3-dev \
+		zlibc libssl-dev libsasl2-dev libltdl3-dev  \
+        libmcrypt-dev zlib1g zlib1g-dev libbz2-1.0 libbz2-dev \
+        libglib2.0-0 libglib2.0-dev libpng3 libfreetype6 libfreetype6-dev libjpeg62 \
+        libjpeg-dev libpng-dev libpng12-0 libpng12-dev curl libcurl3 libcurl4-gnutls-dev \
+        libmhash2 libmhash-dev libpq-dev libpq5 gettext libxml2-dev  libxslt1-dev \
+        mcrypt libcap-dev libexpat1-dev mysql-client libboost-dev;
 		
 		do 
 			apt-get install -y $packages --force-yes;
@@ -105,9 +108,11 @@ function Init()
 		cp /etc/yum.conf /etc/yum.conf.lnmp
 		sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
 		yum -y install wget iproute iproute-doc gcc gcc-c++ gcc-g77 make
+		#安装新版cmake
+        Init_basic
 
-		for packages in patch cmake autoconf \
-		flex bison file libtool libtool-libs \
+		for packages in patch autoconf \
+		flex bison files libtool-libs \
 		kernel-devel \
 		libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel \
 		gd gd-devel \
@@ -164,13 +169,13 @@ function Init_SetDirectoryAndUser
 		echo 
 		echo "=============Start to create the directory=========="
 		echo $IN_DIR/etc
-		echo $IN_DIR/action
+		echo $IN_DIR/bin
 		echo $IN_DIR/tmp
 		echo $IN_DIR/run
 		echo $IN_WEB_DIR/default
 		echo $IN_WEB_LOG_DIR
 		
-		mkdir -p $IN_DIR/{etc,init.d,action,tmp,run}
+		mkdir -p $IN_DIR/{etc,bin,tmp,run}
 		
 		mkdir -p $IN_WEB_DIR/default
 		chmod +w $IN_WEB_DIR/default
@@ -211,4 +216,21 @@ eof
 		echo "Ubuntu default Update source ( default )"
 	fi
 	echo "============= Finish ReplacementSource        ===="
+}
+
+function Init_basic()
+{
+    #新版
+    ProgramDownloadFiles "cmake" "cmake-${VERS['cmake']}.tar.gz"
+    cd $IN_DOWN/
+    tar zxvf cmake-${VERS['cmake']}.tar.gz
+    cd $IN_DOWN/cmake-${VERS['cmake']}
+    ./configure
+    make && make install
+
+    ProgramDownloadFiles "libtool" "libtool-${VERS['libtool']}.tar.gz"
+    tar xzvf libtool-${VERS['libtool']}.tar.gz
+    cd libtool-${VERS['libtool']}
+    ./configure --prefix=/usr
+    make && make install
 }

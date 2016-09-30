@@ -1,8 +1,9 @@
 # start services
 function Starup()
 {
+    
 	cd $IN_PWD
-	
+
 	echo "============================add nginx and php-fpm on startup============================"
 	echo "Set start"
 	systemd_path=/lib/systemd/system
@@ -34,49 +35,45 @@ function Starup()
 			update-rc.d -f memcached defaults
 		fi
 	else
+	    if [ ! $IN_DIR = "/www/lanmps" ]; then
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.nginx.service
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.php-fpm.service
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.mysql.service
+            sed -i "s:/www/lanmps:$IN_DIR:g" $IN_PWD/conf/service.memcached.service
+        fi
+
 		file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
 		file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
 		file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
 		file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
 		
-		systemctl enable nginx.service
-		systemctl enable php-fpm.service
-		systemctl enable memcached.service
-		systemctl enable mysql.service
+		#systemctl enable nginx.service
+		#systemctl enable php-fpm.service
+		#systemctl enable memcached.service
+		#systemctl enable mysql.service
 		
 		
-		systemctl start nginx.service
-		systemctl start php-fpm.service
-		systemctl start mysql.service
-		systemctl start memcached.service
+		#systemctl start nginx.service
+		#systemctl start php-fpm.service
+		#systemctl start mysql.service
+		#systemctl start memcached.service
 	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
-	
-	if [ "${FAST}" = "1" ];then
-		echo "FAST"
-	else
-		file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
-		if [ ! $IN_DIR = "/www/lanmps" ]; then
-			sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
-		fi
-		chmod +x "${IN_DIR}/lanmps"
-	fi
-	ln -s $IN_DIR/lanmps /root/lanmps
-	#sed -i "s:/usr/local/php/logs:$IN_DIR/php/var/run:g" "${IN_DIR}/lnmp"
+
 	
 	echo "Starting LANMPS..."
 	if [ ! -d "$systemd_path" ]; then
-		$IN_DIR/action/mysql start
+		$IN_DIR/bin/mysql start
 		
 		if [ $SERVER == "nginx" ]; then
-			$IN_DIR/action/php-fpm start
-			$IN_DIR/action/nginx start
+			$IN_DIR/bin/php-fpm start
+			$IN_DIR/bin/nginx start
 		else
-			$IN_DIR/action/httpd start
+			$IN_DIR/bin/httpd start
 		fi
 		
-		$IN_DIR/action/memcached start
+		$IN_DIR/bin/memcached start
 	else
 		systemctl start nginx.service
 		systemctl start php-fpm.service
@@ -90,8 +87,8 @@ function Starup()
 		/sbin/iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 		iptables-save > /etc/iptables.up.rules
 		iptables-save > /etc/network/iptables.up.rules
-		#/etc/rc.d/action/iptables save
-		#/etc/action/iptables restart
+		#/etc/rc.d/bin/iptables save
+		#/etc/bin/iptables restart
 	fi
 }
 
@@ -143,7 +140,7 @@ function CheckInstall()
 	
 	if [ "$isnginx" = "ok" ] && [ "$ismysql" = "ok" ] && [ "$isphp" = "ok" ]; then
 		echo "========================================================================="
-		echo "LANMPS V2.2.1 for CentOS/Ubuntu Linux Written by Licess "
+		echo "${PROGRAM_NAME} ${PROGRAM_VERSION} for CentOS/Ubuntu Linux Written by Licess "
 		echo "========================================================================="
 		echo ""
 		echo "For more information please visit http://www.lanmps.com"
@@ -167,7 +164,7 @@ function CheckInstall()
 		echo ""
 		echo "========================================================================="
 		$IN_DIR/lanmps status
-		netstat -ntl
+		ss -pltn
 	else
 		echo "Sorry,Failed to install LANMPS!"
 		echo "Please visit http://bbs.lanmps.com feedback errors and logs."

@@ -3,11 +3,7 @@ function Init_CheckAndDownloadFiles()
     echo "============================check files=================================="
 	
 	ProgramDownloadFiles "$PHP_KEY" "php-${PHP_VER}.tar.gz"
-	
-	#ProgramDownloadFiles "memcache" "memcache-${VERS['memcache']}.tar.gz"
 
-	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tar.gz"
-	
 	ProgramDownloadFiles "nginx" "nginx-${VERS['nginx']}.tar.gz"
 	
 	ProgramDownloadFiles "apache" "httpd-${VERS['apache']}.tar.gz"
@@ -18,11 +14,11 @@ function Init_CheckAndDownloadFiles()
 		ProgramDownloadFiles "mariadb" "mariadb-${VERS['MariaDB']}.tar.gz"
 	fi
 	
-	#ProgramDownloadFiles "phpMyAdmin" "phpMyAdmin-${VERS['phpMyAdmin']}-all-languages.tar.gz"
+	ProgramDownloadFiles "memcache" "memcache-${VERS['php-memcache']}.tgz"
 	
-	ProgramDownloadFiles "memcache" "memcache-${VERS['memcache']}.tgz"
-	
-	ProgramDownloadFiles "xdebug" "xdebug-${VERS['xdebug']}.tgz"
+	ProgramDownloadFiles "xdebug" "xdebug-${VERS['php-xdebug']}.tgz"
+
+	ProgramDownloadFiles "redis" "redis-${VERS['php-redis']}.tgz"
 	
 	
 	#ProgramIsInstalled "iconv" "libiconv-${VERS['libiconv']}.tar.gz" "libiconv"
@@ -65,7 +61,7 @@ function Install_Installed()
 	/sbin/ldconfig
 	
 	ProgramInstalled "autoconf" "autoconf-${VERS['autoconf']}.tar.gz" "--prefix=/usr/local/autoconf"
-	
+
 	/sbin/ldconfig
 	
 	ProgramInstalled "libmcrypt" "libmcrypt-${VERS['libmcrypt']}.tar.gz"

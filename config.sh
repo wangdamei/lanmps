@@ -12,11 +12,14 @@ IN_WEB_LOG_DIR="/www/wwwLogs"
 
 #Asia/Shanghai  时区 设置为上海
 TIME_ZONE=1;
+#程序名称
+PROGRAM_NAME="LANMPS"
+PROGRAM_VERSION="V 3.0.0"
+#安装服务
 SERVER="nginx"
-RE_INS=0
+
+#下载
 SOFT_DOWN=1
-ETC_INIT_D_LN=2;#1:ln x to $IN_DIR/init.d/x;2:no
-INNODB_ID=2
 
 #1:Update the kernel and software(yum install -7 update or apt-get install -y update);2:no
 YUM_APT_GET_UPDATE=1;
@@ -41,7 +44,6 @@ fi
 declare -A LIBS;
 declare -A VERS;
 declare -A DUS;
-declare -A IN_DIR_SETS;
 # soft url and down
 #http://nginx.org/download/nginx-1.8.0.tar.gz
 DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.10.1.tar.gz"
@@ -50,10 +52,20 @@ VERS['nginx']="1.10.1"
 DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
 VERS['mysql']="5.6.31"
 
+DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
+VERS['mysql5.6.x']="5.6.31"
+
+#http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.13.tar.gz
+DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.13.tar.gz"
+VERS['mysql5.7.x']="5.7.13"
+
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
 DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.17.tar.gz"
 VERS['MariaDB']="10.1.17"
+
+DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
+VERS['mariadb10.1.x']="10.1.14"
 
 #http://cn2.php.net/distributions/php-7.0.8.tar.gz
 DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.11.tar.gz"
@@ -74,14 +86,13 @@ VERS['php5.4.x']="5.4.45"
 #http://cn2.php.net/distributions/php-5.3.29.tar.gz
 DUS['php5.3.x']="http://download.lanmps.com/php/php-5.3.29.tar.gz"
 VERS['php5.3.x']="5.3.29"
-IN_DIR_SETS['php5.3.x']=${IN_DIR}/php
 
 #http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.4.10/phpMyAdmin-4.4.10-all-languages.tar.gz
 DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.6.3-all-languages.tar.gz"
 VERS['phpMyAdmin']="4.6.3"
 
-DUS['libpcre']="http://download.lanmps.com/basic/pcre-8.33.tar.gz"
-VERS['libpcre']="8.33"
+DUS['libpcre']="http://download.lanmps.com/basic/pcre-8.39.tar.gz"
+VERS['libpcre']="8.39"
 
 DUS['libiconv']="http://download.lanmps.com/basic/libiconv-1.14.tar.gz"
 VERS['libiconv']="1.14"
@@ -96,16 +107,19 @@ VERS['libevent']="2.0.21"
 DUS['redis']="http://download.lanmps.com/redis/redis-3.2.4.tar.gz"
 VERS['redis']="3.2.4"
 
-DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tar.gz"
+DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tgz"
 VERS['php-redis']="3.0.0"
+
+DUS['php-redis2.x']="http://download.lanmps.com/php_ext/redis-2.2.8.tgz"
+VERS['php-redis2.x']="2.2.8"
 
 
 DUS['memcached']="http://download.lanmps.com/memcache/memcached-1.4.24.tar.gz"
 VERS['memcached']="1.4.24"
 
 #http://pecl.php.net/package/memcache
-DUS['memcache']="http://download.lanmps.com/memcache/memcache-3.0.8.tar.gz"
-VERS['memcache']="3.0.8"
+DUS['php-memcache']="http://download.lanmps.com/memcache/memcache-3.0.8.tar.gz"
+VERS['php-memcache']="3.0.8"
 
 DUS['libxml2']="http://download.lanmps.com/basic/libxml2-2.9.1.tar.gz"
 VERS['libxml2']="2.9.1"
@@ -121,8 +135,8 @@ VERS['libmhash']="0.9.9.9"
 DUS['mcrypt']="http://download.lanmps.com/basic/mcrypt-2.6.8.tar.gz"
 VERS['mcrypt']="2.6.8"
 
-DUS['xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
-VERS['xdebug']="2.4.0"
+DUS['php-xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
+VERS['php-xdebug']="2.4.0"
 
 #http://mirrors.hust.edu.cn/apache/httpd/httpd-2.4.12.tar.gz
 DUS['apache']="http://download.lanmps.com/Apache/httpd-2.4.20.tar.gz"
@@ -135,3 +149,15 @@ VERS['apr']="1.5.1"
 #http://mirrors.axint.net/apache/apr/apr-util-1.5.4.tar.gz
 DUS['apr-util']="http://download.lanmps.com/Apache/apr-util-1.5.4.tar.gz"
 VERS['apr-util']="1.5.4"
+
+#https://cmake.org/files/v3.5/cmake-3.5.2.tar.gz
+DUS['cmake']="http://download.lanmps.com/basic/cmake-3.5.2.tar.gz"
+VERS['cmake']="3.5.2"
+
+#http://mirror.hust.edu.cn/gnu/libtool/libtool-2.4.6.tar.gz
+DUS['libtool']="http://download.lanmps.com/basic/libtool-2.4.6.tar.gz"
+VERS['libtool']="2.4.6"
+
+
+DUS['boost']="http://download.lanmps.com/basic/boost_1_59_0.tar.gz"
+VERS['boost']="1_59_0"
