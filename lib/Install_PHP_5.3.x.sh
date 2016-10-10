@@ -46,8 +46,7 @@ cd php-${VERS['php5.3.x']}/
 --enable-zip \
 --enable-soap \
 --without-pear \
---with-gettext \
---disable-fileinfo $tmp_configure
+--with-gettext  $tmp_configure
 
 if [ $OS_RL = "centos" ]; then
     make

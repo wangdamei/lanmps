@@ -44,8 +44,7 @@ cd php-${PHP_VER}/
 --enable-zip \
 --enable-soap \
 --without-pear \
---with-gettext \
---disable-fileinfo $tmp_configure
+--with-gettext  $tmp_configure
 
 #make ZEND_EXTRA_LIBS='-liconv'
 make

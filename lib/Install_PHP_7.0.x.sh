@@ -54,8 +54,8 @@ cd php-${PHP_VER}/
 --enable-session \
 --enable-xml \
 --enable-zip \
---disable-rpath \
---disable-fileinfo $tmp_configure
+--enable-intl \
+--disable-rpath $tmp_configure
 #make ZEND_EXTRA_LIBS='-liconv'
 make
 make install
