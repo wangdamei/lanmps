@@ -39,10 +39,40 @@ function Install_PHP_Tools()
 	echo "================================="
 	echo "================================="
 	echo "================================="
+    echo "install php_fileinfo "
+	echo "install php_fileinfo "
+	cd ${PHP_PATH}/ext/fileinfo
+	${PHP_PATH}/bin/phpize
+	./configure --with-php-config=${PHP_PATH}/bin/php-config
+	make && make install
+
+	echo "================================="
+    echo "================================="
+    echo "================================="
+    echo "install intl "
+    echo "install intl "
+    cd ${PHP_PATH}/ext/intl
+    ${PHP_PATH}/bin/phpize
+    ./configure --with-php-config=${PHP_PATH}/bin/php-config
+    make && make install
+
+    echo "================================="
+    echo "================================="
+    echo "================================="
+    echo "install phar "
+    echo "install phar "
+    cd ${PHP_PATH}/ext/phar
+    ${PHP_PATH}/bin/phpize
+    ./configure --with-php-config=${PHP_PATH}/bin/php-config
+    make && make install
+
+    echo "================================="
+    echo "================================="
+    echo "================================="
 
 	local php_v=`${PHP_PATH}/bin/php -v`
 	local php_ext_date="20131226"
-	local PHP_EXT='\nextension = "memcache.so"\nextension = "redis.so"\n'
+	local PHP_EXT='\nextension = "memcache.so"\nextension = "redis.so"\nextension=fileinfo.so\nextension=intl.so\nextension=phar.so\n'
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
