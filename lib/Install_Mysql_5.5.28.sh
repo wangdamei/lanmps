@@ -60,7 +60,7 @@ EOF
 	ldconfig
 
 	ln -s $IN_DIR/mysql/lib /usr/lib/mysql
-	ln -s $IN_DIR/mysql/include /usr/include/mysql
+	ln -s $IN_DIR/mysql/include/mysql /usr/include/mysql
 	if [ -d "/proc/vz" ];then
 		ulimit -s unlimited
 	fi

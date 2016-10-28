@@ -65,7 +65,7 @@ EOF
 
 	ldconfig
 	ln -s $MYSQL_PATH/lib /usr/lib/mysql
-    ln -s $MYSQL_PATH/include /usr/include/mysql
+    ln -s $MYSQL_PATH/include/mysql /usr/include/mysql
 	
 	#start
 	$MYSQL_BIN_PATH start
