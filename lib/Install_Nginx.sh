@@ -85,20 +85,6 @@ function Install_Nginx {
     chmod +x "${IN_DIR}/lanmps"
     ln -s $IN_DIR/lanmps /root/lanmps
 
-	
-	cd $IN_PWD
-	#cp conf/dabr.conf $IN_DIR/nginx/conf/dabr.conf
-	#cp conf/discuz.conf $IN_DIR/nginx/conf/discuz.conf
-	#cp conf/sablog.conf $IN_DIR/nginx/conf/sablog.conf
-	#cp conf/typecho.conf $IN_DIR/nginx/conf/typecho.conf
-	#cp conf/wordpress.conf $IN_DIR/nginx/conf/wordpress.conf
-	#cp conf/discuzx.conf $IN_DIR/nginx/conf/discuzx.conf
-	#cp conf/wp2.conf $IN_DIR/nginx/conf/wp2.conf
-	#cp conf/phpwind.conf $IN_DIR/nginx/conf/phpwind.conf
-	#cp conf/shopex.conf $IN_DIR/nginx/conf/shopex.conf
-	#cp conf/dedecms.conf $IN_DIR/nginx/conf/dedecms.conf
-	#cp conf/drupal.conf $IN_DIR/nginx/conf/drupal.conf
-	#cp conf/ecshop.conf $IN_DIR/nginx/conf/ecshop.conf
 	unset tmp
 	
 	echo "============================Install Nginx================================="

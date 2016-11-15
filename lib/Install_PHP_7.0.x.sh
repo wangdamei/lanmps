@@ -1,4 +1,5 @@
 
+yum install -y  libicu-devel
 PHP_PATH=${IN_DIR}/php${VERS['php7.0.x']}
 tmp_configure=""
 if [ $SERVER == "nginx" ]; then
