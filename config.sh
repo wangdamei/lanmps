@@ -52,28 +52,31 @@ VERS['nginx']="1.10.1"
 DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
 VERS['mysql']="5.6.31"
 
-DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
-VERS['mysql5.6.x']="5.6.31"
+DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.34.tar.gz"
+VERS['mysql5.6.x']="5.6.34"
 
 #http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.13.tar.gz
-DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.13.tar.gz"
-VERS['mysql5.7.x']="5.7.13"
+DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.16.tar.gz"
+VERS['mysql5.7.x']="5.7.16"
 
 #http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
 #http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
-DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.17.tar.gz"
-VERS['MariaDB']="10.1.17"
+DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.19.tar.gz"
+VERS['MariaDB']="10.1.19"
 
 DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
 VERS['mariadb10.1.x']="10.1.14"
 
-#http://cn2.php.net/distributions/php-7.0.8.tar.gz
-DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.11.tar.gz"
-VERS['php7.0.x']="7.0.11"
+#http://cn2.php.net/distributions/php-7.0.14.tar.gz
+DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.14.tar.gz"
+VERS['php7.0.x']="7.0.14"
+
+DUS['php7.1.x']="http://download.lanmps.com/php/php-7.1.0.tar.gz"
+VERS['php7.1.x']="7.1.0"
 
 #http://cn2.php.net/distributions/php-5.6.10.tar.gz
-DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.26.tar.gz"
-VERS['php5.6.x']="5.6.26"
+DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.29.tar.gz"
+VERS['php5.6.x']="5.6.29"
 
 #http://cn2.php.net/distributions/php-5.5.26.tar.gz
 DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.38.tar.gz"

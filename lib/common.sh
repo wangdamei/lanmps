@@ -132,8 +132,8 @@ elif [ "${PHP_VER_ID}" == "2" ]; then
 	PHP_KEY="php5.6.x"
 	PHP_VER_ID=2
 elif [ $PHP_VER_ID == "1" ]; then
-    PHP_VER=${VERS['php7.0.x']}
-	PHP_KEY="php7.0.x"
+    PHP_VER=${VERS['php7.1.x']}
+	PHP_KEY="php7.1.x"
 	PHP_VER_ID=1
 else
     echo ${PHP_VER_ID}
