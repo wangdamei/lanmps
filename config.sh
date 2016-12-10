@@ -46,8 +46,8 @@ declare -A VERS;
 declare -A DUS;
 # soft url and down
 #http://nginx.org/download/nginx-1.8.0.tar.gz
-DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.10.1.tar.gz"
-VERS['nginx']="1.10.1"
+DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.11.6.tar.gz"
+VERS['nginx']="1.11.6"
 #http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.29.tar.gz
 DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
 VERS['mysql']="5.6.31"
