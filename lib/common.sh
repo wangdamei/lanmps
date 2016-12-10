@@ -104,37 +104,41 @@ echo $SERVER
 #PHP Version
 echo
 echo "Select php version:
-    1 php-${VERS['php7.0.x']} (default)
+    4 php-${VERS['php7.1.x']} (default)
+    3 php-${VERS['php7.0.x']}
     2 php-${VERS['php5.6.x']}
-    3 php-${VERS['php5.5.x']}
-    4 php-${VERS['php5.4.x']}
-    5 php-${VERS['php5.3.x']}
-    6 don't install is now "
+    1 php-${VERS['php5.5.x']}
+    0 don't install is now "
 read -p "Please Input 1-6: " PHP_VER_ID
 if [ "$PHP_VER_ID" = "" ]; then
 	PHP_VER_ID="1"
 fi
 
-if [ "${PHP_VER_ID}" == "5" ]; then
+/*if [ "${PHP_VER_ID}" == "5" ]; then
     PHP_VER=${VERS['php5.3.x']}
 	PHP_KEY="php5.3.x"
 	PHP_VER_ID=5
-elif [ "${PHP_VER_ID}" == "4" ]; then
-    PHP_VER=${VERS['php5.5.x']}
+elif [ "${PHP_VER_ID}" == "1" ]; then
+    PHP_VER=${VERS['php5.4.x']}
 	PHP_KEY="php5.4.x"
-	PHP_VER_ID=4
-elif [ "${PHP_VER_ID}" == "3" ]; then
+	PHP_VER_ID=1
+*/
+if [ "${PHP_VER_ID}" == "1" ]; then
     PHP_VER=${VERS['php5.5.x']}
 	PHP_KEY="php5.5.x"
-	PHP_VER_ID=3
+	PHP_VER_ID=1
 elif [ "${PHP_VER_ID}" == "2" ]; then
     PHP_VER=${VERS['php5.6.x']}
 	PHP_KEY="php5.6.x"
 	PHP_VER_ID=2
-elif [ $PHP_VER_ID == "1" ]; then
+elif [ "${PHP_VER_ID}" == "3" ]; then
+    PHP_VER=${VERS['php7.0.x']}
+	PHP_KEY="php7.0.x"
+	PHP_VER_ID=3
+elif [ $PHP_VER_ID == "4" ]; then
     PHP_VER=${VERS['php7.1.x']}
 	PHP_KEY="php7.1.x"
-	PHP_VER_ID=1
+	PHP_VER_ID=4
 else
     echo ${PHP_VER_ID}
 	exit
