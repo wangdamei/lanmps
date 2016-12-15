@@ -126,7 +126,7 @@ function Init()
 		vim-minimal nano fonts-chinese \
 		pcre pcre-devel libtool-ltdl-devel \
 		libmcrypt libmcrypt-devel libmhash-devel \
-		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils sendmail expat-devel libxslt-devel ;
+		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils expat-devel libxslt-devel ;
 		do 
 			yum -y install $packages;
 			echo
