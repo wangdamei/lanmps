@@ -122,6 +122,9 @@ EOF
         echo "==================================="
         echo "==================================="
         echo "==================================="
+
+        chown -R www:www $IN_WEB_DIR/default
+
         cd $IN_DOWN
         echo "安装 composer "
         php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php

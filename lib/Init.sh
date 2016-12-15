@@ -123,7 +123,7 @@ function Init()
 		ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel \
 		krb5 krb5-devel libidn libidn-devel \
 		openssl openssl-devel \
-		vim vim-minimal nano fonts-chinese \
+		vim nano fonts-chinese \
 		pcre pcre-devel libtool-ltdl-devel \
 		libmcrypt libmcrypt-devel libmhash-devel \
 		gettext gettext-devel gmp-devel pspell-devel unzip libcap libcap-devel diffutils expat-devel libxslt-devel ;
