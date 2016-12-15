@@ -74,10 +74,10 @@ unset t_median x1
 if [[ "$START"x != "no"x  ]]; then
 
 echo ""
-
+#    2 Apache + php + mysql + es  + memcache + phpmyadmin
 echo "Select Install  ( 1 default ):
     1 Nginx + php + mysql + es  + memcache + phpmyadmin
-    2 Apache + php + mysql + es  + memcache + phpmyadmin
+
     5 don't install is now"
 sleep 0.1
 
