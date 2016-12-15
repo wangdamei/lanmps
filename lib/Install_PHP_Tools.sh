@@ -8,19 +8,24 @@ function Install_PHP_Tools()
     echo "================================="
     echo "================================="
 	echo "Install memcache php extension..."
-	
-	echo "tar zxvf memcache-${VERS['php-memcache']}.tgz"
-	cd $IN_DOWN
-	tar zxvf memcache-${VERS['php-memcache']}.tgz
-	cd memcache-${VERS['php-memcache']}
-	${PHP_PATH}/bin/phpize
-	./configure --enable-memcache --with-php-config=${PHP_PATH}/bin/php-config --with-zlib-dir
-	make && make install
-
+	if [ $PHP_KEY == "php7.1.x" ]; then
+	    echo "error: memcache不支持7.x"
+	elif [ $PHP_KEY == "php7.0.x" ]; then
+      	    echo "error: memcache不支持7.x"
+	else
+        echo "tar zxvf memcache-${VERS['php-memcache']}.tgz"
+        cd $IN_DOWN
+        tar zxvf memcache-${VERS['php-memcache']}.tgz
+        cd memcache-${VERS['php-memcache']}
+        ${PHP_PATH}/bin/phpize
+        ./configure --enable-memcache --with-php-config=${PHP_PATH}/bin/php-config --with-zlib-dir
+        make && make install
+    fi
 	echo "================================="
 	echo "================================="
 	echo "================================="
 	echo "Install Redis php extension..."
+	echo "${PHP_KEY} "
     echo "tar zxvf redis-${VERS['php-redis']}.tgz"
     cd $IN_DOWN
 
@@ -51,8 +56,8 @@ function Install_PHP_Tools()
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
 	if echo "$php_v" | grep -q "7.1."; then
-        		php_ext_date="20160303"
-        		PHP_EXT='\nextension = "redis.so"\n'
+        	php_ext_date="20160303"
+        	PHP_EXT='\nextension = "redis.so"\n'
 	elif echo "$php_v" | grep -q "7.0."; then
     		php_ext_date="20151012"
     		PHP_EXT='\nextension = "redis.so"\n'
