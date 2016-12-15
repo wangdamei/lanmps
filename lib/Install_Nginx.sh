@@ -19,6 +19,12 @@ function Install_Nginx {
 	--with-http_stub_status_module \
 	--with-http_ssl_module \
 	--with-http_gzip_static_module \
+	--with-http_secure_link_module \
+	--with-http_random_index_module \
+	--with-http_dav_module \
+	--with-http_sub_module \
+	--with-http_addition_module \
+	--with-http_realip_module \
 	--with-ipv6 \
 	--http-proxy-temp-path=${tmp}/nginx-proxy \
 	--http-fastcgi-temp-path=${tmp}/nginx-fcgi \
@@ -30,6 +36,14 @@ function Install_Nginx {
 	make && make install
 	#--pid-path=$IN_DIR/nginx/logs/nginx.pid 
 	#--lock-path=${tmp}/nginx.lock
+	#--with-http_secure_link_module 防盗链
+	#--with-http_random_index_module 从目录中选择一个随机主页
+	#--with-http_gzip_static_module 在线实时压缩输出数据流
+	#--with-http_dav_module  增加PUT,DELETE,MKCOL：创建集合,COPY和MOVE方法
+	#--with-http_sub_module 允许用一些其他文本替换nginx响应中的一些文本
+	#--with-http_addition_module 作为一个输出过滤器，支持不完全缓冲，分部分响应请求
+	#--with-http_realip_module 启用ngx_http_realip_module支持（这个模块允许从请求标头更改客户端的IP地址值，默认为关）
+
 	ln -s $IN_DIR/nginx/sbin/nginx /usr/bin/nginx
 
 	cd $IN_PWD
@@ -77,14 +91,14 @@ function Install_Nginx {
 	fi
 	chmod +x $IN_DIR/vhost.sh
 	ln -s $IN_DIR/vhost.sh /root/vhost.sh
-
+:<<注释
 	file_cp $IN_PWD/conf/sh.lanmps.sh "${IN_DIR}/lanmps"
     if [ ! $IN_DIR = "/www/lanmps" ]; then
         sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/lanmps
     fi
     chmod +x "${IN_DIR}/lanmps"
     ln -s $IN_DIR/lanmps /root/lanmps
-
+注释
 	unset tmp
 	
 	echo "============================Install Nginx================================="
