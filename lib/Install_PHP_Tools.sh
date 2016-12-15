@@ -24,7 +24,10 @@ function Install_PHP_Tools()
     echo "tar zxvf redis-${VERS['php-redis']}.tgz"
     cd $IN_DOWN
 
-    if [ $PHP_KEY == "php7.0.x" ]; then
+    if [ $PHP_KEY == "php7.1.x" ]; then
+        tar zxvf redis-${VERS['php-redis']}.tgz
+        cd redis-${VERS['php-redis']}
+    elif [ $PHP_KEY == "php7.0.x" ]; then
         tar zxvf redis-${VERS['php-redis']}.tgz
         cd redis-${VERS['php-redis']}
     else
@@ -47,7 +50,10 @@ function Install_PHP_Tools()
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
-	if echo "$php_v" | grep -q "7.0."; then
+	if echo "$php_v" | grep -q "7.1."; then
+        		php_ext_date="20151012"
+        		PHP_EXT='\nextension = "redis.so"\n'
+	elif echo "$php_v" | grep -q "7.0."; then
     		php_ext_date="20151012"
     		PHP_EXT='\nextension = "redis.so"\n'
 	elif echo "$php_v" | grep -q "5.6."; then

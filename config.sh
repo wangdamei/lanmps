@@ -46,26 +46,26 @@ declare -A VERS;
 declare -A DUS;
 # soft url and down
 #http://nginx.org/download/nginx-1.8.0.tar.gz
-DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.11.6.tar.gz"
-VERS['nginx']="1.11.6"
+DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.11.7.tar.gz"
+VERS['nginx']="1.11.7"
 #http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.29.tar.gz
 DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
 VERS['mysql']="5.6.31"
 
-DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.34.tar.gz"
-VERS['mysql5.6.x']="5.6.34"
+DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.35.tar.gz"
+VERS['mysql5.6.x']="5.6.35"
 
 #http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.13.tar.gz
-DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.16.tar.gz"
-VERS['mysql5.7.x']="5.7.16"
+DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.17.tar.gz"
+VERS['mysql5.7.x']="5.7.17"
 
-#http://mirrors.hustunique.com/mariadb/mariadb-10.0.17/source/mariadb-10.0.17.tar.gz
-#http://mirrors.opencas.cn/mariadb/mariadb-10.0.20/source/mariadb-10.0.20.tar.gz
+#https://mirrors.tuna.tsinghua.edu.cn/mariadb//mariadb-10.1.19/source/mariadb-10.1.19.tar.gz
 DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.19.tar.gz"
 VERS['MariaDB']="10.1.19"
 
-DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.14.tar.gz"
-VERS['mariadb10.1.x']="10.1.14"
+#https://mirrors.tuna.tsinghua.edu.cn/mariadb//mariadb-10.1.19/source/mariadb-10.1.19.tar.gz
+DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.19.tar.gz"
+VERS['mariadb10.1.x']="10.1.19"
 
 #http://cn2.php.net/distributions/php-7.0.14.tar.gz
 DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.14.tar.gz"
@@ -90,9 +90,9 @@ VERS['php5.4.x']="5.4.45"
 DUS['php5.3.x']="http://download.lanmps.com/php/php-5.3.29.tar.gz"
 VERS['php5.3.x']="5.3.29"
 
-#http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.4.10/phpMyAdmin-4.4.10-all-languages.tar.gz
-DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.6.3-all-languages.tar.gz"
-VERS['phpMyAdmin']="4.6.3"
+#https://files.phpmyadmin.net/phpMyAdmin/4.6.5.2/phpMyAdmin-4.6.5.2-all-languages.tar.gz
+DUS['phpMyAdmin']="http://download.lanmps.com/phpMyAdmin/phpMyAdmin-4.6.5.2-all-languages.tar.gz"
+VERS['phpMyAdmin']="4.6.5.2"
 
 DUS['libpcre']="http://download.lanmps.com/basic/pcre-8.39.tar.gz"
 VERS['libpcre']="8.39"
@@ -107,11 +107,12 @@ DUS['libevent']="http://download.lanmps.com/basic/libevent-2.0.21-stable.tar.gz"
 VERS['libevent']="2.0.21"
 
 #http://download.redis.io/releases/redis-3.2.1.tar.gz
-DUS['redis']="http://download.lanmps.com/redis/redis-3.2.4.tar.gz"
-VERS['redis']="3.2.4"
+DUS['redis']="http://download.lanmps.com/redis/redis-3.2.6.tar.gz"
+VERS['redis']="3.2.6"
 
-DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.0.0.tgz"
-VERS['php-redis']="3.0.0"
+#http://pecl.php.net/get/redis-3.1.0.tgz
+DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.1.0.tgz"
+VERS['php-redis']="3.1.0"
 
 DUS['php-redis2.x']="http://download.lanmps.com/php_ext/redis-2.2.8.tgz"
 VERS['php-redis2.x']="2.2.8"
@@ -138,12 +139,12 @@ VERS['libmhash']="0.9.9.9"
 DUS['mcrypt']="http://download.lanmps.com/basic/mcrypt-2.6.8.tar.gz"
 VERS['mcrypt']="2.6.8"
 
-DUS['php-xdebug']="http://xdebug.org/files/xdebug-2.4.0.tgz"
-VERS['php-xdebug']="2.4.0"
+DUS['php-xdebug']="http://xdebug.org/files/xdebug-2.5.0.tgz"
+VERS['php-xdebug']="2.5.0"
 
-#http://mirrors.hust.edu.cn/apache/httpd/httpd-2.4.12.tar.gz
-DUS['apache']="http://download.lanmps.com/Apache/httpd-2.4.20.tar.gz"
-VERS['apache']="2.4.20"
+#http://mirrors.hust.edu.cn/apache/httpd/httpd-2.4.23.tar.gz
+DUS['apache']="http://download.lanmps.com/Apache/httpd-2.4.23.tar.gz"
+VERS['apache']="2.4.23"
 
 #http://mirrors.axint.net/apache/apr/apr-1.5.1.tar.gz
 DUS['apr']="http://download.lanmps.com/Apache/apr-1.5.1.tar.gz"

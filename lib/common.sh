@@ -114,7 +114,8 @@ if [ "$PHP_VER_ID" = "" ]; then
 	PHP_VER_ID="1"
 fi
 
-/*if [ "${PHP_VER_ID}" == "5" ]; then
+:<<注释
+if [ "${PHP_VER_ID}" == "5" ]; then
     PHP_VER=${VERS['php5.3.x']}
 	PHP_KEY="php5.3.x"
 	PHP_VER_ID=5
@@ -122,7 +123,7 @@ elif [ "${PHP_VER_ID}" == "1" ]; then
     PHP_VER=${VERS['php5.4.x']}
 	PHP_KEY="php5.4.x"
 	PHP_VER_ID=1
-*/
+注释
 if [ "${PHP_VER_ID}" == "1" ]; then
     PHP_VER=${VERS['php5.5.x']}
 	PHP_KEY="php5.5.x"
