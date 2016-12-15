@@ -43,9 +43,10 @@ function Install_Nginx {
 	#--with-http_sub_module 允许用一些其他文本替换nginx响应中的一些文本
 	#--with-http_addition_module 作为一个输出过滤器，支持不完全缓冲，分部分响应请求
 	#--with-http_realip_module 启用ngx_http_realip_module支持（这个模块允许从请求标头更改客户端的IP地址值，默认为关）
-
+    #nginx 启动项软连接
 	ln -s $IN_DIR/nginx/sbin/nginx /usr/bin/nginx
 
+    #nginx 配置文件
 	cd $IN_PWD
 	file_cp conf.nginx.conf $conf
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
@@ -54,9 +55,10 @@ function Install_Nginx {
 	fi
 	
 	cd $IN_PWD
-	local FASTCGI_FILE=nginx/$nginx_version
+	#关闭 nginx 版本显示
+	local FASTCGI_FILE=$IN_DIR/nginx/conf/fastcgi.conf
     sed -i "s#nginx/\$nginx_version#nginx#g" $FASTCGI_FILE
-
+    # upstream 设置单独文件
 	file_cp conf.upstream.conf $IN_DIR/nginx/conf/upstream.conf
 	
 	mkdir -p $IN_DIR/nginx/conf/vhost
@@ -65,7 +67,7 @@ function Install_Nginx {
 	ln -s $IN_DIR/nginx/conf/vhost $IN_DIR/etc/
 	
 	file_cp conf.default.conf $conf_default
-	
+	#检测目录是否改动安装目录
 	if [ ! $IN_WEB_DIR = "/www/wwwroot" ]; then
 		sed -i "s:/www/wwwroot:$IN_WEB_DIR:g" $conf_default
 	fi
@@ -78,7 +80,7 @@ function Install_Nginx {
 		sed -i 's:/www/lanmps:'$IN_DIR':g' $IN_DIR/bin/nginx
 	fi
 	chmod +x $IN_DIR/bin/nginx
-	
+	#虚拟目录命令
 	file_cp sh.vhost.sh $IN_DIR/vhost.sh
 	if [ ! $IN_DIR = "/www/lanmps" ]; then
 		sed -i "s:/www/lanmps:$IN_DIR:g" $IN_DIR/vhost.sh
@@ -89,6 +91,7 @@ function Install_Nginx {
 	if [ ! $IN_WEB_LOG_DIR = "/www/wwwLogs" ]; then
 		sed -i "s:/www/wwwLogs:$IN_WEB_LOG_DIR:g" $IN_DIR/vhost.sh
 	fi
+	#虚拟目录命令
 	chmod +x $IN_DIR/vhost.sh
 	ln -s $IN_DIR/vhost.sh /root/vhost.sh
 :<<注释
