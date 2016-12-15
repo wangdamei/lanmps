@@ -44,14 +44,14 @@ function Install_PHP_Tools()
 	echo "================================="
 
 	local php_v=`${PHP_PATH}/bin/php -v`
-	local php_ext_date="20131226"
+	local php_ext_date="20160303"
 	#extension=fileinfo.so\nextension=intl.so\nextension=phar.so
 	local PHP_EXT='\nextension = "memcache.so"\nextension = "redis.so"\n'
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
 	if echo "$php_v" | grep -q "7.1."; then
-        		php_ext_date="20151012"
+        		php_ext_date="20160303"
         		PHP_EXT='\nextension = "redis.so"\n'
 	elif echo "$php_v" | grep -q "7.0."; then
     		php_ext_date="20151012"
