@@ -145,7 +145,7 @@ function CheckInstall()
 		echo ""
 		echo "For more information please visit http://www.lanmps.com"
 		echo ""
-		echo "lanmps status manage: $IN_DIR/lanmps {start|stop|reload|restart|kill|status}"
+		echo "lanmps bin status manage: $IN_DIR/bin/* "
 		echo "default mysql root password:$MysqlPassWord"
 		echo "Prober : http://$IP/_tz.php"
 		echo "phpinfo : http://$IP/_phpinfo.php"
@@ -163,7 +163,7 @@ function CheckInstall()
 		echo "web dir :    $IN_WEB_DIR/default"
 		echo ""
 		echo "========================================================================="
-		$IN_DIR/lanmps status
+		#$IN_DIR/lanmps status
 		ss -pltn
 	else
 		echo "Sorry,Failed to install LANMPS!"
