@@ -144,7 +144,7 @@ else
     echo ${PHP_VER_ID}
 	exit
 fi
-echo "Input $PHP_VER_ID  ,PHP_VER=${PHP_VER}"
+echo "Input $PHP_VER_ID  ,PHP_VER=${PHP_VER} ,PHP_KEY=${PHP_KEY}"
 
 echo "Select mysql :
     1 MariaDB (default)
