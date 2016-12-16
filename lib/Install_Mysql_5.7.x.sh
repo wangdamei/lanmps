@@ -43,7 +43,7 @@ cmake . \
 -DENABLED_LOCAL_INFILE=1 $OTHER_MAKE
 	make && make install
 
-    ln -s ln $IN_DIR/mysql
+    ln -s $MYSQL_PATH $IN_DIR/mysql
 	local cnf=$MYSQL_PATH/my.cnf
 	#cp $IN_PWD/conf/conf.mysql.conf $cnf
 	#cp $MYSQL_PATH/my-new.cnf $cnf
@@ -100,7 +100,7 @@ EOF
 
 	rm -f /tmp/mysql_sec_script
 
-	sed -i "s#bin/mysql#bin/mysql#g" $IN_DIR/lanmps
+	#sed -i "s#bin/mysql#bin/mysql#g" $IN_DIR/lanmps
 	
 	$MYSQL_BIN_PATH restart
 	$MYSQL_BIN_PATH stop
