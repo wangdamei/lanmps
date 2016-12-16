@@ -73,12 +73,12 @@ function Starup()
 			$IN_DIR/bin/httpd start
 		fi
 		
-		$IN_DIR/bin/memcached start
+		#$IN_DIR/bin/memcached start
 	else
 		systemctl start nginx.service
 		systemctl start php-fpm.service
 		systemctl start mysql.service
-		systemctl start memcached.service
+		#systemctl start memcached.service
 	fi
 	#add 80 port to iptables
 	if [ -s /sbin/iptables ]; then
