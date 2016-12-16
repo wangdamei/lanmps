@@ -9,7 +9,8 @@ function Init_CheckAndDownloadFiles()
 	ProgramDownloadFiles "apache" "httpd-${VERS['apache']}.tar.gz"
 	
 	if [ "$MYSQL_ID" == "mysql" ]; then
-		ProgramDownloadFiles "mysql" "mysql-${VERS['mysql']}.tar.gz"
+	    tmp_mysql="mysql${MYSQL_KEY}"
+		ProgramDownloadFiles "${tmp_mysql}" "mysql-${tmp_mysql}.tar.gz"
 	else
 		ProgramDownloadFiles "mariadb" "mariadb-${VERS['MariaDB']}.tar.gz"
 	fi
