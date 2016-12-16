@@ -80,7 +80,7 @@ function Init()
 		done
 
 	else
-		if [ "${IS_DOCKER}"x = "0"x ]; then
+		if [ "$IS_DOCKER" = "0" ]; then
 			yum install -y ntp
 			ntpdate -u pool.ntp.org
 			date
