@@ -112,4 +112,8 @@ fi
 if [ ! -d "$IN_DIR/mysql/" ]; then
         ln -s $MYSQL_PATH $IN_DIR/mysql
 fi
-
+#mysql 软连接
+ln -s $IN_DIR/bin/mariadb $IN_DIR/bin/mysql
+#服务内名称等替换
+sed -i "s#bin/mysql#bin/mariadb#g" $IN_PWD/conf/service.mysql.service
+#sed -i "s#bin/mysql#bin/mariadb#g" $IN_PWD/conf/service.mariadb.service

@@ -47,15 +47,17 @@ function Starup()
 		file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
 		file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
 		
-		#systemctl enable nginx.service
-		#systemctl enable php-fpm.service
+		systemctl enable nginx.service
+		systemctl enable php-fpm.service
+		systemctl enable mysql.service
+		#关闭不启动
 		#systemctl enable memcached.service
-		#systemctl enable mysql.service
 		
 		
-		#systemctl start nginx.service
-		#systemctl start php-fpm.service
-		#systemctl start mysql.service
+		systemctl start nginx.service
+		systemctl start php-fpm.service
+		systemctl start mysql.service
+		#关闭不启动
 		#systemctl start memcached.service
 	fi
 	
@@ -64,6 +66,7 @@ function Starup()
 	
 	echo "Starting LANMPS..."
 	if [ ! -d "$systemd_path" ]; then
+	    echo " old system starting "
 		$IN_DIR/bin/mysql start
 		
 		if [ $SERVER == "nginx" ]; then
@@ -72,12 +75,16 @@ function Starup()
 		else
 			$IN_DIR/bin/httpd start
 		fi
-		
+		#关闭不启动
 		#$IN_DIR/bin/memcached start
 	else
+	    echo " new system starting"
+	    echo " systemctl start xxxxx "
+
 		systemctl start nginx.service
 		systemctl start php-fpm.service
 		systemctl start mysql.service
+		#关闭不启动
 		#systemctl start memcached.service
 	fi
 	#add 80 port to iptables
@@ -167,7 +174,7 @@ function CheckInstall()
 		ss -pltn
 	else
 		echo "Sorry,Failed to install LANMPS!"
-		echo "Please visit http://bbs.lanmps.com feedback errors and logs."
+		echo "Please visit https://github.com/foxiswho/lanmps/issues feedback errors and logs."
 		echo "You can download $LOGPATH from your server,And upload all the files in the directory to the Forum."
 	fi
 }
