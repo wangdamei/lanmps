@@ -1,7 +1,8 @@
 # start services
 function Starup()
 {
-    
+    #设置默认目录权限
+    chown -R www:www $IN_WEB_DIR/default
 	cd $IN_PWD
 
 	echo "============================add nginx and php-fpm on startup============================"
