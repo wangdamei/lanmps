@@ -152,7 +152,7 @@ echo "Select mysql :
     3 MariaDB (default)
     2 MySql  ${VERS['mysql5.7.x']}
     1 MySql  ${VERS['mysql5.6.x']}
-    0 don't install is now "
+    0 don't install is now
     "
 read -p "Please Input 1,2: " MYSQL_SELECT
 MYSQL_INITD="mysql"
