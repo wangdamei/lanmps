@@ -49,8 +49,8 @@ declare -A DUS;
 DUS['nginx']="http://download.lanmps.com/nginx/nginx-1.11.7.tar.gz"
 VERS['nginx']="1.11.7"
 #http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.29.tar.gz
-DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.31.tar.gz"
-VERS['mysql']="5.6.31"
+DUS['mysql']="http://download.lanmps.com/mysql/mysql-5.6.35.tar.gz"
+VERS['mysql']="5.6.35"
 
 DUS['mysql5.6.x']="http://download.lanmps.com/mysql/mysql-5.6.35.tar.gz"
 VERS['mysql5.6.x']="5.6.35"

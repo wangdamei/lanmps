@@ -149,27 +149,31 @@ fi
 echo "Input $PHP_VER_ID  ,PHP_VER=${PHP_VER} ,PHP_KEY=${PHP_KEY}"
 
 echo "Select mysql :
-    1 MariaDB (default)
-    2 MySql  ${VERS['mysql5.6.x']}
-    3 MySql  ${VERS['mysql5.7.x']}
+    3 MariaDB (default)
+    2 MySql  ${VERS['mysql5.7.x']}
+    1 MySql  ${VERS['mysql5.6.x']}
+    0 don't install is now "
     "
 read -p "Please Input 1,2: " MYSQL_SELECT
 MYSQL_INITD="mysql"
 if [ $MYSQL_SELECT == "1" ]; then
-    MYSQL_VER=${VERS['mariadb10.1.x']}
-    MYSQL_KEY="10.1.x"
-    MYSQL_ID="MariaDB"
-    MYSQL_SELECT=1
-elif [ $PHP_VER_ID == "2" ]; then
     MYSQL_VER=${VERS['mysql5.6.x']}
 	MYSQL_ID="mysql"
     MYSQL_KEY="5.6.x"
-    MYSQL_SELECT=2
-else
-	MYSQL_VER=${VERS['mysql5.7.x']}
-    MYSQL_ID="mysql"
-    MYSQL_KEY="5.7.x"
+    MYSQL_SELECT=1
+elif [ $MYSQL_SELECT == "2" ]; then
+   MYSQL_VER=${VERS['mysql5.7.x']}
+   MYSQL_ID="mysql"
+   MYSQL_KEY="5.7.x"
+   MYSQL_SELECT=2
+elif [ $MYSQL_SELECT == "3" ]; then
+    MYSQL_VER=${VERS['mariadb10.1.x']}
+    MYSQL_KEY="10.1.x"
+    MYSQL_ID="MariaDB"
     MYSQL_SELECT=3
+else
+    echo ${MYSQL_SELECT}
+    exit
 fi
 echo "Input $MYSQL_SELECT  ,MYSQL Name ${MYSQL_ID}"
 
