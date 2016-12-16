@@ -56,7 +56,7 @@ cmake . \
 	sed -i 's:#loose-skip-innodb:loose-skip-innodb:g' $cnf
 	sed -i "s#/www/lanmps/mysql#${MYSQL_PATH}#g" $cnf
 #--defaults-file=$cnf
-	$MYSQL_PATH/bin/mysqld --initialize-insecure --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql
+	$MYSQL_PATH/bin/mysqld --initialize-insecure --basedir=$MYSQL_PATH --datadir=$MYSQL_PATH/data --user=mysql --explicit_defaults_for_timestamp=1
 	chown -R mysql $MYSQL_PATH/data
 	chgrp -R mysql $MYSQL_PATH/.
 
