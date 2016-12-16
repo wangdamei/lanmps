@@ -84,7 +84,7 @@ EOF
 	
 	#start
 	$MYSQL_BIN_PATH start
-
+:<<注释
 	$MYSQL_PATH/bin/mysqladmin -u root password $MysqlPassWord
 
 	cat > /tmp/mysql_sec_script<<EOF
@@ -103,4 +103,6 @@ EOF
 	#sed -i "s#bin/mysql#bin/mysql#g" $IN_DIR/lanmps
 	
 	$MYSQL_BIN_PATH restart
+注释
+
 	$MYSQL_BIN_PATH stop
