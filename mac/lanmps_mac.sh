@@ -16,7 +16,7 @@ mkdir -p $IN_WEB_DIR
 mkdir -p $IN_WEB_LOG_DIR
 
 
-
+#http://avnpc.com/pages/install-lnmp-on-osx
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew tap homebrew/dupes
@@ -32,34 +32,30 @@ sudo mv /usr/bin/php-config /usr/bin/php-config55
 sudo mv /usr/bin/phpize /usr/bin/phpize55
 
 brew install php56 \
---without-snmp \
---without-apache \
 --with-debug \
---with-fpm \
---with-intl \
 --with-homebrew-curl \
 --with-homebrew-libxslt \
---with-homebrew-openssl \
---with-imap \
---with-mysql \
---with-tidy
+--with-homebrew-libressl \
+--with-homebrew-libxml2 \
+--with-imap
 
-brew install php56-pdo-dblib \
-php56-pdo-pgsql \
-php56-mcrypt \
+brew install --build-from-source php56-mcrypt \
+php56-redis
+
+#php56-pdo-dblib \
+#php56-pdo-pgsql \
 #php56-memcache \
 #php56-memcached \
 #php56-mongo \
-php56-redis \
 #php56-xdebug \
 #php56-wbxml \
-php56-opcache \
+#php56-opcache \
 #php56-pcntl \
 #php56-libevent \
 #php56-xcache \
 #php56-gearman \
 #php56-http \
-php56-msgpack
+#php56-msgpack
 
 
 #========================
