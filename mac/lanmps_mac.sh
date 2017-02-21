@@ -57,7 +57,12 @@ php56-redis
 #php56-http \
 #php56-msgpack
 
-
+#php 扩展 配置文件存放位置
+#cd /usr/local/etc/php/5.6/conf.d/
+#php.ini 配置文件存放位置
+#cd /usr/local/etc/php/5.6/php.ini
+#conf.d 配置文件存放位置
+#cd /usr/local/etc/php/5.6/php-fpm.conf
 #========================
 #nginx
 brew install nginx
@@ -76,7 +81,8 @@ cp -rf action.nginx $IN_DIR/nginx
 
 chmod +x $IN_DIR/nginx
 
-
+#nginx配置文件
+#/usr/local/etc/nginx/nginx.conf
 
 php_ini="/usr/local/etc/php/5.6/php.ini"
 rm -rf /private/etc/php.ini
