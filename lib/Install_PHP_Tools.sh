@@ -65,19 +65,19 @@ function Install_PHP_Tools()
     		php_ext_date="20151012"
     		PHP_EXT='\nextension = "redis.so"\n'
     		echo "7.0."
-	elif echo "$php_v" | grep -q "5.6."; then
+	elif echo "$php_v" | grep -q "5\.6\."; then
 		php_ext_date="20131226"
 		echo "5.6."
-	elif echo "$php_v" | grep -q "5.5."; then
+	elif echo "$php_v" | grep -q "5\.5\."; then
 		php_ext_date="20121212"
 		echo "5.5."
-	elif echo "$php_v" | grep -q "5.4."; then
+	elif echo "$php_v" | grep -q "5\.4\."; then
 		php_ext_date="20100525"
 		echo "5.4."
-	elif echo "$php_v" | grep -q "5.3."; then
+	elif echo "$php_v" | grep -q "5\.3\."; then
 		php_ext_date="20090626"
 		echo "5.3."
-	elif echo "$php_v" | grep -q "5.2."; then
+	elif echo "$php_v" | grep -q "5\.2\."; then
 		php_ext_date="20060613"
 		echo "5.2."
 	fi
