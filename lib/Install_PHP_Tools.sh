@@ -57,24 +57,31 @@ function Install_PHP_Tools()
 	echo "php_vvvvvvv"
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
-	if echo "$php_v" | grep -q "7.1."; then
+	if echo "$php_v" | grep -q "7\.1\."; then
         	php_ext_date="20160303"
         	PHP_EXT='\nextension = "redis.so"\n'
-	elif echo "$php_v" | grep -q "7.0."; then
+        	echo "7.1."
+	elif echo "$php_v" | grep -q "7\.0\."; then
     		php_ext_date="20151012"
     		PHP_EXT='\nextension = "redis.so"\n'
+    		echo "7.0."
 	elif echo "$php_v" | grep -q "5.6."; then
 		php_ext_date="20131226"
+		echo "5.6."
 	elif echo "$php_v" | grep -q "5.5."; then
 		php_ext_date="20121212"
+		echo "5.5."
 	elif echo "$php_v" | grep -q "5.4."; then
 		php_ext_date="20100525"
+		echo "5.4."
 	elif echo "$php_v" | grep -q "5.3."; then
 		php_ext_date="20090626"
+		echo "5.3."
 	elif echo "$php_v" | grep -q "5.2."; then
 		php_ext_date="20060613"
+		echo "5.2."
 	fi
-	echi "编译后 扩展日期文件夹"
+	echo "编译后 扩展日期文件夹"
 	echo "${php_ext_date}"
 	if [ "$php_ext_date" == "20090626" ]; then
 	    php_ext_date="no-debug-zts-${php_ext_date}"

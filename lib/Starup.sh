@@ -98,9 +98,6 @@ function Starup()
 		#/etc/rc.d/bin/iptables save
 		#/etc/bin/iptables restart
 	fi
-	if [ $MYSQL_SELECT == "2" ]; then
-	   echo "MySql 5.7.X版本 默认密码为空字符串"
-	fi
 }
 
 function CheckInstall()
@@ -176,6 +173,10 @@ function CheckInstall()
 		echo "========================================================================="
 		#$IN_DIR/lanmps status
 		ss -pltn
+
+		if [ $MYSQL_SELECT == "2" ]; then
+        	   echo "MySql 5.7.X版本 默认密码为空字符串"
+        fi
 	else
 		echo "Sorry,Failed to install LANMPS!"
 		echo "Please visit https://github.com/foxiswho/lanmps/issues feedback errors and logs."
