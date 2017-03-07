@@ -60,23 +60,23 @@ DUS['mysql5.7.x']="http://download.lanmps.com/mysql/mysql-5.7.17.tar.gz"
 VERS['mysql5.7.x']="5.7.17"
 
 #https://mirrors.tuna.tsinghua.edu.cn/mariadb//mariadb-10.1.19/source/mariadb-10.1.19.tar.gz
-DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.19.tar.gz"
-VERS['MariaDB']="10.1.19"
+DUS['MariaDB']="http://download.lanmps.com/mysql/mariadb-10.1.21.tar.gz"
+VERS['MariaDB']="10.1.21"
 
 #https://mirrors.tuna.tsinghua.edu.cn/mariadb//mariadb-10.1.19/source/mariadb-10.1.19.tar.gz
-DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.19.tar.gz"
-VERS['mariadb10.1.x']="10.1.19"
+DUS['mariadb10.1.x']="http://download.lanmps.com/mysql/mariadb-10.1.21.tar.gz"
+VERS['mariadb10.1.x']="10.1.21"
 
 #http://cn2.php.net/distributions/php-7.0.14.tar.gz
-DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.14.tar.gz"
-VERS['php7.0.x']="7.0.14"
+DUS['php7.0.x']="http://download.lanmps.com/php/php-7.0.16.tar.gz"
+VERS['php7.0.x']="7.0.16"
 
-DUS['php7.1.x']="http://download.lanmps.com/php/php-7.1.0.tar.gz"
-VERS['php7.1.x']="7.1.0"
+DUS['php7.1.x']="http://download.lanmps.com/php/php-7.1.2.tar.gz"
+VERS['php7.1.x']="7.1.2"
 
 #http://cn2.php.net/distributions/php-5.6.10.tar.gz
-DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.29.tar.gz"
-VERS['php5.6.x']="5.6.29"
+DUS['php5.6.x']="http://download.lanmps.com/php/php-5.6.30.tar.gz"
+VERS['php5.6.x']="5.6.30"
 
 #http://cn2.php.net/distributions/php-5.5.26.tar.gz
 DUS['php5.5.x']="http://download.lanmps.com/php/php-5.5.38.tar.gz"
@@ -111,8 +111,8 @@ DUS['redis']="http://download.lanmps.com/redis/redis-3.2.6.tar.gz"
 VERS['redis']="3.2.6"
 
 #http://pecl.php.net/get/redis-3.1.0.tgz
-DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.1.0.tgz"
-VERS['php-redis']="3.1.0"
+DUS['php-redis']="http://download.lanmps.com/php_ext/redis-3.1.1.tgz"
+VERS['php-redis']="3.1.1"
 
 DUS['php-redis2.x']="http://download.lanmps.com/php_ext/redis-2.2.8.tgz"
 VERS['php-redis2.x']="2.2.8"

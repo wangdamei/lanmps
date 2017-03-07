@@ -53,6 +53,8 @@ function Install_PHP_Tools()
 	#extension=fileinfo.so\nextension=intl.so\nextension=phar.so
 	local PHP_EXT='\nextension = "memcache.so"\nextension = "redis.so"\n'
 	sed -i 's#; extension_dir = "./"#extension_dir = "./"#' $php_ini
+	echo "PHP 版本"
+	echo "php_vvvvvvv"
 	echo "${PHP_PATH}/bin/php -v"
 	echo $php_v
 	if echo "$php_v" | grep -q "7.1."; then
@@ -72,6 +74,8 @@ function Install_PHP_Tools()
 	elif echo "$php_v" | grep -q "5.2."; then
 		php_ext_date="20060613"
 	fi
+	echi "编译后 扩展日期文件夹"
+	echo "${php_ext_date}"
 	if [ "$php_ext_date" == "20090626" ]; then
 	    php_ext_date="no-debug-zts-${php_ext_date}"
 	elif [ "$php_ext_date" == "20100525" ]; then
@@ -79,6 +83,7 @@ function Install_PHP_Tools()
 	else
 	    php_ext_date="no-debug-non-zts-${php_ext_date}"
 	fi
+	echo "${php_ext_date}"
 
 	EXTENSION_DIR=${PHP_PATH}/lib/php/extensions/${php_ext_date}
 	sed -i "s#extension_dir = \"./\"#extension_dir=${EXTENSION_DIR}${PHP_EXT}#" $php_ini
@@ -93,7 +98,7 @@ function Install_PHP_Tools()
 	make && make install
 	echo '
 [Xdebug]
-;zend_extension="'$PHP_PATH'/lib/php/extensions/no-debug-zts-'$php_ext_date'/xdebug.so"
+;zend_extension="'$PHP_PATH'/lib/php/extensions/'$php_ext_date'/xdebug.so"
 ;xdebug.auto_trace=1
 ;xdebug.collect_params=1
 ;xdebug.collect_return=1

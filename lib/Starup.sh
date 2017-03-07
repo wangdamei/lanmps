@@ -98,6 +98,9 @@ function Starup()
 		#/etc/rc.d/bin/iptables save
 		#/etc/bin/iptables restart
 	fi
+	if [ $MYSQL_SELECT == "2" ]; then
+	   echo "MySql 5.7.X版本 默认密码为空字符串"
+	fi
 }
 
 function CheckInstall()
