@@ -121,6 +121,8 @@ if [ $SERVER == "nginx" ]; then
 
         sed -i "s#bin/php-fpm#bin/php-fpm56#g" $IN_DIR/lanmps
         sed -i "s#bin/php-fpm#bin/php-fpm56#g" $IN_DIR/vhost.sh
+        #服务内名称等替换
+        sed -i "s#bin/php-fpm#bin/php-fpm56#g" $IN_PWD/conf/service.php-fpm.service
 
 fi
 #PHP-FPM

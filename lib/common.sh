@@ -104,6 +104,8 @@ fi
 echo $SERVER
 
 #PHP Version
+PHP_VER_NUM=71
+PHP_VER_ID=4
 echo
 echo "Select php version:
     4 php-${VERS['php7.1.x']} (default)
@@ -113,7 +115,8 @@ echo "Select php version:
     0 don't install is now "
 read -p "Please Input 1-6: " PHP_VER_ID
 if [ "$PHP_VER_ID" = "" ]; then
-	PHP_VER_ID="1"
+	PHP_VER_ID="4"
+	PHP_VER_NUM=71
 fi
 
 :<<注释
@@ -121,32 +124,39 @@ if [ "${PHP_VER_ID}" == "5" ]; then
     PHP_VER=${VERS['php5.3.x']}
 	PHP_KEY="php5.3.x"
 	PHP_VER_ID=5
+	PHP_VER_NUM=53
 elif [ "${PHP_VER_ID}" == "1" ]; then
     PHP_VER=${VERS['php5.4.x']}
 	PHP_KEY="php5.4.x"
 	PHP_VER_ID=1
+	PHP_VER_NUM=54
 注释
 if [ "${PHP_VER_ID}" == "1" ]; then
     PHP_VER=${VERS['php5.5.x']}
 	PHP_KEY="php5.5.x"
 	PHP_VER_ID=1
+	PHP_VER_NUM=55
 elif [ "${PHP_VER_ID}" == "2" ]; then
     PHP_VER=${VERS['php5.6.x']}
 	PHP_KEY="php5.6.x"
 	PHP_VER_ID=2
+	PHP_VER_NUM=56
 elif [ "${PHP_VER_ID}" == "3" ]; then
     PHP_VER=${VERS['php7.0.x']}
 	PHP_KEY="php7.0.x"
 	PHP_VER_ID=3
+	PHP_VER_NUM=70
 elif [ $PHP_VER_ID == "4" ]; then
     PHP_VER=${VERS['php7.1.x']}
 	PHP_KEY="php7.1.x"
 	PHP_VER_ID=4
+	PHP_VER_NUM=71
 else
     echo ${PHP_VER_ID}
+    echo ${PHP_VER_NUM}
 	exit
 fi
-echo "Input $PHP_VER_ID  ,PHP_VER=${PHP_VER} ,PHP_KEY=${PHP_KEY}"
+echo "Input $PHP_VER_ID  ,PHP_VER=${PHP_VER} ,PHP_KEY=${PHP_KEY} , ${PHP_VER_NUM}"
 
 echo "Select mysql :
     3 MariaDB (default)

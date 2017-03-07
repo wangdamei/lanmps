@@ -71,7 +71,7 @@ function Starup()
 		$IN_DIR/bin/mysql start
 		
 		if [ $SERVER == "nginx" ]; then
-			$IN_DIR/bin/php-fpm start
+			$IN_DIR/bin/php-fpm${PHP_VER_NUM} start
 			$IN_DIR/bin/nginx start
 		else
 			$IN_DIR/bin/httpd start

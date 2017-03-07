@@ -62,9 +62,9 @@ make
 make install
 
 if [ -e /usr/bin/php ]; then
-    ln -s "${PHP_PATH}/bin/php" /usr/bin/php7
-    ln -s "${PHP_PATH}/bin/phpize" /usr/bin/phpize7
-    ln -s "${PHP_PATH}/sbin/php-fpm" /usr/bin/php-fpm7
+    ln -s "${PHP_PATH}/bin/php" /usr/bin/php70
+    ln -s "${PHP_PATH}/bin/phpize" /usr/bin/phpize70
+    ln -s "${PHP_PATH}/sbin/php-fpm" /usr/bin/php-fpm70
 else
     ln -s "${PHP_PATH}/bin/php" /usr/bin/php
     ln -s "${PHP_PATH}/bin/phpize" /usr/bin/phpize
@@ -119,7 +119,7 @@ if [ $SERVER == "nginx" ]; then
 
             echo "Copy php-fpm init.d file......"
 
-            PHP_BIN_PATH=$IN_DIR/bin/php-fpm7
+            PHP_BIN_PATH=$IN_DIR/bin/php-fpm70
             cp "${IN_DOWN}/php-${PHP_VER}/sapi/fpm/init.d.php-fpm" $PHP_BIN_PATH
             chmod +x $PHP_BIN_PATH
             if [ ! $IN_DIR = "/www/lanmps" ]; then
@@ -127,10 +127,10 @@ if [ $SERVER == "nginx" ]; then
             fi
 
 
-            sed -i "s#bin/php-fpm#bin/php-fpm7#g" $IN_DIR/lanmps
-            sed -i "s#bin/php-fpm#bin/php-fpm7#g" $IN_DIR/vhost.sh
+            sed -i "s#bin/php-fpm#bin/php-fpm70#g" $IN_DIR/lanmps
+            sed -i "s#bin/php-fpm#bin/php-fpm70#g" $IN_DIR/vhost.sh
             #服务内名称等替换
-            sed -i "s#bin/php-fpm#bin/php-fpm7#g" $IN_PWD/conf/service.php-fpm.service
+            sed -i "s#bin/php-fpm#bin/php-fpm70#g" $IN_PWD/conf/service.php-fpm.service
 
 fi
 #PHP-FPM
