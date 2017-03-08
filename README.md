@@ -10,9 +10,9 @@ Linux+Nginx+Mysql+PHP+Elasticsearch ( phpmyadmin+opencache+xdebug )环境套件�
 * 内存：大于等于256M内存 
 * 安装时需要联网
 
-LANMPS 一键安装包V3.1.0 ：Linux+Nginx+Mysql+PHP+Elasticsearch ( phpmyadmin+opencache+xdebug )套件包,绿色PHP套件，一键自动安装。
+LANMPS 一键安装包V3.2.2 ：Linux+Nginx+Mysql+PHP+Elasticsearch ( phpmyadmin+opencache+xdebug )套件包,绿色PHP套件，一键自动安装。
 > 
-已在 CentOS7.x，Ubuntu15.x 中安装成功！
+已在 CentOS7.x，Ubuntu17.x 中安装成功！
 
 注意
 ------------------------------------
@@ -23,12 +23,12 @@ coreseek(Sphinx中文版) 不支持 Ubuntu 12.x,13.x,14.x `已废弃`
 
 请以  root  用户执行命令
 
-安装包大小：197MB（包含相关环境所需文件）
+安装包大小：340MB（包含相关环境所需文件）
 ### 方法二：
 百度网盘下载(速度快)：[http://pan.baidu.com/s/1bnjIYKJ](http://pan.baidu.com/s/1bnjIYKJ)
 
 然后上传文件到服务器上，在当前目录下执行：
-`tar -zxvf lanmps-2.2.3.tar.gz && cd lanmps-2.2.3 && ./lanmps.sh`
+`tar -zxvf lanmps-3.2.2.tar.gz && cd lanmps-3.2.2 && ./lanmps.sh`
 
 LANMPS状态管理命令
 ------------------------------------
@@ -80,6 +80,15 @@ nginx 自动分割日志
 > 
 凌晨 0点0分00秒 开始执行
 
+### 更新日志
+* 2017年03月07日 LANMPS V3.2.2 发布
+
+ * 升级PHP7.1.x
+ * 升级MYSQL5.7.x
+ * 升级REDIS
+ * 升级NGINX1.11.x
+ * BUG修复
+ 
 ### 更新日志
 * 2016年12月15日 LANMPS V3.2.0 发布
 
