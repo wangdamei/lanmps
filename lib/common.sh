@@ -52,7 +52,7 @@ if [ $X86 = 1 ]; then
 t_median=64
 fi
 MemTotal=`free -m | grep Mem | awk '{print  $2}'`
-echo "LANMPS V0.1 for CentOS/Ubuntu Linux Written by Feng"
+echo "LANMPS ${PROGRAM_VERSION} for CentOS/Ubuntu Linux Written by Feng"
 echo "========================================================================="
 echo "A tool to auto-compile & install Apache+Nginx+MySQL+PHP on Linux "
 echo "For more information please visit http://www.lanmps.com"
