@@ -11,7 +11,7 @@ IN_WEB_DIR="/www/wwwroot"
 IN_WEB_LOG_DIR="/www/wwwLogs"
 
 #Asia/Shanghai  时区 设置为上海
-TIME_ZONE=1;
+TIME_ZONE=1
 #程序名称
 PROGRAM_NAME="LANMPS"
 PROGRAM_VERSION="V 3.0.0"
@@ -31,6 +31,7 @@ MysqlPassWord="root";
 if [ "${IS_EXISTS_REMOVE}" = "0" ]; then
 	IS_EXISTS_REMOVE=1
 fi
+IS_DOCKER=0
 if [ "${IS_DOCKER}" = "1" ]; then
 	IS_DOCKER=0
 fi

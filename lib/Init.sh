@@ -37,7 +37,7 @@ function Init()
 			dpkg -P php5 php5-common php5-cgi php5-mysql php5-curl php5-gd
 			apt-get purge `dpkg -l | grep php| awk '{print $2}'`
 		fi
-		if [ "$IS_DOCKER" = "0" ]; then
+		if [ "${IS_DOCKER}" = "0" ]; then
 			apt-get install -y ntpdate
 			ntpdate -u pool.ntp.org
 			date
@@ -49,7 +49,7 @@ function Init()
 		if [ "$YUM_APT_GET_UPDATE" = "1" ]; then
 			apt-get update -y
 		fi
-		if [ "$IS_DOCKER" = "0" ]; then
+		if [ "${IS_DOCKER}" = "0" ]; then
 			apt-get autoremove -y
 			apt-get -fy install
 		fi
@@ -80,7 +80,7 @@ function Init()
 		done
 
 	else
-		if [ "$IS_DOCKER" = "0" ]; then
+		if [ "${IS_DOCKER}" = "0" ]; then
 			yum install -y ntp
 			ntpdate -u pool.ntp.org
 			date
