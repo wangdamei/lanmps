@@ -161,7 +161,7 @@ if [[ $ftp_account == "y" || $ftp_account == "Y" ]];then
 fi
 
 if [[ $SERVER == "nginx" ]];then
-	#$IN_DIR/bin/php-fpm restart
+	$IN_DIR/bin/php-fpm restart
 	$IN_DIR/bin/nginx restart
 else
 	service httpd restart
