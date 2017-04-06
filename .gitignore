@@ -12,3 +12,5 @@
 /down/sphinx-*.tar.gz
 /down/xdict_1.1.tar.gz
 .idea
+.sass-cache
+_site
