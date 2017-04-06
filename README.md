@@ -30,6 +30,9 @@ coreseek(Sphinx中文版) 不支持 Ubuntu 12.x,13.x,14.x `已废弃`
 然后上传文件到服务器上，在当前目录下执行：
 `tar -zxvf lanmps-3.2.2.tar.gz && cd lanmps-3.2.2 && ./lanmps.sh`
 
+>数据库默认密码为`root`
+>mysql5.7.x版密码为空
+
 LANMPS状态管理命令
 ------------------------------------
 
