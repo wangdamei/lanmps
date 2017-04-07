@@ -24,8 +24,11 @@ coreseek(Sphinx中文版) 不支持 Ubuntu 12.x,13.x,14.x `已废弃`
 请以  root  用户执行命令
 
 安装包大小：340MB（包含相关环境所需文件）
-### 方法二：
+### 方法一：
 百度网盘下载(速度快)：[http://pan.baidu.com/s/1bnjIYKJ](http://pan.baidu.com/s/1bnjIYKJ)
+
+### 方法二：
+下载地址：http://download.lanmps.com/lanmps/lanmps-3.2.2.tar.gz (七牛免费资源,每月10G流量)
 
 然后上传文件到服务器上，在当前目录下执行：
 `tar -zxvf lanmps-3.2.2.tar.gz && cd lanmps-3.2.2 && ./lanmps.sh`
