@@ -36,6 +36,12 @@ coreseek(Sphinx中文版) 不支持 Ubuntu 12.x,13.x,14.x `已废弃`
 >数据库默认密码为`root`
 >mysql5.7.x版密码为空
 
+Centos 7 最后执行 下面两条命令   一个是 增加 防火墙端口，一个是重启防火墙
+```SHELL
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+systemctl restart firewalld.service
+```
+
 LANMPS状态管理命令
 ------------------------------------
 

@@ -98,6 +98,9 @@ function Starup()
 		#/etc/rc.d/bin/iptables save
 		#/etc/bin/iptables restart
 	fi
+	if [ -d "$systemd_path" ]; then
+	    firewall-cmd --zone=public --add-port=80/tcp --permanent
+	fi
 }
 
 function CheckInstall()
