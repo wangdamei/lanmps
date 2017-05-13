@@ -63,6 +63,8 @@ function Starup()
 		#systemctl start redis.service
 		#关闭不启动
 		#systemctl start memcached.service
+		#重新加载
+		systemctl daemon-reload
 	fi
 	
 	echo "===========================add nginx and php-fpm on startup completed===================="
