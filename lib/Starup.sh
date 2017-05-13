@@ -46,18 +46,21 @@ function Starup()
 		file_cp $IN_PWD/conf/service.nginx.service "${systemd_path}/nginx.service"
 		file_cp $IN_PWD/conf/service.php-fpm.service "${systemd_path}/php-fpm.service"
 		file_cp $IN_PWD/conf/service.mysql.service "${systemd_path}/mysql.service"
-		file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
+		#file_cp $IN_PWD/conf/service.memcached.service "${systemd_path}/memcached.service"
+		file_cp $IN_PWD/conf/service.redis.service "${systemd_path}/redis.service"
 		
 		systemctl enable nginx.service
 		systemctl enable php-fpm.service
 		systemctl enable mysql.service
+		systemctl enable redis.service
 		#关闭不启动
 		#systemctl enable memcached.service
 		
 		
-		systemctl start nginx.service
-		systemctl start php-fpm.service
-		systemctl start mysql.service
+		#systemctl start nginx.service
+		#systemctl start php-fpm.service
+		#systemctl start mysql.service
+		#systemctl start redis.service
 		#关闭不启动
 		#systemctl start memcached.service
 	fi
@@ -85,6 +88,7 @@ function Starup()
 		systemctl start nginx.service
 		systemctl start php-fpm.service
 		systemctl start mysql.service
+		systemctl start redis.service
 		#关闭不启动
 		#systemctl start memcached.service
 	fi

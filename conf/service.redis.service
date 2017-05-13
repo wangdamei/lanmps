@@ -1,0 +1,13 @@
+[Unit]
+Description=redis
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/www/lanmps/bin/redis start
+ExecReload=/www/lanmps/bin/redis restart
+ExecStop=/www/lanmps/bin/redis  stop
+PrivateTmp=true
+ 
+[Install]
+WantedBy=multi-user.target
